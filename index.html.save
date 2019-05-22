@@ -85,9 +85,9 @@
 						<div class="container">
 
 							<header>
-								<h2 class="alt">Hi! I'm Peter Zaffina.</h2>
+								<h2 class="alt">Hi! I'm Peter Zaffina. Welcome to my corner of the internet.</h2>
 								<p>I’m a dynamic leader who uses data to drive decision making and continuous improvement.
-								I use Python and Tableau to help automate reporting and visualizations, turning data into information.
+								I use Python and Tableau at work to help automate reporting and visualizations, turning data into information.
 								</p>
 							</header>
 
@@ -113,7 +113,7 @@
 							<h3><strong style="font-weight: bold">Software Packages: </strong>Anaconda (Python distribution), Pandas (Python package), SAP, Minitab, SPSS, Tableau, Power BI</h3>
 							<h3><strong style="font-weight: bold">Technologies: </strong>Docker, Cloud Based Architecture, Linux, SQL Server, Postgresql</h3>
 							<h3><strong style="font-weight: bold">Methods: </strong>Agile Software Development, DevOps, Lean Six Sigma</h3>
-							<h3><strong style="font-weight: bold">Tools: </strong>Jupyter Notebooks, Azure Data Studio, VS Code, VS 2017, Git, VSTS</h3>
+							<h3><strong style="font-weight: bold">Tools: </strong>Jupyter Notebooks, VS Code, VS 2017, SSOS, Git, VSTS</h3>
 						
 					
 						</div>
@@ -171,33 +171,31 @@
 							</h3><br>
 							<h5>November 2015 - August 2018</h5><br>
 							<p>
-								Led team of 25 engineers, analysts, technicians, and inspectors to develop, implement, and maintain 
-                                the plant’s Quality Management System. Responsible for ensuring plant’s systems adhered to industry 
-                                and customer specifications. Created, monitored, and analyzed information systems to enhance
-                                decision making.
+								Led team of 25 engineers, analysts, technicians, and inspectors to develop, implement, 
+								and maintain the plant’s Quality Management System. Responsible for ensuring plant’s systems 
+								adhere to industry and customer specifications. Created, monitored, and analyzed information 
+								systems to ensure adequate record keeping and enhance decision making.
 							<ul>
 								<li>
-									* Created department dashboard and email reporting system to track several metrics, enabling 
-                                    better management, reducing scrap, and saving hundreds of thousands of dollars.
+									* Led team to achieve highest score on internal corporate audit in the history of the 
+									company.
 								</li>
 								<li>
-									* Led team of developers to create a production management system in .NET ASP, a best practice 
-                                    for the division.
+									* Created automated reporting system to track documentation output, enabling management 
+									to optimize employee capacity, reducing customer response times from over 14 days to less 
+									than 1 day.
 								</li>
 								<li>
-									* Oversaw the transition of on premise MS SQL Server to Cloud based MS SQL Server in MS Azure. 
-                                    No data loss, minimal disruption to productivity and production quotas.
+									* Led plant initiative to incorporate best practices from DevOps into our IT and BI daily 
+									workflow.
 								</li>
 								<li>
-									* Used MS Visual Studio Online to create code repository and manage team using Agile and DevOps
-                                    principles.
+									* Utilized Tableau to create quality management dashboard to increase awareness of key 
+									performance indicators.
 								</li>
 								<li>
-									* Utilized Tableau to create quality management dashboard to increase awareness of key performance  
-                                    indicators. 
-								</li>
-								<li>
-									* Led team to achieve highest score on internal corporate audit in the history of the company.
+									* Led initiative on scrap and rework resulting in year over year reduction in costs of 18%, 
+									and 108% for two year period. 
 								</li>
 							</ul>
 							</p>
@@ -212,8 +210,8 @@
 									Provided leadership to a team of 11 people responsible for Plant Engineering and Product Tendering 
 									activities. Activities included ensuring the advanced quotations group was responsive to sales and 
 									provided a thorough and complete technical solution. Ensured the engineers reviewed purchase orders 
-									and provided the detailed technical work up, drawings and documentation to ensure the product was
-                                    made to customer specifications.
+									and provided the detailed technical work up, drawings and documentation to ensure the product was made 
+									to customer specifications.
 								<ul>
 									<li>
 										* Utilized SAP and BI Reporting to track and manage requests for work to ensure accountability 
