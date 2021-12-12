@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkpeter_zaffina=self.webpackChunkpeter_zaffina||[]).push([[682],{5518:function(t,e,n){n.r(e);n(7294);var u=n(977),a=(n(5444),n(4832));e.default=function(){return(0,u.tZ)(a.Z,{pageTitle:"About"},(0,u.tZ)("h2",null,"About content"))}}}]);
+//# sourceMappingURL=component---src-pages-about-js-68935c64605632cedd10.js.map
