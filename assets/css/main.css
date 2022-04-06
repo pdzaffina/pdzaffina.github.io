@@ -199,12 +199,16 @@ input, select, textarea {
 		font-weight: 900;
 		line-height: 1.5;
 		margin: 0 0 2em 0;
-		text-transform: uppercase;
+		text-transform: none;
 		letter-spacing: 0.35em;
 	}
 
 		h2 a, h3 a, h4 a, h5 a, h6 a {
 			color: inherit;
+		}
+
+		h2  {
+			text-transform: uppercase;
 		}
 
 	h2 {
@@ -2706,7 +2710,7 @@ input, select, textarea {
 					}
 
 			.tiles article.style1 > .image:before {
-				background-color: #f2849e;
+				background-color: #f2eb84;
 			}
 
 			.tiles article.style2 > .image:before {
