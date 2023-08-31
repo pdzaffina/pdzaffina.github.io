@@ -1,7 +1,0 @@
-{
-  "name": "wildlifePwa",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
