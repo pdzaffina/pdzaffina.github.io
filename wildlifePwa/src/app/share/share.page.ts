@@ -37,11 +37,11 @@ export class SharePage implements OnInit {
 
   async share() {
     await Share.share({
-      title: 'Come and find me',
-      text: `Here's my current location: 
+      title: 'Harvest Share',
+      text: `Look what I got! 
         ${this.position?.coords.latitude}, 
         ${this.position?.coords.longitude}`,
-      url: 'http://ionicacademy.com/'
+      url: 'http://www.choctawnation.com'
     });
   }
 
