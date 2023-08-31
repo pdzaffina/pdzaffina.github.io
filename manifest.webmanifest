@@ -1,8 +1,8 @@
 {
-  "name": "app",
-  "short_name": "app",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "CNO Wildlife Conservation",
+  "short_name": "cnoWildlife",
+  "theme_color": "#967c2d",
+  "background_color": "#2d7096",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
