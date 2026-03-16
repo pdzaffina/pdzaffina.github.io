@@ -12,9 +12,45 @@
 
 		<!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-VW34240TN2"></script>
-		
+
+		<!-- Shared brand fonts — same as blog -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+		<style>
+		/* ─────────────────────────────────────────────────────────────
+		   BRAND COLOR LAYER — blog palette applied to HTML5 UP Twenty
+		   Layout, structure, and copy are completely unchanged.
+		───────────────────────────────────────────────────────────── */
+
+		/* Shared fonts */
+		body, #nav ul li a, #footer .copyright {
+			font-family: 'DM Sans', system-ui, sans-serif;
+		}
+		#header h1, #banner .inner header h2, #main .special h2 {
+			font-family: 'Cormorant Garamond', Georgia, serif;
+		}
+
+		/* Gold on nav hover / active */
+		#nav > ul > li.current > a,
+		#nav > ul > li > a:hover {
+			color: #c9a84c !important;
+			border-color: #c9a84c !important;
+		}
+
+		/* Gold on section icon accents */
+		#main .special .icon::before {
+			color: #c9a84c;
+		}
+
+		/* Footer social icons — override the hardcoded inline styles below */
+		#footer .icons a { color: #6b7588 !important; }
+		#footer .icons a:hover { color: #e2c278 !important; }
+		</style>
 	</head>
 	<body class="index is-preload">
 		<div id="page-wrapper">
@@ -132,7 +168,6 @@
 							</li>
   						
   							<li>
-
 							  The focus is not compliance or reporting, but shared understanding and durable oversight 
 							  that enables sustained progress.
 							</li>
