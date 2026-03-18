@@ -145,6 +145,13 @@
   [data-theme="dark"] .theme-toggle .icon-sun  { opacity: 1; transform: rotate(0deg)   scale(1);   }
   [data-theme="dark"] .theme-toggle .icon-moon { opacity: 0; transform: rotate(-90deg) scale(0.5); }
 
+  .hero-theme-toggle {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.75rem;
+    z-index: 10;
+  }
+
   /* ── HERO ─────────────────────────────────────────────── */
   .hero-section {
     position: relative;
@@ -822,6 +829,11 @@
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
 
+  <button class="theme-toggle hero-theme-toggle" id="themeToggle" title="Toggle dark / light mode">
+    <span class="icon-sun">☀︎</span>
+    <span class="icon-moon">☽</span>
+  </button>
+
   <div class="hero-eyebrow">Ancient Wisdom</div>
 
   <div class="hero-quote-wrap" id="heroWrap">
@@ -873,10 +885,6 @@
     <button class="view-btn" id="listBtn" title="List view">&#9776;</button>
   </div>
   <span class="results-info" id="resultsInfo"></span>
-  <button class="theme-toggle" id="themeToggle" title="Toggle dark / light mode">
-    <span class="icon-sun">☀︎</span>
-    <span class="icon-moon">☽</span>
-  </button>
 </div>
 
 <!-- THEMES BAR -->
