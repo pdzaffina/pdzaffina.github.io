@@ -905,8 +905,14 @@
     <div class="modal-author" id="modalAuthor"></div>
     <div class="modal-source" id="modalSource"></div>
     <span class="modal-theme" id="modalTheme"></span>
+    <br>
+    <button class="modal-share-btn" id="modalShareBtn">
+      <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      Copy Share Link
+    </button>
   </div>
 </div>
+<div class="toast" id="toast">Link copied to clipboard</div>
 
 <script>
 // ── THEME TOGGLE ───────────────────────────────────────────
@@ -1103,6 +1109,11 @@ allThemes.forEach(theme => {
 // ── FILTERS ────────────────────────────────────────────────
 document.getElementById('searchInput').addEventListener('input', e => {
   currentSearch = e.target.value;
+  const url = new URL(window.location.href);
+  if (currentSearch.trim()) { url.searchParams.set('q', currentSearch.trim()); }
+  else { url.searchParams.delete('q'); }
+  url.searchParams.delete('id');
+  history.replaceState(null, '', url.toString());
   renderQuotes();
 });
 
@@ -1128,11 +1139,35 @@ document.getElementById('listBtn').addEventListener('click', () => {
 // ── QUOTES RENDERER ────────────────────────────────────────
 function getFiltered() {
   return quotes.filter(q => {
-    const s = currentSearch.toLowerCase();
-    const matchSearch  = !s || q.text.toLowerCase().includes(s) || q.author.toLowerCase().includes(s);
-    const matchAuthor  = !currentAuthor || q.author === currentAuthor;
-    const matchTheme   = currentTheme === 'All' || q.theme === currentTheme;
+    const tokens = currentSearch.toLowerCase().split(/\s+/).filter(Boolean);
+    const haystack = (q.text + ' ' + q.author + ' ' + q.source).toLowerCase();
+    const matchSearch = tokens.length === 0 || tokens.every(t => haystack.includes(t));
+    const matchAuthor = !currentAuthor || q.author === currentAuthor;
+    const matchTheme  = currentTheme === 'All' || q.theme === currentTheme;
     return matchSearch && matchAuthor && matchTheme;
+  });
+}
+
+const shareIcon = `<svg viewBox="0 0 24 24" style="width:.75rem;height:.75rem;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>`;
+
+let toastTimer = null;
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function copyShareLink(id) {
+  const url = new URL(window.location.href);
+  url.search = '';
+  if (id != null) url.searchParams.set('id', id);
+  if (currentSearch.trim()) url.searchParams.set('q', currentSearch.trim());
+  navigator.clipboard.writeText(url.toString()).then(showToast).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = url.toString(); ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta); showToast();
   });
 }
 
@@ -1161,7 +1196,10 @@ function renderQuotes() {
               <span class="quote-author">${esc(q.author)}</span>
               <span class="quote-source">${esc(q.source)}</span>
             </div>
-            <span class="quote-theme-badge" style="color:${tc};border-color:${tc}60">${esc(q.theme)}</span>
+            <div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0">
+              <span class="quote-theme-badge" style="color:${tc};border-color:${tc}60">${esc(q.theme)}</span>
+              <button class="share-btn" data-share-id="${q.id}" title="Copy share link">${shareIcon}Share</button>
+            </div>
           </div>
         </div>`;
     }).join('')}</div>`;
@@ -1177,6 +1215,7 @@ function renderQuotes() {
               <span class="list-author">${esc(q.author)}</span>
               <span class="list-source">${esc(q.source)}</span>
               <span class="list-theme" style="color:${tc}">${esc(q.theme)}</span>
+              <button class="share-btn" data-share-id="${q.id}" title="Copy share link">${shareIcon}Share</button>
             </div>
           </div>
         </div>`;
@@ -1185,6 +1224,9 @@ function renderQuotes() {
 
   // attach click handlers
   container.querySelectorAll('[data-id]').forEach(el => {
+    el.querySelectorAll('.share-btn').forEach(btn => {
+      btn.addEventListener('click', e => { e.stopPropagation(); copyShareLink(parseInt(btn.dataset.shareId)); });
+    });
     el.addEventListener('click', () => {
       const q = quotes.find(x => x.id === parseInt(el.dataset.id));
       if (q) openModal(q);
@@ -1199,6 +1241,7 @@ function openModal(q) {
   document.getElementById('modalAuthor').textContent = q.author;
   document.getElementById('modalSource').textContent = q.source;
   document.getElementById('modalTheme').textContent  = q.theme;
+  document.getElementById('modalShareBtn').onclick = () => copyShareLink(q.id);
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -1216,6 +1259,28 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 
 // ── INIT ───────────────────────────────────────────────────
 renderQuotes();
+
+// ── URL PARAMETERS ─────────────────────────────────────────
+// ?q=term   pre-fills the search box and filters results
+// ?id=N     opens that quote's modal (compatible with ?q=)
+(function () {
+  const params = new URLSearchParams(window.location.search);
+
+  const qParam = params.get('q');
+  if (qParam) {
+    currentSearch = qParam;
+    document.getElementById('searchInput').value = qParam;
+    renderQuotes();
+    document.getElementById('collection').scrollIntoView({ behavior: 'instant' });
+  }
+
+  const idParam = params.get('id');
+  if (!idParam) return;
+  const target = quotes.find(q => q.id === parseInt(idParam));
+  if (!target) return;
+  document.getElementById('collection').scrollIntoView({ behavior: 'instant' });
+  setTimeout(() => openModal(target), 120);
+})();
 </script>
 </body>
 </html>
