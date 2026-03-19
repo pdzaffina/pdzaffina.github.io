@@ -756,6 +756,76 @@
     .modal { padding: 2rem 1.5rem; }
     .modal-text { font-size: 1.2rem; }
   }
+
+  /* ── SHARE BUTTON ─────────────────────────────────────── */
+  .share-btn {
+    background: none;
+    border: 1px solid var(--border-pill);
+    color: var(--text-muted);
+    font-family: 'Cinzel', serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.5rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    line-height: 1;
+    align-self: flex-end;
+  }
+  .share-btn:hover { border-color: var(--text-accent); color: var(--text-accent); }
+  .share-btn svg {
+    width: 0.6rem; height: 0.6rem;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+  .modal-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: none;
+    border: 1px solid var(--border-pill);
+    color: var(--text-muted);
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    margin-top: 0;
+  }
+  .modal-share-btn:hover { border-color: var(--text-accent); color: var(--text-accent); }
+  .modal-share-btn svg {
+    width: 0.65rem; height: 0.65rem;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: var(--text-title);
+    color: var(--bg-page);
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.25rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s, transform 0.25s;
+    z-index: 2000;
+    white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
@@ -833,9 +903,16 @@
     <div class="modal-divider"></div>
     <div class="modal-author" id="modalRef"></div>
     <div class="modal-source" id="modalBook"></div>
-    <span class="modal-theme" id="modalTheme"></span>
+    <div style="display:flex;align-items:center;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap;">
+      <span class="modal-theme" id="modalTheme"></span>
+      <button class="modal-share-btn" id="modalShareBtn">
+        <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Copy Share Link
+      </button>
+    </div>
   </div>
 </div>
+<div class="toast" id="toast">Link copied to clipboard</div>
 
 <script>
 // ── THEME TOGGLE ───────────────────────────────────────────
@@ -1171,7 +1248,15 @@ allThemes.forEach(theme => {
 });
 
 // ── FILTER CONTROLS ────────────────────────────────────────
-document.getElementById('searchInput').addEventListener('input', e => { currentSearch = e.target.value; renderVerses(); });
+document.getElementById('searchInput').addEventListener('input', e => {
+  currentSearch = e.target.value;
+  const url = new URL(window.location.href);
+  if (currentSearch.trim()) { url.searchParams.set('q', currentSearch.trim()); }
+  else { url.searchParams.delete('q'); }
+  url.searchParams.delete('id');
+  history.replaceState(null, '', url.toString());
+  renderVerses();
+});
 document.getElementById('gridBtn').addEventListener('click', () => {
   currentView = 'grid';
   document.getElementById('gridBtn').classList.add('active');
@@ -1188,11 +1273,35 @@ document.getElementById('listBtn').addEventListener('click', () => {
 // ── RENDER ─────────────────────────────────────────────────
 function getFiltered() {
   return verses.filter(v => {
-    const s = currentSearch.toLowerCase();
-    const matchSearch = !s || v.text.toLowerCase().includes(s) || v.ref.toLowerCase().includes(s) || v.book.toLowerCase().includes(s);
+    const tokens = currentSearch.toLowerCase().split(/\s+/).filter(Boolean);
+    const haystack = (v.text + ' ' + v.ref + ' ' + v.book + ' ' + v.theme).toLowerCase();
+    const matchSearch = tokens.length === 0 || tokens.every(t => haystack.includes(t));
     const matchBook   = !currentBook  || v.book  === currentBook;
     const matchTheme  = currentTheme === 'All'  || v.theme === currentTheme;
     return matchSearch && matchBook && matchTheme;
+  });
+}
+
+const shareIcon = `<svg viewBox="0 0 24 24" style="width:.6rem;height:.6rem;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>`;
+
+let toastTimer = null;
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function copyShareLink(id) {
+  const url = new URL(window.location.href);
+  url.search = '';
+  if (id != null) url.searchParams.set('id', id);
+  if (currentSearch.trim()) url.searchParams.set('q', currentSearch.trim());
+  navigator.clipboard.writeText(url.toString()).then(showToast).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = url.toString(); ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta); showToast();
   });
 }
 
@@ -1221,7 +1330,10 @@ function renderVerses() {
               <span class="quote-author">${esc(v.book)}</span>
               <span class="quote-source">New International Version</span>
             </div>
-            <span class="quote-theme-badge" style="color:${tc};border-color:${tc}55">${esc(v.theme)}</span>
+            <div style="display:flex;align-items:flex-end;gap:.5rem;flex-shrink:0">
+              <span class="quote-theme-badge" style="color:${tc};border-color:${tc}55">${esc(v.theme)}</span>
+              <button class="share-btn" data-share-id="${v.id}" title="Copy share link">${shareIcon}Share</button>
+            </div>
           </div>
         </div>`;
     }).join('')}</div>`;
@@ -1237,6 +1349,7 @@ function renderVerses() {
               <span class="list-author">${esc(v.book)}</span>
               <span class="list-source">NIV</span>
               <span class="list-theme" style="color:${tc}">${esc(v.theme)}</span>
+              <button class="share-btn" data-share-id="${v.id}" title="Copy share link">${shareIcon}Share</button>
             </div>
           </div>
         </div>`;
@@ -1244,6 +1357,9 @@ function renderVerses() {
   }
 
   container.querySelectorAll('[data-id]').forEach(el => {
+    el.querySelectorAll('.share-btn').forEach(btn => {
+      btn.addEventListener('click', e => { e.stopPropagation(); copyShareLink(parseInt(btn.dataset.shareId)); });
+    });
     el.addEventListener('click', () => {
       const v = verses.find(x => x.id === parseInt(el.dataset.id));
       if (v) openModal(v);
@@ -1258,6 +1374,7 @@ function openModal(v) {
   document.getElementById('modalRef').textContent    = v.book;
   document.getElementById('modalBook').textContent   = 'New International Version';
   document.getElementById('modalTheme').textContent  = v.theme;
+  document.getElementById('modalShareBtn').onclick = () => copyShareLink(v.id);
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -1275,6 +1392,28 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal()
 
 // ── INIT ───────────────────────────────────────────────────
 renderVerses();
+
+// ── URL PARAMETERS ─────────────────────────────────────────
+// ?q=term  pre-fills the search box and filters results
+// ?id=N    opens that verse's modal (compatible with ?q=)
+(function () {
+  const params = new URLSearchParams(window.location.search);
+
+  const qParam = params.get('q');
+  if (qParam) {
+    currentSearch = qParam;
+    document.getElementById('searchInput').value = qParam;
+    renderVerses();
+    document.getElementById('collection').scrollIntoView({ behavior: 'instant' });
+  }
+
+  const idParam = params.get('id');
+  if (!idParam) return;
+  const target = verses.find(v => v.id === parseInt(idParam));
+  if (!target) return;
+  document.getElementById('collection').scrollIntoView({ behavior: 'instant' });
+  setTimeout(() => openModal(target), 120);
+})();
 </script>
 </body>
 </html>
