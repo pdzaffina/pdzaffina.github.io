@@ -820,6 +820,81 @@
     .modal { padding: 2rem 1.5rem; }
     .modal-text { font-size: 1.15rem; }
   }
+
+  /* ── SHARE BUTTON ─────────────────────────────────────── */
+  .share-btn {
+    background: none;
+    border: 1px solid var(--border-pill);
+    color: var(--text-muted);
+    font-family: 'Cinzel', serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.5rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    line-height: 1;
+    vertical-align: middle;
+    align-self: flex-end;
+  }
+  .share-btn:hover { border-color: var(--text-accent); color: var(--text-accent); }
+  .share-btn svg {
+    width: 0.6rem; height: 0.6rem;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  /* ── MODAL SHARE BUTTON ───────────────────────────────── */
+  .modal-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: none;
+    border: 1px solid var(--border-pill);
+    color: var(--text-muted);
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    margin-top: 1rem;
+  }
+  .modal-share-btn:hover { border-color: var(--text-accent); color: var(--text-accent); }
+  .modal-share-btn svg {
+    width: 0.65rem; height: 0.65rem;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  /* ── TOAST ────────────────────────────────────────────── */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: var(--text-title);
+    color: var(--bg-page);
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.25rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s, transform 0.25s;
+    z-index: 2000;
+    white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
@@ -905,7 +980,6 @@
     <div class="modal-author" id="modalAuthor"></div>
     <div class="modal-source" id="modalSource"></div>
     <span class="modal-theme" id="modalTheme"></span>
-    <br>
     <button class="modal-share-btn" id="modalShareBtn">
       <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
       Copy Share Link
@@ -1196,7 +1270,7 @@ function renderQuotes() {
               <span class="quote-author">${esc(q.author)}</span>
               <span class="quote-source">${esc(q.source)}</span>
             </div>
-            <div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0">
+            <div style="display:flex;align-items:flex-end;gap:.5rem;flex-shrink:0">
               <span class="quote-theme-badge" style="color:${tc};border-color:${tc}60">${esc(q.theme)}</span>
               <button class="share-btn" data-share-id="${q.id}" title="Copy share link">${shareIcon}Share</button>
             </div>
