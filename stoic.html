@@ -865,7 +865,7 @@
     padding: 0.3rem 0.75rem;
     cursor: pointer;
     transition: border-color 0.2s, color 0.2s;
-    margin-top: 1rem;
+    margin-top: 0;
   }
   .modal-share-btn:hover { border-color: var(--text-accent); color: var(--text-accent); }
   .modal-share-btn svg {
@@ -979,11 +979,13 @@
     <div class="modal-divider"></div>
     <div class="modal-author" id="modalAuthor"></div>
     <div class="modal-source" id="modalSource"></div>
-    <span class="modal-theme" id="modalTheme"></span>
-    <button class="modal-share-btn" id="modalShareBtn">
-      <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-      Copy Share Link
-    </button>
+    <div style="display:flex;align-items:center;gap:.75rem;margin-top:0;flex-wrap:wrap;">
+      <span class="modal-theme" id="modalTheme"></span>
+      <button class="modal-share-btn" id="modalShareBtn">
+        <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Copy Share Link
+      </button>
+    </div>
   </div>
 </div>
 <div class="toast" id="toast">Link copied to clipboard</div>
