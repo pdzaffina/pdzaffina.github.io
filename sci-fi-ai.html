@@ -136,6 +136,14 @@ body{min-height:100vh;background:var(--bg-page);font-family:'Cormorant Garamond'
 .modal-source{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text-muted);font-style:italic;margin-bottom:1.5rem;transition:color .35s ease;}
 .modal-theme{display:inline-block;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:.3rem .8rem;border:1px solid var(--text-gold);color:var(--text-accent);background:rgba(50,80,150,.06);}
 .no-results{text-align:center;padding:5rem 2rem;font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--text-muted);font-style:italic;line-height:2;}
+.share-btn{background:none;border:1px solid var(--border-pill);color:var(--text-muted);font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;padding:.22rem .6rem;cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;display:inline-flex;align-items:center;gap:.35rem;}
+.share-btn:hover{border-color:var(--text-accent);color:var(--text-accent);}
+.share-btn svg{width:.75rem;height:.75rem;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.modal-share-btn{display:inline-flex;align-items:center;gap:.4rem;background:none;border:1px solid var(--border-pill);color:var(--text-muted);font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:.35rem .9rem;cursor:pointer;transition:all .2s;margin-top:1.25rem;}
+.modal-share-btn:hover{border-color:var(--text-accent);color:var(--text-accent);}
+.modal-share-btn svg{width:.8rem;height:.8rem;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(8px);background:var(--text-title);color:var(--bg-page);font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;padding:.6rem 1.4rem;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:2000;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 @media(max-width:640px){.stats-row{gap:1.2rem 2rem;}.grid-view{grid-template-columns:1fr;}.controls{flex-direction:column;}.search-input{width:100%;}.list-quote-card{padding:1.2rem;gap:1rem;}.modal{padding:2rem 1.5rem;}.modal-text{font-size:1.15rem;}}
 </style>
 </head>
@@ -185,8 +193,14 @@ body{min-height:100vh;background:var(--bg-page);font-family:'Cormorant Garamond'
     <div class="modal-author" id="modalAuthor"></div>
     <div class="modal-source" id="modalSource"></div>
     <span class="modal-theme" id="modalTheme"></span>
+    <br>
+    <button class="modal-share-btn" id="modalShareBtn">
+      <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      Copy Share Link
+    </button>
   </div>
 </div>
+<div class="toast" id="toast">Link copied to clipboard</div>
 <script>
 const htmlEl=document.documentElement;
 if(localStorage.getItem('ai-scifi-theme')==='dark')htmlEl.setAttribute('data-theme','dark');
@@ -281,16 +295,45 @@ document.getElementById('listBtn').addEventListener('click',()=>{currentView='li
 function getFiltered(){return quotes.filter(q=>{const s=currentSearch.toLowerCase();const ms=!s||q.text.toLowerCase().includes(s)||q.author.toLowerCase().includes(s)||q.source.toLowerCase().includes(s);return ms&&(!currentAuthor||q.author===currentAuthor)&&(currentTheme==='All'||q.theme===currentTheme);});}
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
+const shareIcon=`<svg viewBox="0 0 24 24" style="width:.75rem;height:.75rem;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>`;
+
+let toastTimer=null;
+function showToast(){
+  const t=document.getElementById('toast');
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+function copyShareLink(id){
+  const url=new URL(window.location.href);
+  url.search='';
+  url.searchParams.set('id',id);
+  navigator.clipboard.writeText(url.toString()).then(showToast).catch(()=>{
+    // fallback for non-https contexts
+    const ta=document.createElement('textarea');
+    ta.value=url.toString();ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();document.execCommand('copy');
+    document.body.removeChild(ta);showToast();
+  });
+}
+
 function renderQuotes(){
   const filtered=getFiltered();const container=document.getElementById('quotesContainer');
   document.getElementById('resultsInfo').textContent=`${filtered.length} of ${quotes.length}`;
   if(filtered.length===0){container.innerHTML='<div class="no-results">No quotes matching your search.<br><span style="font-size:.9rem;opacity:.6">The machine has not spoken on this.</span></div>';return;}
   if(currentView==='grid'){
-    container.innerHTML='<div class="grid-view">'+filtered.map(q=>{const tc=themeColors[q.theme]||'#384878';return`<div class="quote-card" data-id="${q.id}"><div class="quote-number">${esc(q.author)}</div><p class="quote-text">${esc(q.text)}</p><div class="quote-footer"><div class="quote-attribution"><span class="quote-source">${esc(q.source)}</span></div><span class="quote-theme-badge" style="color:${tc};border-color:${tc}55">${esc(q.theme)}</span></div></div>`;}).join('')+'</div>';
+    container.innerHTML='<div class="grid-view">'+filtered.map(q=>{const tc=themeColors[q.theme]||'#384878';return`<div class="quote-card" data-id="${q.id}"><div class="quote-number">${esc(q.author)}</div><p class="quote-text">${esc(q.text)}</p><div class="quote-footer"><div class="quote-attribution"><span class="quote-source">${esc(q.source)}</span></div><div style="display:flex;align-items:center;gap:.5rem;flex-shrink:0"><span class="quote-theme-badge" style="color:${tc};border-color:${tc}55">${esc(q.theme)}</span><button class="share-btn" data-share-id="${q.id}" title="Copy share link">${shareIcon}Share</button></div></div></div>`;}).join('')+'</div>';
   } else {
-    container.innerHTML='<div class="list-view">'+filtered.map(q=>{const tc=themeColors[q.theme]||'#384878';return`<div class="list-quote-card" data-id="${q.id}"><div class="list-number" style="color:${tc}">${esc(q.theme)}</div><div class="list-content"><p class="list-text">&#x201C;${esc(q.text)}&#x201D;</p><div class="list-meta"><span class="list-author">${esc(q.author)}</span><span class="list-source">${esc(q.source)}</span></div></div></div>`;}).join('')+'</div>';
+    container.innerHTML='<div class="list-view">'+filtered.map(q=>{const tc=themeColors[q.theme]||'#384878';return`<div class="list-quote-card" data-id="${q.id}"><div class="list-number" style="color:${tc}">${esc(q.theme)}</div><div class="list-content"><p class="list-text">&#x201C;${esc(q.text)}&#x201D;</p><div class="list-meta"><span class="list-author">${esc(q.author)}</span><span class="list-source">${esc(q.source)}</span><button class="share-btn" data-share-id="${q.id}" title="Copy share link">${shareIcon}Share</button></div></div></div>`;}).join('')+'</div>';
   }
-  container.querySelectorAll('[data-id]').forEach(el=>{el.addEventListener('click',()=>{const q=quotes.find(x=>x.id===parseInt(el.dataset.id));if(q)openModal(q);});});
+  container.querySelectorAll('[data-id]').forEach(el=>{
+    // share buttons stop propagation so they don't open the modal
+    el.querySelectorAll('.share-btn').forEach(btn=>{
+      btn.addEventListener('click',e=>{e.stopPropagation();copyShareLink(parseInt(btn.dataset.shareId));});
+    });
+    el.addEventListener('click',()=>{const q=quotes.find(x=>x.id===parseInt(el.dataset.id));if(q)openModal(q);});
+  });
 }
 
 function openModal(q){
@@ -299,6 +342,7 @@ function openModal(q){
   document.getElementById('modalAuthor').textContent=q.author;
   document.getElementById('modalSource').textContent=q.source;
   document.getElementById('modalTheme').textContent=q.theme;
+  document.getElementById('modalShareBtn').onclick=()=>copyShareLink(q.id);
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
