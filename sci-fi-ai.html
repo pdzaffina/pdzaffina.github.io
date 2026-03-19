@@ -288,11 +288,18 @@ const allThemes=['All',...Object.keys(themeCounts).sort()];
 const tb=document.getElementById('themesBar');
 allThemes.forEach(t=>{const b=document.createElement('button');b.className='theme-pill'+(t==='All'?' active':'');b.textContent=t;b.addEventListener('click',()=>{currentTheme=t;document.querySelectorAll('.theme-pill').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderQuotes();});tb.appendChild(b);});
 
-document.getElementById('searchInput').addEventListener('input',e=>{currentSearch=e.target.value;renderQuotes();});
+document.getElementById('searchInput').addEventListener('input',e=>{
+  currentSearch=e.target.value;
+  const url=new URL(window.location.href);
+  if(currentSearch.trim()){url.searchParams.set('q',currentSearch.trim());}else{url.searchParams.delete('q');}
+  url.searchParams.delete('id');
+  history.replaceState(null,'',url.toString());
+  renderQuotes();
+});
 document.getElementById('gridBtn').addEventListener('click',()=>{currentView='grid';document.getElementById('gridBtn').classList.add('active');document.getElementById('listBtn').classList.remove('active');renderQuotes();});
 document.getElementById('listBtn').addEventListener('click',()=>{currentView='list';document.getElementById('listBtn').classList.add('active');document.getElementById('gridBtn').classList.remove('active');renderQuotes();});
 
-function getFiltered(){return quotes.filter(q=>{const s=currentSearch.toLowerCase();const ms=!s||q.text.toLowerCase().includes(s)||q.author.toLowerCase().includes(s)||q.source.toLowerCase().includes(s);return ms&&(!currentAuthor||q.author===currentAuthor)&&(currentTheme==='All'||q.theme===currentTheme);});}
+function getFiltered(){return quotes.filter(q=>{const tokens=currentSearch.toLowerCase().split(/\s+/).filter(Boolean);const haystack=(q.text+' '+q.author+' '+q.source).toLowerCase();const ms=tokens.length===0||tokens.every(t=>haystack.includes(t));return ms&&(!currentAuthor||q.author===currentAuthor)&&(currentTheme==='All'||q.theme===currentTheme);});}
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
 const shareIcon=`<svg viewBox="0 0 24 24" style="width:.75rem;height:.75rem;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>`;
@@ -308,9 +315,9 @@ function showToast(){
 function copyShareLink(id){
   const url=new URL(window.location.href);
   url.search='';
-  url.searchParams.set('id',id);
+  if(id!=null) url.searchParams.set('id',id);
+  if(currentSearch.trim()) url.searchParams.set('q',currentSearch.trim());
   navigator.clipboard.writeText(url.toString()).then(showToast).catch(()=>{
-    // fallback for non-https contexts
     const ta=document.createElement('textarea');
     ta.value=url.toString();ta.style.position='fixed';ta.style.opacity='0';
     document.body.appendChild(ta);ta.select();document.execCommand('copy');
@@ -352,16 +359,28 @@ document.getElementById('modalOverlay').addEventListener('click',e=>{if(e.target
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 renderQuotes();
 
-// ── URL PARAMETER: ?id=N opens that quote's modal on load ──
+// ── URL PARAMETERS ────────────────────────────────────────
+// ?q=term  pre-fills the search box and filters results
+// ?id=N    opens that quote's modal (compatible with ?q=)
 (function(){
   const params = new URLSearchParams(window.location.search);
+
+  // Restore search term first so renderQuotes() has it
+  const qParam = params.get('q');
+  if(qParam){
+    currentSearch = qParam;
+    const input = document.getElementById('searchInput');
+    input.value = qParam;
+    renderQuotes(); // re-render with the search term applied
+    document.getElementById('collection').scrollIntoView({behavior:'instant'});
+  }
+
+  // Open modal if id is present
   const idParam = params.get('id');
-  if (!idParam) return;
+  if(!idParam) return;
   const target = quotes.find(q => q.id === parseInt(idParam));
-  if (!target) return;
-  // Scroll past hero to the collection so the page feels anchored
+  if(!target) return;
   document.getElementById('collection').scrollIntoView({behavior:'instant'});
-  // Small delay lets the layout settle before the modal opens
   setTimeout(() => openModal(target), 120);
 })();
 </script>
