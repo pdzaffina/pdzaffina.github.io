@@ -895,6 +895,40 @@
     white-space: nowrap;
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ── HERO SHARE BUTTON ────────────────────────────────── */
+  .hero-share-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+  .hero-share-btn {
+    background: none;
+    border: 1px solid var(--border-input);
+    color: var(--text-author);
+    padding: 0.75rem 1.5rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.25s, color 0.25s, background 0.25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .hero-share-btn:hover {
+    border-color: var(--text-accent);
+    color: var(--text-body);
+    background: rgba(0,0,0,0.04);
+  }
+  .hero-share-btn svg {
+    width: 0.7rem; height: 0.7rem;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+  }
 </style>
 </head>
 <body>
@@ -925,7 +959,10 @@
     <span class="hero-theme-pill" id="heroTheme"></span>
   </div>
 
-  <button class="hero-refresh-btn" id="refreshBtn">&#8635;&nbsp;&nbsp;New Reflection</button>
+  <div class="hero-share-row">
+    <button class="hero-refresh-btn" id="refreshBtn">&#8635;&nbsp;&nbsp;New Reflection</button>
+    <button class="hero-share-btn" id="heroShareBtn"><svg viewBox="0 0 24 24" style="width:.7rem;height:.7rem;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Share</button>
+  </div>
 
   <a href="#collection" class="hero-scroll-hint">
     <span>Explore All</span>
@@ -1151,6 +1188,7 @@ function cycleHero() {
 }
 
 document.getElementById('refreshBtn').addEventListener('click', cycleHero);
+document.getElementById('heroShareBtn').addEventListener('click', () => copyShareLink(quotes[heroIdx].id));
 renderHero(quotes[heroIdx]);
 
 // ── STATS ──────────────────────────────────────────────────
