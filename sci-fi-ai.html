@@ -145,6 +145,40 @@ body{min-height:100vh;background:var(--bg-page);font-family:'Cormorant Garamond'
 .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(8px);background:var(--text-title);color:var(--bg-page);font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;padding:.6rem 1.4rem;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:2000;white-space:nowrap;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 @media(max-width:640px){.stats-row{gap:1.2rem 2rem;}.grid-view{grid-template-columns:1fr;}.controls{flex-direction:column;}.search-input{width:100%;}.list-quote-card{padding:1.2rem;gap:1rem;}.modal{padding:2rem 1.5rem;}.modal-text{font-size:1.15rem;}}
+
+  /* ── HERO SHARE BUTTON ────────────────────────────────── */
+  .hero-share-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+  .hero-share-btn {
+    background: none;
+    border: 1px solid var(--border-input);
+    color: var(--text-author);
+    padding: 0.75rem 1.5rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.25s, color 0.25s, background 0.25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .hero-share-btn:hover {
+    border-color: var(--text-accent);
+    color: var(--text-body);
+    background: rgba(0,0,0,0.04);
+  }
+  .hero-share-btn svg {
+    width: 0.7rem; height: 0.7rem;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+  }
 </style>
 </head>
 <body>
@@ -163,7 +197,10 @@ body{min-height:100vh;background:var(--bg-page);font-family:'Cormorant Garamond'
     </div>
     <span class="hero-theme-pill" id="heroTheme"></span>
   </div>
-  <button class="hero-refresh-btn" id="refreshBtn">&#8635;&nbsp;&nbsp;New Quote</button>
+  <div class="hero-share-row">
+    <button class="hero-refresh-btn" id="refreshBtn">&#8635;&nbsp;&nbsp;New Quote</button>
+    <button class="hero-share-btn" id="heroShareBtn"><svg viewBox="0 0 24 24" style="width:.7rem;height:.7rem;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Share</button>
+  </div>
   <a href="#collection" class="hero-scroll-hint"><span>All Quotes</span><div class="hero-scroll-arrow"></div></a>
 </section>
 <div class="stoic-header" id="collection">
@@ -273,6 +310,7 @@ let currentSearch='',currentAuthor='',currentTheme='All',currentView='grid',hero
 function renderHero(q){document.getElementById('heroText').textContent=q.text;document.getElementById('heroAuthor').textContent=q.author;document.getElementById('heroSource').textContent=q.source;document.getElementById('heroTheme').textContent=q.theme;}
 function cycleHero(){const w=document.getElementById('heroWrap');w.classList.add('fading');setTimeout(()=>{let n;do{n=Math.floor(Math.random()*quotes.length);}while(n===heroIdx);heroIdx=n;renderHero(quotes[heroIdx]);w.classList.remove('fading');},400);}
 document.getElementById('refreshBtn').addEventListener('click',cycleHero);
+document.getElementById('heroShareBtn').addEventListener('click',()=>copyShareLink(quotes[heroIdx].id));
 renderHero(quotes[heroIdx]);
 
 const authorCounts={},themeCounts={};
