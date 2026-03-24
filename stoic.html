@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stoic Wisdom — 100 Essential Teachings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  /* ── LIGHT MODE TOKENS (default) ──────────────────────── */
+  :root {
+    --bg-page:        #f5f0e8;
+    --bg-hero:        #ede6d6;
+    --bg-header:      linear-gradient(180deg, #e8dfc8 0%, #f0e8d4 100%);
+    --bg-controls:    #ede6d6;
+    --bg-themes:      #f5f0e8;
+    --bg-card:        #faf7f0;
+    --bg-card-hover:  #ffffff;
+    --bg-input:       #faf6ee;
+    --bg-modal:       #faf7f0;
+    --bg-vbtn-active: #c8a84b;
+
+    --border-header:  #d4c090;
+    --border-controls:#d4c090;
+    --border-themes:  #e0d4b0;
+    --border-card:    #e0d4b0;
+    --border-card-hov:#c8a84b;
+    --border-input:   #c8b07a;
+    --border-pill:    #d4c090;
+    --border-modal:   #c8a84b;
+
+    --text-body:      #2c2416;
+    --text-hero-q:    #1e1810;
+    --text-muted:     #9a8060;
+    --text-faint:     #b0986a;
+    --text-author:    #7a5e20;
+    --text-accent:    #9a7c3a;
+    --text-gold:      #c8a84b;
+    --text-title:     #4a3410;
+    --text-subtitle:  #7a6840;
+    --text-number:    #c8a84b;
+    --text-vbtn:      #9a8060;
+    --text-vbtn-act:  #ffffff;
+
+    --shadow-card:    0 1px 4px rgba(100,70,20,0.06);
+    --shadow-card-hov:0 6px 20px rgba(100,70,20,0.10);
+    --shadow-controls:0 2px 8px rgba(100,70,20,0.08);
+    --shadow-modal:   0 20px 60px rgba(80,50,10,0.25);
+    --overlay-bg:     rgba(40,28,10,0.55);
+
+    --grid-line:      rgba(160,120,50,0.07);
+    --hero-glow1:     rgba(180,140,60,0.12);
+    --hero-glow2:     rgba(160,120,50,0.07);
+    --hero-glow3:     rgba(140,100,40,0.06);
+    --quote-mark-col: rgba(200,168,75,0.6);
+  }
+
+  /* ── DARK MODE TOKENS ─────────────────────────────────── */
+  [data-theme="dark"] {
+    --bg-page:        #0d0c0a;
+    --bg-hero:        #0a0907;
+    --bg-header:      linear-gradient(180deg, #1a1710 0%, #0d0c0a 100%);
+    --bg-controls:    #110f0c;
+    --bg-themes:      #0f0e0b;
+    --bg-card:        #141210;
+    --bg-card-hover:  #181510;
+    --bg-input:       #1a1710;
+    --bg-modal:       #141210;
+    --bg-vbtn-active: #3a3020;
+
+    --border-header:  #3a3020;
+    --border-controls:#2a2015;
+    --border-themes:  #2a2015;
+    --border-card:    #2a2015;
+    --border-card-hov:#5a4a2a;
+    --border-input:   #3a3020;
+    --border-pill:    #2a2015;
+    --border-modal:   #5a4a2a;
+
+    --text-body:      #d4c9a8;
+    --text-hero-q:    #e8d9a8;
+    --text-muted:     #6a5a3a;
+    --text-faint:     #5a4a2a;
+    --text-author:    #c8a84b;
+    --text-accent:    #9a7c3a;
+    --text-gold:      #c8a84b;
+    --text-title:     #c8a84b;
+    --text-subtitle:  #8a7a5a;
+    --text-number:    #4a3a1a;
+    --text-vbtn:      #6a5a3a;
+    --text-vbtn-act:  #c8a84b;
+
+    --shadow-card:    none;
+    --shadow-card-hov:none;
+    --shadow-controls:none;
+    --shadow-modal:   0 0 80px rgba(0,0,0,0.8), 0 0 40px rgba(140,100,30,0.1);
+    --overlay-bg:     rgba(0,0,0,0.85);
+
+    --grid-line:      rgba(120,90,30,0.04);
+    --hero-glow1:     rgba(160,120,40,0.10);
+    --hero-glow2:     rgba(100,70,20,0.06);
+    --hero-glow3:     rgba(80,60,20,0.05);
+    --quote-mark-col: #4a3a1a;
+  }
+
+  body {
+    min-height: 100vh;
+    background: var(--bg-page);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: var(--text-body);
+    transition: background 0.35s ease, color 0.35s ease;
+  }
+
+  /* ── THEME TOGGLE ─────────────────────────────────────── */
+  .theme-toggle {
+    background: var(--bg-input);
+    border: 1px solid var(--border-input);
+    color: var(--text-muted);
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .theme-toggle:hover { border-color: var(--text-accent); color: var(--text-accent); }
+  .theme-toggle .icon-sun,
+  .theme-toggle .icon-moon {
+    position: absolute;
+    line-height: 1;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .theme-toggle .icon-sun  { opacity: 0; transform: rotate(90deg) scale(0.5); }
+  .theme-toggle .icon-moon { opacity: 1; transform: rotate(0deg)  scale(1);   }
+  [data-theme="dark"] .theme-toggle .icon-sun  { opacity: 1; transform: rotate(0deg)   scale(1);   }
+  [data-theme="dark"] .theme-toggle .icon-moon { opacity: 0; transform: rotate(-90deg) scale(0.5); }
+
+  .hero-theme-toggle {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.75rem;
+    z-index: 10;
+  }
+
+  /* ── HERO ─────────────────────────────────────────────── */
+  .hero-section {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5rem 2rem 5rem;
+    overflow: hidden;
+    background: var(--bg-hero);
+    transition: background 0.35s ease;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 30%, var(--hero-glow1) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 20% 80%, var(--hero-glow2) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 80% 20%, var(--hero-glow3) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+  }
+
+  .hero-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.5em;
+    color: var(--text-accent);
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-eyebrow::before,
+  .hero-eyebrow::after {
+    content: '';
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--text-accent));
+  }
+  .hero-eyebrow::after {
+    background: linear-gradient(90deg, var(--text-accent), transparent);
+  }
+
+  .hero-quote-wrap {
+    max-width: 820px;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .hero-quote-wrap.fading {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  .hero-open-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 7rem;
+    color: var(--text-gold);
+    line-height: 0.4;
+    display: block;
+    margin-bottom: 0.5rem;
+    user-select: none;
+    opacity: 0.5;
+  }
+
+  .hero-quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--text-hero-q);
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.01em;
+    transition: color 0.35s ease;
+  }
+
+  .hero-attribution {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-author-line {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-rule {
+    width: 30px;
+    height: 1px;
+    background: var(--text-accent);
+  }
+
+  .hero-author {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    color: var(--text-author);
+    text-transform: uppercase;
+  }
+
+  .hero-source {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: var(--text-muted);
+  }
+
+  .hero-theme-pill {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--text-gold);
+    color: var(--text-accent);
+    margin-bottom: 3rem;
+    background: rgba(200,168,75,0.08);
+  }
+
+  .hero-refresh-btn {
+    background: none;
+    border: 1px solid var(--border-input);
+    color: var(--text-author);
+    padding: 0.75rem 2rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.25s, color 0.25s, background 0.25s;
+  }
+
+  .hero-refresh-btn:hover {
+    border-color: var(--text-accent);
+    color: var(--text-body);
+    background: rgba(160,120,40,0.08);
+  }
+
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-accent);
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    animation: scrollBounce 2s ease-in-out infinite;
+    text-decoration: none;
+  }
+
+  .hero-scroll-arrow {
+    width: 1px;
+    height: 24px;
+    background: linear-gradient(180deg, var(--text-accent), transparent);
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ── STATS HEADER ─────────────────────────────────────── */
+  .stoic-header {
+    background: var(--bg-header);
+    border-bottom: 1px solid var(--border-header);
+    padding: 2rem 2rem 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.35s ease;
+  }
+
+  .stoic-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(200,168,75,0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header-ornament {
+    font-family: 'Cinzel', serif;
+    color: var(--text-accent);
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .header-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--text-title);
+    letter-spacing: 0.08em;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    transition: color 0.35s ease;
+  }
+
+  .header-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    color: var(--text-subtitle);
+    margin-bottom: 1.5rem;
+    transition: color 0.35s ease;
+  }
+
+  .header-divider {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--text-gold), transparent);
+    margin: 0 auto 1.5rem;
+  }
+
+  .stats-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem 3rem;
+  }
+
+  .stat-item { text-align: center; }
+
+  .stat-number {
+    font-family: 'Cinzel', serif;
+    font-size: 1.6rem;
+    color: var(--text-author);
+    font-weight: 600;
+    display: block;
+    transition: color 0.35s ease;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: color 0.35s ease;
+  }
+
+  /* ── CONTROLS ─────────────────────────────────────────── */
+  .controls {
+    background: var(--bg-controls);
+    border-bottom: 1px solid var(--border-controls);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-controls);
+    transition: background 0.35s ease, border-color 0.35s ease;
+  }
+
+  .search-input {
+    flex: 1;
+    min-width: 180px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-input);
+    color: var(--text-body);
+    padding: 0.6rem 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.35s ease, color 0.35s ease;
+  }
+  .search-input:focus { border-color: var(--text-accent); box-shadow: 0 0 0 3px rgba(154,124,58,0.12); }
+  .search-input::placeholder { color: var(--text-faint); font-style: italic; }
+
+  .filter-select {
+    background: var(--bg-input);
+    border: 1px solid var(--border-input);
+    color: var(--text-body);
+    padding: 0.6rem 0.8rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.35s ease, color 0.35s ease;
+  }
+  .filter-select:focus { border-color: var(--text-accent); }
+
+  .view-toggle { display: flex; border: 1px solid var(--border-input); overflow: hidden; transition: border-color 0.35s ease; }
+
+  .view-btn {
+    background: var(--bg-input);
+    border: none;
+    color: var(--text-vbtn);
+    padding: 0.6rem 0.85rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+  .view-btn.active { background: var(--bg-vbtn-active); color: var(--text-vbtn-act); }
+
+  .results-info {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    transition: color 0.35s ease;
+  }
+
+  /* ── THEMES BAR ───────────────────────────────────────── */
+  .themes-bar {
+    background: var(--bg-themes);
+    border-bottom: 1px solid var(--border-themes);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    transition: background 0.35s ease, border-color 0.35s ease;
+  }
+  .themes-bar::-webkit-scrollbar { display: none; }
+
+  .theme-pill {
+    background: none;
+    border: 1px solid var(--border-pill);
+    color: var(--text-muted);
+    padding: 0.3rem 0.8rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .theme-pill:hover { border-color: var(--text-accent); color: var(--text-body); background: rgba(154,124,58,0.06); }
+  .theme-pill.active { background: var(--text-gold); border-color: var(--text-gold); color: #fff; }
+
+  /* ── CONTENT AREA ─────────────────────────────────────── */
+  .content {
+    padding: 2rem 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--bg-page);
+    transition: background 0.35s ease;
+  }
+
+  /* ── GRID VIEW ────────────────────────────────────────── */
+  .grid-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .quote-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    padding: 1.75rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+  }
+  .quote-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, var(--text-gold), transparent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .quote-card:hover { border-color: var(--border-card-hov); background: var(--bg-card-hover); transform: translateY(-2px); box-shadow: var(--shadow-card-hov); }
+  .quote-card:hover::before { opacity: 1; }
+
+  .quote-number {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    color: var(--text-number);
+    letter-spacing: 0.2em;
+    margin-bottom: 1rem;
+    transition: color 0.35s ease;
+  }
+
+  .quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 1.25rem;
+    transition: color 0.35s ease;
+  }
+
+  .quote-text::before {
+    content: '\201C';
+    font-size: 2.5rem;
+    color: var(--quote-mark-col);
+    line-height: 0;
+    vertical-align: -0.8rem;
+    margin-right: 0.1rem;
+    font-style: normal;
+  }
+
+  .quote-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 0.75rem;
+  }
+
+  .quote-attribution { flex: 1; }
+
+  .quote-author {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    color: var(--text-author);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.2rem;
+    transition: color 0.35s ease;
+  }
+
+  .quote-source {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: italic;
+    transition: color 0.35s ease;
+  }
+
+  .quote-theme-badge {
+    font-family: 'Cinzel', serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── LIST VIEW ────────────────────────────────────────── */
+  .list-view { display: flex; flex-direction: column; }
+
+  .list-quote-card {
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-card);
+    padding: 1.4rem 2rem;
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .list-quote-card:hover { background: var(--bg-card-hover); }
+
+  .list-number {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    color: var(--text-number);
+    letter-spacing: 0.1em;
+    min-width: 2.5rem;
+    padding-top: 0.25rem;
+    transition: color 0.35s ease;
+  }
+
+  .list-content { flex: 1; }
+
+  .list-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 0.5rem;
+    transition: color 0.35s ease;
+  }
+
+  .list-meta {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .list-author {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    color: var(--text-author);
+    letter-spacing: 0.1em;
+    transition: color 0.35s ease;
+  }
+
+  .list-source {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: italic;
+    transition: color 0.35s ease;
+  }
+
+  .list-theme {
+    font-family: 'Cinzel', serif;
+    font-size: 0.52rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── MODAL ────────────────────────────────────────────── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--overlay-bg);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal {
+    background: var(--bg-modal);
+    border: 1px solid var(--border-modal);
+    max-width: 640px;
+    width: 100%;
+    padding: 3rem;
+    position: relative;
+    box-shadow: var(--shadow-modal);
+    transform: translateY(16px);
+    transition: transform 0.3s, background 0.35s ease;
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+
+  .modal::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 20px; right: 20px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--text-gold), transparent);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1.25rem; right: 1.25rem;
+    background: none;
+    border: 1px solid var(--border-pill);
+    color: var(--text-muted);
+    width: 2rem; height: 2rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-family: 'Cinzel', serif;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-close:hover { border-color: var(--text-accent); color: var(--text-body); }
+
+  .modal-number {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    color: var(--text-gold);
+    letter-spacing: 0.3em;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    line-height: 1.8;
+    color: var(--text-hero-q);
+    font-style: italic;
+    margin-bottom: 2rem;
+    transition: color 0.35s ease;
+  }
+
+  .modal-divider {
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--text-gold), transparent);
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-author {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--text-author);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.4rem;
+    transition: color 0.35s ease;
+  }
+
+  .modal-source {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    transition: color 0.35s ease;
+  }
+
+  .modal-theme {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--text-gold);
+    color: var(--text-accent);
+    background: rgba(200,168,75,0.08);
+  }
+
+  /* ── NO RESULTS ───────────────────────────────────────── */
+  .no-results {
+    text-align: center;
+    padding: 5rem 2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 2;
+  }
+
+  /* ── RESPONSIVE ───────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .stats-row { gap: 1.2rem 2rem; }
+    .grid-view { grid-template-columns: 1fr; }
+    .controls { flex-direction: column; }
+    .search-input { width: 100%; }
+    .list-quote-card { padding: 1.2rem; gap: 1rem; }
+    .modal { padding: 2rem 1.5rem; }
+    .modal-text { font-size: 1.15rem; }
+  }
+
+  /* ── SHARE BUTTON ─────────────────────────────────────── */
+  .share-btn {
+    background: none;
+    border: 1px solid var(--border-pill);
+    color: var(--text-muted);
+    font-family: 'Cinzel', serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.5rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    line-height: 1;
+    vertical-align: middle;
+    align-self: flex-end;
+  }
+  .share-btn:hover { border-color: var(--text-accent); color: var(--text-accent); }
+  .share-btn svg {
+    width: 0.6rem; height: 0.6rem;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  /* ── MODAL SHARE BUTTON ───────────────────────────────── */
+  .modal-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: none;
+    border: 1px solid var(--border-pill);
+    color: var(--text-muted);
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    margin-top: 0;
+  }
+  .modal-share-btn:hover { border-color: var(--text-accent); color: var(--text-accent); }
+  .modal-share-btn svg {
+    width: 0.65rem; height: 0.65rem;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+
+  /* ── TOAST ────────────────────────────────────────────── */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: var(--text-title);
+    color: var(--bg-page);
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.25rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s, transform 0.25s;
+    z-index: 2000;
+    white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ── HERO SHARE BUTTON ────────────────────────────────── */
+  .hero-share-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+  .hero-share-btn {
+    background: none;
+    border: 1px solid var(--border-input);
+    color: var(--text-author);
+    padding: 0.75rem 1.5rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.25s, color 0.25s, background 0.25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .hero-share-btn:hover {
+    border-color: var(--text-accent);
+    color: var(--text-body);
+    background: rgba(0,0,0,0.04);
+  }
+  .hero-share-btn svg {
+    width: 0.7rem; height: 0.7rem;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero-section" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <button class="theme-toggle hero-theme-toggle" id="themeToggle" title="Toggle dark / light mode">
+    <span class="icon-sun">☀︎</span>
+    <span class="icon-moon">☽</span>
+  </button>
+
+  <div class="hero-eyebrow">Ancient Wisdom</div>
+
+  <div class="hero-quote-wrap" id="heroWrap">
+    <span class="hero-open-quote">&ldquo;</span>
+    <p class="hero-quote-text" id="heroText"></p>
+    <div class="hero-attribution">
+      <div class="hero-author-line">
+        <span class="hero-rule"></span>
+        <span class="hero-author" id="heroAuthor"></span>
+        <span class="hero-rule"></span>
+      </div>
+      <span class="hero-source" id="heroSource"></span>
+    </div>
+    <span class="hero-theme-pill" id="heroTheme"></span>
+  </div>
+
+  <div class="hero-share-row">
+    <button class="hero-refresh-btn" id="refreshBtn">&#8635;&nbsp;&nbsp;New Reflection</button>
+    <button class="hero-share-btn" id="heroShareBtn"><svg viewBox="0 0 24 24" style="width:.7rem;height:.7rem;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Share</button>
+  </div>
+
+  <a href="#collection" class="hero-scroll-hint">
+    <span>Explore All</span>
+    <div class="hero-scroll-arrow"></div>
+  </a>
+</section>
+
+<!-- STATS HEADER -->
+<div class="stoic-header" id="collection">
+  <div class="header-ornament">✦ &nbsp; Ancient Wisdom &nbsp; ✦</div>
+  <h1 class="header-title">STOIC WISDOM</h1>
+  <p class="header-subtitle">One hundred essential teachings from the philosophers of virtue</p>
+  <div class="header-divider"></div>
+  <div class="stats-row" id="statsRow"></div>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <input class="search-input" id="searchInput" placeholder="Search the wisdom of the ancients…" type="text">
+  <select class="filter-select" id="authorFilter">
+    <option value="">All Authors</option>
+    <option>Marcus Aurelius</option>
+    <option>Seneca</option>
+    <option>Epictetus</option>
+    <option>Zeno of Citium</option>
+    <option>Musonius Rufus</option>
+    <option>Cleanthes</option>
+    <option>Chrysippus</option>
+  </select>
+  <div class="view-toggle">
+    <button class="view-btn active" id="gridBtn" title="Grid view">&#x229E;</button>
+    <button class="view-btn" id="listBtn" title="List view">&#9776;</button>
+  </div>
+  <span class="results-info" id="resultsInfo"></span>
+</div>
+
+<!-- THEMES BAR -->
+<div class="themes-bar" id="themesBar"></div>
+
+<!-- QUOTES CONTAINER -->
+<div class="content">
+  <div id="quotesContainer"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-number" id="modalNumber"></div>
+    <p class="modal-text" id="modalText"></p>
+    <div class="modal-divider"></div>
+    <div class="modal-author" id="modalAuthor"></div>
+    <div class="modal-source" id="modalSource"></div>
+    <div style="display:flex;align-items:center;gap:.75rem;margin-top:0;flex-wrap:wrap;">
+      <span class="modal-theme" id="modalTheme"></span>
+      <button class="modal-share-btn" id="modalShareBtn">
+        <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Copy Share Link
+      </button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast">Link copied to clipboard</div>
+
+<script>
+// ── THEME TOGGLE ───────────────────────────────────────────
+const html = document.documentElement;
+const saved = localStorage.getItem('stoic-theme');
+if (saved === 'dark') html.setAttribute('data-theme', 'dark');
+
+document.getElementById('themeToggle').addEventListener('click', () => {
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    html.removeAttribute('data-theme');
+    localStorage.setItem('stoic-theme', 'light');
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    localStorage.setItem('stoic-theme', 'dark');
+  }
+});
+
+const quotes = [
+  { id:1,  text:"You have power over your mind, not outside events. Realize this, and you will find strength.", author:"Marcus Aurelius", source:"Meditations", theme:"Control" },
+  { id:2,  text:"The impediment to action advances action. What stands in the way becomes the way.", author:"Marcus Aurelius", source:"Meditations", theme:"Adversity" },
+  { id:3,  text:"Waste no more time arguing what a good man should be. Be one.", author:"Marcus Aurelius", source:"Meditations", theme:"Virtue" },
+  { id:4,  text:"Very little is needed to make a happy life; it is all within yourself, in your way of thinking.", author:"Marcus Aurelius", source:"Meditations", theme:"Happiness" },
+  { id:5,  text:"The best revenge is to be unlike him who performed the injury.", author:"Marcus Aurelius", source:"Meditations", theme:"Virtue" },
+  { id:6,  text:"It never ceases to amaze me: we all love ourselves more than other people, but care more about their opinion than our own.", author:"Marcus Aurelius", source:"Meditations", theme:"Self-Knowledge" },
+  { id:7,  text:"The soul becomes dyed with the colour of its thoughts.", author:"Marcus Aurelius", source:"Meditations", theme:"Mind" },
+  { id:8,  text:"If it is not right, do not do it; if it is not true, do not say it.", author:"Marcus Aurelius", source:"Meditations", theme:"Virtue" },
+  { id:9,  text:"Choose not to be harmed and you won't feel harmed. Don't feel harmed and you haven't been.", author:"Marcus Aurelius", source:"Meditations", theme:"Perception" },
+  { id:10, text:"Accept the things to which fate binds you, and love the people with whom fate brings you together.", author:"Marcus Aurelius", source:"Meditations", theme:"Acceptance" },
+  { id:11, text:"When you wake up in the morning, tell yourself: The people I deal with today will be meddling, ungrateful, arrogant, dishonest, jealous and surly.", author:"Marcus Aurelius", source:"Meditations", theme:"Resilience" },
+  { id:12, text:"You could leave life right now. Let that determine what you do and say and think.", author:"Marcus Aurelius", source:"Meditations", theme:"Mortality" },
+  { id:13, text:"The happiness of your life depends upon the quality of your thoughts.", author:"Marcus Aurelius", source:"Meditations", theme:"Mind" },
+  { id:14, text:"Be tolerant with others and strict with yourself.", author:"Marcus Aurelius", source:"Meditations", theme:"Virtue" },
+  { id:15, text:"If anyone can refute me, show me I'm making a mistake or looking at things from the wrong perspective. I'll gladly change.", author:"Marcus Aurelius", source:"Meditations", theme:"Wisdom" },
+  { id:16, text:"Never esteem anything as of advantage to you that will make you break your word or lose your self-respect.", author:"Marcus Aurelius", source:"Meditations", theme:"Integrity" },
+  { id:17, text:"A man's life is a mere moment, his existence a flux, his perception clouded, his body's composition corruptible.", author:"Marcus Aurelius", source:"Meditations", theme:"Mortality" },
+  { id:18, text:"Do not indulge in dreams of what you have not, but count the blessings actually present in your life.", author:"Marcus Aurelius", source:"Meditations", theme:"Gratitude" },
+  { id:19, text:"Think of the life you have lived until now as over and, as a dead man, see what's left as a bonus.", author:"Marcus Aurelius", source:"Meditations", theme:"Mortality" },
+  { id:20, text:"External things are not the problem. It's your assessment of them. Which you can erase right now.", author:"Marcus Aurelius", source:"Meditations", theme:"Perception" },
+  { id:21, text:"It's time you realized that you have something in you more powerful and miraculous than the things that affect you and make you dance like a puppet.", author:"Marcus Aurelius", source:"Meditations", theme:"Inner Strength" },
+  { id:22, text:"Loss is nothing else but change, and change is Nature's delight.", author:"Marcus Aurelius", source:"Meditations", theme:"Change" },
+  { id:23, text:"Receive without conceit, release without struggle.", author:"Marcus Aurelius", source:"Meditations", theme:"Acceptance" },
+  { id:24, text:"Confine yourself to the present.", author:"Marcus Aurelius", source:"Meditations", theme:"Presence" },
+  { id:25, text:"Begin at once to live, and count each separate day as a separate life.", author:"Marcus Aurelius", source:"Meditations", theme:"Presence" },
+  { id:26, text:"We suffer more often in imagination than in reality.", author:"Seneca", source:"Letters from a Stoic", theme:"Mind" },
+  { id:27, text:"If a man knows not which port he sails, no wind is favorable.", author:"Seneca", source:"Letters from a Stoic", theme:"Purpose" },
+  { id:28, text:"Life is long if you know how to use it.", author:"Seneca", source:"On the Shortness of Life", theme:"Time" },
+  { id:29, text:"People are frugal in guarding their personal property; but as soon as it comes to squandering time they are most wasteful of the one thing in which it is right to be stingy.", author:"Seneca", source:"On the Shortness of Life", theme:"Time" },
+  { id:30, text:"He who fears death will never do anything worthy of a man who is alive.", author:"Seneca", source:"Letters from a Stoic", theme:"Mortality" },
+  { id:31, text:"It is not that I'm so brave; it is just that those other guys are in such a hurry.", author:"Seneca", source:"Letters from a Stoic", theme:"Courage" },
+  { id:32, text:"Wealth is the slave of a wise man. The master of a fool.", author:"Seneca", source:"Letters from a Stoic", theme:"Wealth" },
+  { id:33, text:"As long as you live, keep learning how to live.", author:"Seneca", source:"Letters from a Stoic", theme:"Wisdom" },
+  { id:34, text:"While we are postponing, life speeds by.", author:"Seneca", source:"On the Shortness of Life", theme:"Time" },
+  { id:35, text:"Difficulties strengthen the mind, as labor does the body.", author:"Seneca", source:"Letters from a Stoic", theme:"Adversity" },
+  { id:36, text:"The greatest blessings of mankind are within us and within our reach. A wise man is content with his lot.", author:"Seneca", source:"Letters from a Stoic", theme:"Happiness" },
+  { id:37, text:"No person has the power to have everything they want, but it is in their power not to want what they don't have.", author:"Seneca", source:"Letters from a Stoic", theme:"Desires" },
+  { id:38, text:"Ignorance is the cause of fear.", author:"Seneca", source:"Natural Questions", theme:"Fear" },
+  { id:39, text:"It is a rough road that leads to the heights of greatness.", author:"Seneca", source:"Letters from a Stoic", theme:"Adversity" },
+  { id:40, text:"Nothing, to my way of thinking, is a better proof of a well-ordered mind than a man's ability to stop just where he is and pass some time in his own company.", author:"Seneca", source:"Letters from a Stoic", theme:"Solitude" },
+  { id:41, text:"He who is brave is free.", author:"Seneca", source:"Letters from a Stoic", theme:"Freedom" },
+  { id:42, text:"Cease to hope and you will cease to fear.", author:"Seneca", source:"Letters from a Stoic", theme:"Equanimity" },
+  { id:43, text:"Hang on to your youthful enthusiasms. You'll be able to use them better when you are older.", author:"Seneca", source:"Letters from a Stoic", theme:"Character" },
+  { id:44, text:"This is our big mistake: to think we look forward to death. Most of death is already gone. Whatever time has passed is owned by death.", author:"Seneca", source:"Letters from a Stoic", theme:"Mortality" },
+  { id:45, text:"The time will come when diligent research over long periods will bring to light things which now lie hidden.", author:"Seneca", source:"Natural Questions", theme:"Knowledge" },
+  { id:46, text:"Hurry up and live.", author:"Seneca", source:"Letters from a Stoic", theme:"Time" },
+  { id:47, text:"How long are you going to wait before you demand the best for yourself?", author:"Seneca", source:"Letters from a Stoic", theme:"Purpose" },
+  { id:48, text:"Omnia aliena sunt, tempus tantum nostrum est. All things are alien; time alone is ours.", author:"Seneca", source:"Letters from a Stoic", theme:"Time" },
+  { id:49, text:"I shall never be ashamed of citing a bad author if the line is good.", author:"Seneca", source:"Letters from a Stoic", theme:"Wisdom" },
+  { id:50, text:"True happiness is to enjoy the present, without anxious dependence upon the future.", author:"Seneca", source:"Letters from a Stoic", theme:"Presence" },
+  { id:51, text:"It's not what happens to you, but how you react to it that matters.", author:"Epictetus", source:"Enchiridion", theme:"Perception" },
+  { id:52, text:"Make the best use of what is in your power, and take the rest as it happens.", author:"Epictetus", source:"Enchiridion", theme:"Control" },
+  { id:53, text:"We have two ears and one mouth so that we can listen twice as much as we speak.", author:"Epictetus", source:"Discourses", theme:"Wisdom" },
+  { id:54, text:"No man is free who is not master of himself.", author:"Epictetus", source:"Discourses", theme:"Freedom" },
+  { id:55, text:"Men are disturbed not by things, but by the view which they take of them.", author:"Epictetus", source:"Enchiridion", theme:"Perception" },
+  { id:56, text:"First say to yourself what you would be; and then do what you have to do.", author:"Epictetus", source:"Discourses", theme:"Purpose" },
+  { id:57, text:"Don't seek for everything to happen as you wish it would, but rather wish that everything happens as it actually will. Then your life will flow well.", author:"Epictetus", source:"Enchiridion", theme:"Acceptance" },
+  { id:58, text:"It is impossible for a man to learn what he thinks he already knows.", author:"Epictetus", source:"Discourses", theme:"Wisdom" },
+  { id:59, text:"No great thing is created suddenly.", author:"Epictetus", source:"Discourses", theme:"Patience" },
+  { id:60, text:"Know, first, who you are, and then adorn yourself accordingly.", author:"Epictetus", source:"Discourses", theme:"Self-Knowledge" },
+  { id:61, text:"Curb your desire. Don't set your heart on so many things and you will get what you need.", author:"Epictetus", source:"Enchiridion", theme:"Desires" },
+  { id:62, text:"It is the nature of the wise to resist pleasures, but the foolish to be a slave to them.", author:"Epictetus", source:"Discourses", theme:"Self-Discipline" },
+  { id:63, text:"If you want something good, get it yourself.", author:"Epictetus", source:"Discourses", theme:"Action" },
+  { id:64, text:"A ship should not ride on a single anchor, nor life on a single hope.", author:"Epictetus", source:"Discourses", theme:"Resilience" },
+  { id:65, text:"It is difficulties that show what men are.", author:"Epictetus", source:"Discourses", theme:"Adversity" },
+  { id:66, text:"Seek not the good in external things; seek it in yourself.", author:"Epictetus", source:"Discourses", theme:"Inner Strength" },
+  { id:67, text:"The key is to keep company only with people who uplift you, whose presence calls forth your best.", author:"Epictetus", source:"Enchiridion", theme:"Relationships" },
+  { id:68, text:"If you are ever tempted to look for outside approval, realize that you have compromised your own integrity.", author:"Epictetus", source:"Enchiridion", theme:"Integrity" },
+  { id:69, text:"Wealth consists not in having great possessions, but in having few wants.", author:"Epictetus", source:"Enchiridion", theme:"Wealth" },
+  { id:70, text:"He is a wise man who does not grieve for the things which he has not, but rejoices for those which he has.", author:"Epictetus", source:"Discourses", theme:"Gratitude" },
+  { id:71, text:"Only the educated are free.", author:"Epictetus", source:"Discourses", theme:"Freedom" },
+  { id:72, text:"Never say about anything, I have lost it; but I have restored it.", author:"Epictetus", source:"Enchiridion", theme:"Loss" },
+  { id:73, text:"How long are you going to wait before you demand the best of yourself?", author:"Epictetus", source:"Discourses", theme:"Self-Discipline" },
+  { id:74, text:"The greater the difficulty, the more glory in surmounting it.", author:"Epictetus", source:"Discourses", theme:"Adversity" },
+  { id:75, text:"Practice yourself in little things, and thence proceed to greater.", author:"Epictetus", source:"Discourses", theme:"Growth" },
+  { id:76, text:"Man conquers the world by conquering himself.", author:"Zeno of Citium", source:"Fragments", theme:"Self-Discipline" },
+  { id:77, text:"All the good are friends of one another.", author:"Zeno of Citium", source:"Fragments", theme:"Virtue" },
+  { id:78, text:"No loss should be more regrettable to us than losing our time, for it's irretrievable.", author:"Zeno of Citium", source:"Fragments", theme:"Time" },
+  { id:79, text:"Steel your sensibilities, so that life shall hurt you as little as possible.", author:"Zeno of Citium", source:"Fragments", theme:"Resilience" },
+  { id:80, text:"A bad feeling is a commotion of the mind repugnant to reason, and against nature.", author:"Zeno of Citium", source:"Fragments", theme:"Mind" },
+  { id:81, text:"Extravagance is its own destroyer.", author:"Zeno of Citium", source:"Fragments", theme:"Moderation" },
+  { id:82, text:"Well-being is attained little by little, and nevertheless is no little thing itself.", author:"Zeno of Citium", source:"Fragments", theme:"Happiness" },
+  { id:83, text:"The goal of life is living in agreement with Nature.", author:"Zeno of Citium", source:"Fragments", theme:"Nature" },
+  { id:84, text:"If you accomplish something good with hard work, the labor passes quickly, but the good endures.", author:"Musonius Rufus", source:"Lectures", theme:"Virtue" },
+  { id:85, text:"Only in good actions is there true joy.", author:"Musonius Rufus", source:"Lectures", theme:"Happiness" },
+  { id:86, text:"We should not prize material things or dread the lack of them.", author:"Musonius Rufus", source:"Lectures", theme:"Wealth" },
+  { id:87, text:"The person who is truly educated is the one who is able to bear the things that happen to them and endure misfortune.", author:"Musonius Rufus", source:"Lectures", theme:"Resilience" },
+  { id:88, text:"Begin at once, before it slips your mind, to apply reason to life.", author:"Musonius Rufus", source:"Lectures", theme:"Action" },
+  { id:89, text:"Lead me, Zeus, and you too, Fate, wherever you have appointed for me to go.", author:"Cleanthes", source:"Hymn to Zeus", theme:"Acceptance" },
+  { id:90, text:"The sun does not abandon its course on account of the blindness of some.", author:"Cleanthes", source:"Fragments", theme:"Purpose" },
+  { id:91, text:"Take care of your body as if you were going to live forever; and take care of your soul as if you were going to die tomorrow.", author:"Chrysippus", source:"Fragments", theme:"Balance" },
+  { id:92, text:"The universe is a single living creature which encompasses all living creatures within it.", author:"Chrysippus", source:"Fragments", theme:"Nature" },
+  { id:93, text:"When you arise in the morning, think of what a precious privilege it is to be alive, to breathe, to think, to enjoy, to love.", author:"Marcus Aurelius", source:"Meditations", theme:"Gratitude" },
+  { id:94, text:"Nowhere can man find a quieter or more untroubled retreat than in his own soul.", author:"Marcus Aurelius", source:"Meditations", theme:"Solitude" },
+  { id:95, text:"The object of life is not to be on the side of the majority, but to escape finding oneself in the ranks of the insane.", author:"Marcus Aurelius", source:"Meditations", theme:"Integrity" },
+  { id:96, text:"Everything we hear is an opinion, not a fact. Everything we see is a perspective, not the truth.", author:"Marcus Aurelius", source:"Meditations", theme:"Perception" },
+  { id:97, text:"A gem cannot be polished without friction, nor a man perfected without trials.", author:"Seneca", source:"Letters from a Stoic", theme:"Adversity" },
+  { id:98, text:"We are more often frightened than hurt; and we suffer more in imagination than in reality.", author:"Seneca", source:"Letters from a Stoic", theme:"Fear" },
+  { id:99, text:"Associate with those who will make a better man of you.", author:"Seneca", source:"Letters from a Stoic", theme:"Relationships" },
+  { id:100, text:"You want to live but do you know how to live? You are scared of dying and tell me, is the kind of life you lead really any different from being dead?", author:"Seneca", source:"Letters from a Stoic", theme:"Purpose" },
+];
+
+const themeColors = {
+  "Control":"#8B6914","Adversity":"#6B4C3B","Virtue":"#4A6741","Happiness":"#7A5C3A",
+  "Mind":"#4A5568","Perception":"#5C4A7A","Mortality":"#4A4A4A","Acceptance":"#4A6B6B",
+  "Time":"#6B4A4A","Wisdom":"#4A5C4A","Purpose":"#5C4A6B","Resilience":"#6B5C4A",
+  "Inner Strength":"#4A6B4A","Self-Knowledge":"#5C5C4A","Integrity":"#4A4A6B",
+  "Gratitude":"#6B6B4A","Presence":"#4A6B5C","Freedom":"#4A5C6B","Desires":"#6B4A5C",
+  "Self-Discipline":"#5C6B4A","Action":"#6B5C4A","Change":"#4A6B6B","Fear":"#5C4A4A",
+  "Wealth":"#6B6B4A","Solitude":"#4A4A6B","Growth":"#4A6B4A","Loss":"#5C5C5C",
+  "Patience":"#6B5C4A","Relationships":"#5C4A6B","Balance":"#6B4A6B","Nature":"#4A6B4A",
+  "Moderation":"#6B6B4A","Equanimity":"#4A6B6B","Courage":"#6B4A4A","Knowledge":"#4A4A6B",
+  "Character":"#5C6B4A",
+};
+
+// ── STATE ──────────────────────────────────────────────────
+let currentSearch = '';
+let currentAuthor = '';
+let currentTheme  = 'All';
+let currentView   = 'grid';
+let heroIdx       = Math.floor(Math.random() * quotes.length);
+
+// ── HERO ───────────────────────────────────────────────────
+function renderHero(q) {
+  document.getElementById('heroText').textContent   = q.text;
+  document.getElementById('heroAuthor').textContent = q.author;
+  document.getElementById('heroSource').textContent = q.source;
+  document.getElementById('heroTheme').textContent  = q.theme;
+}
+
+function cycleHero() {
+  const wrap = document.getElementById('heroWrap');
+  wrap.classList.add('fading');
+  setTimeout(() => {
+    let next;
+    do { next = Math.floor(Math.random() * quotes.length); } while (next === heroIdx);
+    heroIdx = next;
+    renderHero(quotes[heroIdx]);
+    wrap.classList.remove('fading');
+  }, 400);
+}
+
+document.getElementById('refreshBtn').addEventListener('click', cycleHero);
+document.getElementById('heroShareBtn').addEventListener('click', () => copyShareLink(quotes[heroIdx].id));
+renderHero(quotes[heroIdx]);
+
+// ── STATS ──────────────────────────────────────────────────
+const authorCounts = {};
+quotes.forEach(q => { authorCounts[q.author] = (authorCounts[q.author] || 0) + 1; });
+const statsRow = document.getElementById('statsRow');
+Object.entries(authorCounts).forEach(([author, count]) => {
+  statsRow.insertAdjacentHTML('beforeend', `
+    <div class="stat-item">
+      <span class="stat-number">${count}</span>
+      <span class="stat-label">${author.split(' ')[0]}</span>
+    </div>
+  `);
+});
+
+// ── THEMES BAR ─────────────────────────────────────────────
+const allThemes = ['All', ...Array.from(new Set(quotes.map(q => q.theme))).sort()];
+const themesBar = document.getElementById('themesBar');
+allThemes.forEach(theme => {
+  const btn = document.createElement('button');
+  btn.className = 'theme-pill' + (theme === 'All' ? ' active' : '');
+  btn.textContent = theme;
+  btn.addEventListener('click', () => {
+    currentTheme = theme;
+    document.querySelectorAll('.theme-pill').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderQuotes();
+  });
+  themesBar.appendChild(btn);
+});
+
+// ── FILTERS ────────────────────────────────────────────────
+document.getElementById('searchInput').addEventListener('input', e => {
+  currentSearch = e.target.value;
+  const url = new URL(window.location.href);
+  if (currentSearch.trim()) { url.searchParams.set('q', currentSearch.trim()); }
+  else { url.searchParams.delete('q'); }
+  url.searchParams.delete('id');
+  history.replaceState(null, '', url.toString());
+  renderQuotes();
+});
+
+document.getElementById('authorFilter').addEventListener('change', e => {
+  currentAuthor = e.target.value;
+  renderQuotes();
+});
+
+document.getElementById('gridBtn').addEventListener('click', () => {
+  currentView = 'grid';
+  document.getElementById('gridBtn').classList.add('active');
+  document.getElementById('listBtn').classList.remove('active');
+  renderQuotes();
+});
+
+document.getElementById('listBtn').addEventListener('click', () => {
+  currentView = 'list';
+  document.getElementById('listBtn').classList.add('active');
+  document.getElementById('gridBtn').classList.remove('active');
+  renderQuotes();
+});
+
+// ── QUOTES RENDERER ────────────────────────────────────────
+function getFiltered() {
+  return quotes.filter(q => {
+    const tokens = currentSearch.toLowerCase().split(/\s+/).filter(Boolean);
+    const haystack = (q.text + ' ' + q.author + ' ' + q.source).toLowerCase();
+    const matchSearch = tokens.length === 0 || tokens.every(t => haystack.includes(t));
+    const matchAuthor = !currentAuthor || q.author === currentAuthor;
+    const matchTheme  = currentTheme === 'All' || q.theme === currentTheme;
+    return matchSearch && matchAuthor && matchTheme;
+  });
+}
+
+const shareIcon = `<svg viewBox="0 0 24 24" style="width:.75rem;height:.75rem;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>`;
+
+let toastTimer = null;
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function copyShareLink(id) {
+  const url = new URL(window.location.href);
+  url.search = '';
+  if (id != null) url.searchParams.set('id', id);
+  if (currentSearch.trim()) url.searchParams.set('q', currentSearch.trim());
+  navigator.clipboard.writeText(url.toString()).then(showToast).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = url.toString(); ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta); showToast();
+  });
+}
+
+function pad(n) { return String(n).padStart(3, '0'); }
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function renderQuotes() {
+  const filtered = getFiltered();
+  const container = document.getElementById('quotesContainer');
+  document.getElementById('resultsInfo').textContent = `${filtered.length} of ${quotes.length}`;
+
+  if (filtered.length === 0) {
+    container.innerHTML = `<div class="no-results">No wisdom matching your search was found.<br><span style="font-size:0.9rem;color:#4a3a1a">Perhaps the ancients did not speak of this.</span></div>`;
+    return;
+  }
+
+  if (currentView === 'grid') {
+    container.innerHTML = `<div class="grid-view">${filtered.map(q => {
+      const tc = themeColors[q.theme] || '#5a4a2a';
+      return `
+        <div class="quote-card" data-id="${q.id}">
+          <div class="quote-number">No. ${pad(q.id)}</div>
+          <p class="quote-text">${esc(q.text)}</p>
+          <div class="quote-footer">
+            <div class="quote-attribution">
+              <span class="quote-author">${esc(q.author)}</span>
+              <span class="quote-source">${esc(q.source)}</span>
+            </div>
+            <div style="display:flex;align-items:flex-end;gap:.5rem;flex-shrink:0">
+              <span class="quote-theme-badge" style="color:${tc};border-color:${tc}60">${esc(q.theme)}</span>
+              <button class="share-btn" data-share-id="${q.id}" title="Copy share link">${shareIcon}Share</button>
+            </div>
+          </div>
+        </div>`;
+    }).join('')}</div>`;
+  } else {
+    container.innerHTML = `<div class="list-view">${filtered.map(q => {
+      const tc = themeColors[q.theme] || '#5a4a2a';
+      return `
+        <div class="list-quote-card" data-id="${q.id}">
+          <div class="list-number">${pad(q.id)}</div>
+          <div class="list-content">
+            <p class="list-text">\u201C${esc(q.text)}\u201D</p>
+            <div class="list-meta">
+              <span class="list-author">${esc(q.author)}</span>
+              <span class="list-source">${esc(q.source)}</span>
+              <span class="list-theme" style="color:${tc}">${esc(q.theme)}</span>
+              <button class="share-btn" data-share-id="${q.id}" title="Copy share link">${shareIcon}Share</button>
+            </div>
+          </div>
+        </div>`;
+    }).join('')}</div>`;
+  }
+
+  // attach click handlers
+  container.querySelectorAll('[data-id]').forEach(el => {
+    el.querySelectorAll('.share-btn').forEach(btn => {
+      btn.addEventListener('click', e => { e.stopPropagation(); copyShareLink(parseInt(btn.dataset.shareId)); });
+    });
+    el.addEventListener('click', () => {
+      const q = quotes.find(x => x.id === parseInt(el.dataset.id));
+      if (q) openModal(q);
+    });
+  });
+}
+
+// ── MODAL ──────────────────────────────────────────────────
+function openModal(q) {
+  document.getElementById('modalNumber').textContent = `QUOTE No. ${pad(q.id)}`;
+  document.getElementById('modalText').textContent   = `\u201C${q.text}\u201D`;
+  document.getElementById('modalAuthor').textContent = q.author;
+  document.getElementById('modalSource').textContent = q.source;
+  document.getElementById('modalTheme').textContent  = q.theme;
+  document.getElementById('modalShareBtn').onclick = () => copyShareLink(q.id);
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── INIT ───────────────────────────────────────────────────
+renderQuotes();
+
+// ── URL PARAMETERS ─────────────────────────────────────────
+// ?q=term   pre-fills the search box and filters results
+// ?id=N     opens that quote's modal (compatible with ?q=)
+(function () {
+  const params = new URLSearchParams(window.location.search);
+
+  const qParam = params.get('q');
+  if (qParam) {
+    currentSearch = qParam;
+    document.getElementById('searchInput').value = qParam;
+    renderQuotes();
+    document.getElementById('collection').scrollIntoView({ behavior: 'instant' });
+  }
+
+  const idParam = params.get('id');
+  if (!idParam) return;
+  const target = quotes.find(q => q.id === parseInt(idParam));
+  if (!target) return;
+  document.getElementById('collection').scrollIntoView({ behavior: 'instant' });
+  setTimeout(() => openModal(target), 120);
+})();
+</script>
+</body>
+</html>
