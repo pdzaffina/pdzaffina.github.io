@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Affirmations — Scripture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  /* ── LIGHT TOKENS ─────────────────────────────────────── */
+  :root {
+    --bg-page:         #f7f3ec;
+    --bg-hero:         #efe8d8;
+    --bg-header:       linear-gradient(180deg, #e9e0cc 0%, #f2ead8 100%);
+    --bg-controls:     #efe8d8;
+    --bg-themes:       #f7f3ec;
+    --bg-card:         #faf8f2;
+    --bg-card-hover:   #ffffff;
+    --bg-input:        #faf7f0;
+    --bg-modal:        #faf8f2;
+    --bg-vbtn-active:  #7a6030;
+
+    --border-header:   #d8c88a;
+    --border-controls: #d8c88a;
+    --border-themes:   #e4d8a8;
+    --border-card:     #e4d8a8;
+    --border-card-hov: #a07830;
+    --border-input:    #c8b878;
+    --border-pill:     #d8c88a;
+    --border-modal:    #a07830;
+
+    --text-body:       #2a1e0c;
+    --text-hero-q:     #1a1208;
+    --text-muted:      #8a7448;
+    --text-faint:      #b09860;
+    --text-author:     #6a4c18;
+    --text-accent:     #8a6428;
+    --text-gold:       #a07830;
+    --text-title:      #3a2808;
+    --text-subtitle:   #6a5830;
+    --text-number:     #a07830;
+    --text-vbtn:       #8a7448;
+    --text-vbtn-act:   #ffffff;
+
+    --shadow-card:     0 1px 4px rgba(80,50,10,0.07);
+    --shadow-card-hov: 0 6px 20px rgba(80,50,10,0.12);
+    --shadow-controls: 0 2px 8px rgba(80,50,10,0.08);
+    --shadow-modal:    0 20px 60px rgba(60,40,5,0.22);
+    --overlay-bg:      rgba(30,20,5,0.55);
+
+    --grid-line:       rgba(140,100,30,0.07);
+    --hero-glow1:      rgba(200,160,60,0.13);
+    --hero-glow2:      rgba(160,120,40,0.07);
+    --hero-glow3:      rgba(130,90,30,0.06);
+    --quote-mark-col:  rgba(160,120,48,0.55);
+  }
+
+  /* ── DARK TOKENS ──────────────────────────────────────── */
+  [data-theme="dark"] {
+    --bg-page:         #0e0c08;
+    --bg-hero:         #0b0907;
+    --bg-header:       linear-gradient(180deg, #1c1810 0%, #0e0c08 100%);
+    --bg-controls:     #120f0a;
+    --bg-themes:       #100d09;
+    --bg-card:         #161208;
+    --bg-card-hover:   #1c1810;
+    --bg-input:        #1c1810;
+    --bg-modal:        #161208;
+    --bg-vbtn-active:  #3a3018;
+
+    --border-header:   #3a3018;
+    --border-controls: #2a2010;
+    --border-themes:   #2a2010;
+    --border-card:     #2a2010;
+    --border-card-hov: #5a4818;
+    --border-input:    #3a3018;
+    --border-pill:     #2a2010;
+    --border-modal:    #5a4818;
+
+    --text-body:       #e0d4a8;
+    --text-hero-q:     #f0e4b8;
+    --text-muted:      #6a5a30;
+    --text-faint:      #5a4820;
+    --text-author:     #c8a848;
+    --text-accent:     #9a8038;
+    --text-gold:       #c8a848;
+    --text-title:      #c8a848;
+    --text-subtitle:   #8a7840;
+    --text-number:     #4a3a18;
+    --text-vbtn:       #6a5a30;
+    --text-vbtn-act:   #c8a848;
+
+    --shadow-card:     none;
+    --shadow-card-hov: none;
+    --shadow-controls: none;
+    --shadow-modal:    0 0 80px rgba(0,0,0,0.8), 0 0 40px rgba(160,120,30,0.1);
+    --overlay-bg:      rgba(0,0,0,0.88);
+
+    --grid-line:       rgba(120,90,20,0.05);
+    --hero-glow1:      rgba(180,140,40,0.10);
+    --hero-glow2:      rgba(110,80,20,0.06);
+    --hero-glow3:      rgba(90,65,15,0.05);
+    --quote-mark-col:  #4a3a18;
+  }
+
+  body {
+    min-height: 100vh;
+    background: var(--bg-page);
+    font-family: 'EB Garamond', Georgia, serif;
+    color: var(--text-body);
+    transition: background 0.35s ease, color 0.35s ease;
+  }
+
+  /* ── THEME TOGGLE ─────────────────────────────────────── */
+  .theme-toggle {
+    background: var(--bg-input);
+    border: 1px solid var(--border-input);
+    color: var(--text-muted);
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .theme-toggle:hover { border-color: var(--text-accent); color: var(--text-accent); }
+  .theme-toggle .icon-sun,
+  .theme-toggle .icon-moon {
+    position: absolute;
+    line-height: 1;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .theme-toggle .icon-sun  { opacity: 0; transform: rotate(90deg) scale(0.5); }
+  .theme-toggle .icon-moon { opacity: 1; transform: rotate(0deg)  scale(1);   }
+  [data-theme="dark"] .theme-toggle .icon-sun  { opacity: 1; transform: rotate(0deg)   scale(1);   }
+  [data-theme="dark"] .theme-toggle .icon-moon { opacity: 0; transform: rotate(-90deg) scale(0.5); }
+
+  .hero-theme-toggle {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.75rem;
+    z-index: 10;
+  }
+
+  /* ── HERO ─────────────────────────────────────────────── */
+  .hero-section {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 5rem 2rem;
+    overflow: hidden;
+    background: var(--bg-hero);
+    transition: background 0.35s ease;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 30%, var(--hero-glow1) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 20% 80%, var(--hero-glow2) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 80% 20%, var(--hero-glow3) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+  }
+
+  .hero-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.5em;
+    color: var(--text-accent);
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; width: 40px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--text-accent));
+  }
+  .hero-eyebrow::after { background: linear-gradient(90deg, var(--text-accent), transparent); }
+
+  .hero-quote-wrap {
+    max-width: 820px;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .hero-quote-wrap.fading { opacity: 0; transform: translateY(10px); }
+
+  .hero-cross {
+    font-size: 2rem;
+    color: var(--text-gold);
+    opacity: 0.45;
+    display: block;
+    margin-bottom: 1rem;
+    user-select: none;
+    letter-spacing: 0.1em;
+  }
+
+  .hero-quote-text {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(1.45rem, 3.2vw, 2.4rem);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--text-hero-q);
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.01em;
+    transition: color 0.35s ease;
+  }
+
+  .hero-attribution {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-author-line {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .hero-rule { width: 30px; height: 1px; background: var(--text-accent); }
+
+  .hero-author {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    color: var(--text-author);
+    text-transform: uppercase;
+  }
+
+  .hero-source {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--text-muted);
+  }
+
+  .hero-theme-pill {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--text-gold);
+    color: var(--text-accent);
+    margin-bottom: 3rem;
+    background: rgba(160,120,48,0.07);
+  }
+
+  .hero-refresh-btn {
+    background: none;
+    border: 1px solid var(--border-input);
+    color: var(--text-author);
+    padding: 0.75rem 2rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.25s, color 0.25s, background 0.25s;
+  }
+  .hero-refresh-btn:hover {
+    border-color: var(--text-accent);
+    color: var(--text-body);
+    background: rgba(140,100,30,0.07);
+  }
+
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-accent);
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    animation: scrollBounce 2s ease-in-out infinite;
+    text-decoration: none;
+  }
+  .hero-scroll-arrow {
+    width: 1px; height: 24px;
+    background: linear-gradient(180deg, var(--text-accent), transparent);
+  }
+
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* ── STATS HEADER ─────────────────────────────────────── */
+  .stoic-header {
+    background: var(--bg-header);
+    border-bottom: 1px solid var(--border-header);
+    padding: 2rem 2rem 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.35s ease;
+  }
+  .stoic-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(200,160,60,0.09) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header-ornament {
+    font-family: 'Cinzel', serif;
+    color: var(--text-accent);
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .header-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 600;
+    color: var(--text-title);
+    letter-spacing: 0.08em;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+    transition: color 0.35s ease;
+  }
+
+  .header-subtitle {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text-subtitle);
+    margin-bottom: 1.5rem;
+    transition: color 0.35s ease;
+  }
+
+  .header-divider {
+    width: 120px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--text-gold), transparent);
+    margin: 0 auto 1.5rem;
+  }
+
+  .stats-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem 3rem;
+  }
+  .stat-item { text-align: center; }
+  .stat-number {
+    font-family: 'Cinzel', serif;
+    font-size: 1.6rem;
+    color: var(--text-author);
+    font-weight: 600;
+    display: block;
+    transition: color 0.35s ease;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: color 0.35s ease;
+  }
+
+  /* ── CONTROLS ─────────────────────────────────────────── */
+  .controls {
+    background: var(--bg-controls);
+    border-bottom: 1px solid var(--border-controls);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: var(--shadow-controls);
+    transition: background 0.35s ease, border-color 0.35s ease;
+  }
+
+  .search-input {
+    flex: 1; min-width: 180px;
+    background: var(--bg-input);
+    border: 1px solid var(--border-input);
+    color: var(--text-body);
+    padding: 0.6rem 1rem;
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.35s ease, color 0.35s ease;
+  }
+  .search-input:focus { border-color: var(--text-accent); box-shadow: 0 0 0 3px rgba(140,100,30,0.11); }
+  .search-input::placeholder { color: var(--text-faint); font-style: italic; }
+
+  .filter-select {
+    background: var(--bg-input);
+    border: 1px solid var(--border-input);
+    color: var(--text-body);
+    padding: 0.6rem 0.8rem;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.95rem;
+    outline: none; cursor: pointer;
+    transition: border-color 0.2s, background 0.35s ease, color 0.35s ease;
+  }
+  .filter-select:focus { border-color: var(--text-accent); }
+
+  .view-toggle { display: flex; border: 1px solid var(--border-input); overflow: hidden; transition: border-color 0.35s ease; }
+  .view-btn {
+    background: var(--bg-input);
+    border: none;
+    color: var(--text-vbtn);
+    padding: 0.6rem 0.85rem;
+    cursor: pointer; font-size: 1rem;
+    transition: all 0.2s;
+  }
+  .view-btn.active { background: var(--bg-vbtn-active); color: var(--text-vbtn-act); }
+
+  .results-info {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: 'Cinzel', serif;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    transition: color 0.35s ease;
+  }
+
+  /* ── THEMES BAR ───────────────────────────────────────── */
+  .themes-bar {
+    background: var(--bg-themes);
+    border-bottom: 1px solid var(--border-themes);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    transition: background 0.35s ease, border-color 0.35s ease;
+  }
+  .themes-bar::-webkit-scrollbar { display: none; }
+
+  .theme-pill {
+    background: none;
+    border: 1px solid var(--border-pill);
+    color: var(--text-muted);
+    padding: 0.3rem 0.8rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer; white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .theme-pill:hover { border-color: var(--text-accent); color: var(--text-body); background: rgba(140,100,30,0.06); }
+  .theme-pill.active { background: var(--text-gold); border-color: var(--text-gold); color: #fff; }
+
+  /* ── CONTENT ──────────────────────────────────────────── */
+  .content {
+    padding: 2rem 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--bg-page);
+    transition: background 0.35s ease;
+  }
+
+  /* ── GRID VIEW ────────────────────────────────────────── */
+  .grid-view {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .quote-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    padding: 1.75rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+  }
+  .quote-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(180deg, transparent, var(--text-gold), transparent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .quote-card:hover { border-color: var(--border-card-hov); background: var(--bg-card-hover); transform: translateY(-2px); box-shadow: var(--shadow-card-hov); }
+  .quote-card:hover::before { opacity: 1; }
+
+  .quote-number {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    color: var(--text-number);
+    letter-spacing: 0.2em;
+    margin-bottom: 1rem;
+    transition: color 0.35s ease;
+  }
+
+  .quote-text {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 1.25rem;
+    transition: color 0.35s ease;
+  }
+  .quote-text::before {
+    content: '\201C';
+    font-size: 2.5rem;
+    color: var(--quote-mark-col);
+    line-height: 0;
+    vertical-align: -0.8rem;
+    margin-right: 0.1rem;
+    font-style: normal;
+  }
+
+  .quote-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 0.75rem;
+  }
+  .quote-attribution { flex: 1; }
+  .quote-author {
+    font-family: 'Cinzel', serif;
+    font-size: 0.68rem;
+    color: var(--text-author);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.2rem;
+    transition: color 0.35s ease;
+  }
+  .quote-source {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+    transition: color 0.35s ease;
+  }
+  .quote-theme-badge {
+    font-family: 'Cinzel', serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── LIST VIEW ────────────────────────────────────────── */
+  .list-view { display: flex; flex-direction: column; }
+  .list-quote-card {
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-card);
+    padding: 1.4rem 2rem;
+    display: flex; gap: 2rem;
+    align-items: flex-start;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .list-quote-card:hover { background: var(--bg-card-hover); }
+  .list-number {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    color: var(--text-number);
+    letter-spacing: 0.1em;
+    min-width: 2.5rem;
+    padding-top: 0.25rem;
+    transition: color 0.35s ease;
+  }
+  .list-content { flex: 1; }
+  .list-text {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: var(--text-body);
+    font-style: italic;
+    margin-bottom: 0.5rem;
+    transition: color 0.35s ease;
+  }
+  .list-meta { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+  .list-author {
+    font-family: 'Cinzel', serif;
+    font-size: 0.62rem;
+    color: var(--text-author);
+    letter-spacing: 0.1em;
+    transition: color 0.35s ease;
+  }
+  .list-source {
+    font-family: 'EB Garamond', serif;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+    transition: color 0.35s ease;
+  }
+  .list-theme {
+    font-family: 'Cinzel', serif;
+    font-size: 0.52rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── MODAL ────────────────────────────────────────────── */
+  .modal-overlay {
+    position: fixed; inset: 0;
+    background: var(--overlay-bg);
+    z-index: 1000;
+    display: flex; align-items: center; justify-content: center;
+    padding: 2rem;
+    backdrop-filter: blur(4px);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+
+  .modal {
+    background: var(--bg-modal);
+    border: 1px solid var(--border-modal);
+    max-width: 660px; width: 100%;
+    padding: 3rem;
+    position: relative;
+    box-shadow: var(--shadow-modal);
+    transform: translateY(16px);
+    transition: transform 0.3s, background 0.35s ease;
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+
+  .modal::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 20px; right: 20px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--text-gold), transparent);
+  }
+
+  .modal-close {
+    position: absolute; top: 1.25rem; right: 1.25rem;
+    background: none;
+    border: 1px solid var(--border-pill);
+    color: var(--text-muted);
+    width: 2rem; height: 2rem;
+    cursor: pointer; font-size: 0.9rem;
+    font-family: 'Cinzel', serif;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .modal-close:hover { border-color: var(--text-accent); color: var(--text-body); }
+
+  .modal-number {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    color: var(--text-gold);
+    letter-spacing: 0.3em;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-text {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.45rem;
+    line-height: 1.85;
+    color: var(--text-hero-q);
+    font-style: italic;
+    margin-bottom: 2rem;
+    transition: color 0.35s ease;
+  }
+
+  .modal-divider {
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, var(--text-gold), transparent);
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-author {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--text-author);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.4rem;
+    transition: color 0.35s ease;
+  }
+
+  .modal-source {
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    transition: color 0.35s ease;
+  }
+
+  .modal-theme {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--text-gold);
+    color: var(--text-accent);
+    background: rgba(160,120,48,0.07);
+  }
+
+  /* ── NO RESULTS ───────────────────────────────────────── */
+  .no-results {
+    text-align: center;
+    padding: 5rem 2rem;
+    font-family: 'EB Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 2;
+  }
+
+  /* ── RESPONSIVE ───────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .stats-row { gap: 1.2rem 2rem; }
+    .grid-view { grid-template-columns: 1fr; }
+    .controls { flex-direction: column; }
+    .search-input { width: 100%; }
+    .list-quote-card { padding: 1.2rem; gap: 1rem; }
+    .modal { padding: 2rem 1.5rem; }
+    .modal-text { font-size: 1.2rem; }
+  }
+
+  /* ── SHARE BUTTON ─────────────────────────────────────── */
+  .share-btn {
+    background: none;
+    border: 1px solid var(--border-pill);
+    color: var(--text-muted);
+    font-family: 'Cinzel', serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.5rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    line-height: 1;
+    align-self: flex-end;
+  }
+  .share-btn:hover { border-color: var(--text-accent); color: var(--text-accent); }
+  .share-btn svg {
+    width: 0.6rem; height: 0.6rem;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+  .modal-share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: none;
+    border: 1px solid var(--border-pill);
+    color: var(--text-muted);
+    font-family: 'Cinzel', serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    margin-top: 0;
+  }
+  .modal-share-btn:hover { border-color: var(--text-accent); color: var(--text-accent); }
+  .modal-share-btn svg {
+    width: 0.65rem; height: 0.65rem;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    background: var(--text-title);
+    color: var(--bg-page);
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.55rem 1.25rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s, transform 0.25s;
+    z-index: 2000;
+    white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ── HERO SHARE BUTTON ────────────────────────────────── */
+  .hero-share-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+  .hero-share-btn {
+    background: none;
+    border: 1px solid var(--border-input);
+    color: var(--text-author);
+    padding: 0.75rem 1.5rem;
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.25s, color 0.25s, background 0.25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .hero-share-btn:hover {
+    border-color: var(--text-accent);
+    color: var(--text-body);
+    background: rgba(0,0,0,0.04);
+  }
+  .hero-share-btn svg {
+    width: 0.7rem; height: 0.7rem;
+    stroke: currentColor; fill: none;
+    stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero-section" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <button class="theme-toggle hero-theme-toggle" id="themeToggle" title="Toggle dark / light mode">
+    <span class="icon-sun">&#9728;&#65038;</span>
+    <span class="icon-moon">&#9789;</span>
+  </button>
+
+  <div class="hero-eyebrow">Daily Scripture</div>
+
+  <div class="hero-quote-wrap" id="heroWrap">
+    <span class="hero-cross">&#10011;</span>
+    <p class="hero-quote-text" id="heroText"></p>
+    <div class="hero-attribution">
+      <div class="hero-author-line">
+        <span class="hero-rule"></span>
+        <span class="hero-author" id="heroRef"></span>
+        <span class="hero-rule"></span>
+      </div>
+      <span class="hero-source" id="heroBook"></span>
+    </div>
+    <span class="hero-theme-pill" id="heroTheme"></span>
+  </div>
+
+  <div class="hero-share-row">
+    <button class="hero-refresh-btn" id="refreshBtn">&#8635;&nbsp;&nbsp;New Verse</button>
+    <button class="hero-share-btn" id="heroShareBtn"><svg viewBox="0 0 24 24" style="width:.7rem;height:.7rem;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Share</button>
+  </div>
+
+  <a href="#collection" class="hero-scroll-hint">
+    <span>All Verses</span>
+    <div class="hero-scroll-arrow"></div>
+  </a>
+</section>
+
+<!-- STATS HEADER -->
+<div class="stoic-header" id="collection">
+  <div class="header-ornament">&#10011; &nbsp; Scripture &nbsp; &#10011;</div>
+  <h1 class="header-title">DAILY AFFIRMATIONS</h1>
+  <p class="header-subtitle">Selected verses from the New International Version</p>
+  <div class="header-divider"></div>
+  <div class="stats-row" id="statsRow"></div>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <input class="search-input" id="searchInput" placeholder="Search scripture…" type="text">
+  <select class="filter-select" id="bookFilter">
+    <option value="">All Books</option>
+  </select>
+  <div class="view-toggle">
+    <button class="view-btn active" id="gridBtn" title="Grid view">&#x229E;</button>
+    <button class="view-btn" id="listBtn" title="List view">&#9776;</button>
+  </div>
+  <span class="results-info" id="resultsInfo"></span>
+</div>
+
+<!-- THEMES BAR -->
+<div class="themes-bar" id="themesBar"></div>
+
+<!-- QUOTES CONTAINER -->
+<div class="content">
+  <div id="quotesContainer"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose">&#10005;</button>
+    <div class="modal-number" id="modalNumber"></div>
+    <p class="modal-text" id="modalText"></p>
+    <div class="modal-divider"></div>
+    <div class="modal-author" id="modalRef"></div>
+    <div class="modal-source" id="modalBook"></div>
+    <div style="display:flex;align-items:center;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap;">
+      <span class="modal-theme" id="modalTheme"></span>
+      <button class="modal-share-btn" id="modalShareBtn">
+        <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Copy Share Link
+      </button>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast">Link copied to clipboard</div>
+
+<script>
+// ── THEME TOGGLE ───────────────────────────────────────────
+const htmlEl = document.documentElement;
+const saved = localStorage.getItem('bible-theme');
+if (saved === 'dark') htmlEl.setAttribute('data-theme', 'dark');
+
+document.getElementById('themeToggle').addEventListener('click', () => {
+  const isDark = htmlEl.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    htmlEl.removeAttribute('data-theme');
+    localStorage.setItem('bible-theme', 'light');
+  } else {
+    htmlEl.setAttribute('data-theme', 'dark');
+    localStorage.setItem('bible-theme', 'dark');
+  }
+});
+
+// ── VERSE DATA ─────────────────────────────────────────────
+const verses = [
+  {
+    id: 1,
+    text: "Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight.",
+    ref: "Proverbs 3:5-6",
+    book: "Proverbs",
+    theme: "Trust"
+  },
+  {
+    id: 2,
+    text: "Do not fret because of those who are evil or be envious of those who do wrong; for like the grass they will soon wither, like green plants they will soon die away. Trust in the Lord and do good; dwell in the land and enjoy safe pasture. Take delight in the Lord, and he will give you the desires of your heart. Commit your way to the Lord; trust in him and he will do this: he will make your righteous reward shine like the dawn, your vindication like the noonday sun. Be still before the Lord and wait patiently for him; do not fret when people succeed in their ways, when they carry out their wicked schemes. Refrain from anger and turn from wrath; do not fret — it leads only to evil.",
+    ref: "Psalm 37:1-8",
+    book: "Psalms",
+    theme: "Trust"
+  },
+  {
+    id: 3,
+    text: "For by the grace given me I say to every one of you: Do not think of yourself more highly than you ought, but rather think of yourself with sober judgment, in accordance with the faith God has distributed to each of you.",
+    ref: "Romans 12:3",
+    book: "Romans",
+    theme: "Humility"
+  },
+  {
+    id: 4,
+    text: "Pride goes before destruction, a haughty spirit before a fall.",
+    ref: "Proverbs 16:18",
+    book: "Proverbs",
+    theme: "Humility"
+  },
+  {
+    id: 5,
+    text: "When pride comes, then comes disgrace, but with humility comes wisdom.",
+    ref: "Proverbs 11:2",
+    book: "Proverbs",
+    theme: "Humility"
+  },
+  {
+    id: 6,
+    text: "Humble yourselves, therefore, under God's mighty hand, that he may lift you up in due time. Cast all your anxiety on him because he cares for you.",
+    ref: "1 Peter 5:6-7",
+    book: "1 Peter",
+    theme: "Humility"
+  },
+  {
+    id: 7,
+    text: "Let someone else praise you, and not your own mouth; an outsider, and not your own lips.",
+    ref: "Proverbs 27:2",
+    book: "Proverbs",
+    theme: "Humility"
+  },
+  {
+    id: 8,
+    text: "Slaves, obey your earthly masters in everything; and do it, not only when their eye is on you and to curry their favor, but with sincerity of heart and reverence for the Lord. Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.",
+    ref: "Colossians 3:22-23",
+    book: "Colossians",
+    theme: "Diligence"
+  },
+  {
+    id: 9,
+    text: "Do not merely listen to the word, and so deceive yourselves. Do what it says.",
+    ref: "James 1:22",
+    book: "James",
+    theme: "Diligence"
+  },
+  {
+    id: 10,
+    text: "Begin at once, before it slips your mind, to apply reason to life.",
+    ref: "Proverbs 16:32",
+    book: "Proverbs",
+    theme: "Diligence"
+  },
+  {
+    id: 11,
+    text: "Who is wise and understanding among you? Let them show it by their good life, by deeds done in the humility that comes from wisdom. But if you harbor bitter envy and selfish ambition in your hearts, do not boast about it or deny the truth. Such 'wisdom' does not come down from heaven but is earthly, unspiritual, demonic. For where you have envy and selfish ambition, there you find disorder and every evil practice.",
+    ref: "James 3:13-16",
+    book: "James",
+    theme: "Wisdom"
+  },
+  {
+    id: 12,
+    text: "My dear brothers and sisters, take note of this: Everyone should be quick to listen, slow to speak and slow to become angry.",
+    ref: "James 1:19",
+    book: "James",
+    theme: "Wisdom"
+  },
+  {
+    id: 13,
+    text: "Better a patient person than a warrior, one with self-control than one who takes a city.",
+    ref: "Proverbs 16:32",
+    book: "Proverbs",
+    theme: "Wisdom"
+  },
+  {
+    id: 14,
+    text: "Do not conform to the pattern of this world, but be transformed by the renewing of your mind.",
+    ref: "Romans 12:2",
+    book: "Romans",
+    theme: "Wisdom"
+  },
+  {
+    id: 15,
+    text: "Consider it pure joy, my brothers and sisters, whenever you face trials of many kinds, because you know that the testing of your faith produces perseverance.",
+    ref: "James 1:2-3",
+    book: "James",
+    theme: "Perseverance"
+  },
+  {
+    id: 16,
+    text: "Not only so, but we also glory in our sufferings, because we know that suffering produces perseverance; perseverance, character; and character, hope.",
+    ref: "Romans 5:3-4",
+    book: "Romans",
+    theme: "Perseverance"
+  },
+  {
+    id: 17,
+    text: "Love must be sincere. Hate what is evil; cling to what is good. Be devoted to one another in love. Honor one another above yourselves. Never be lacking in zeal, but keep your spiritual fervor, serving the Lord. Be joyful in hope, patient in affliction, faithful in prayer. Share with the Lord's people who are in need. Practice hospitality. Bless those who persecute you; bless and do not curse. Rejoice with those who rejoice; mourn with those who mourn. Live in harmony with one another. Do not be proud, but be willing to associate with people of low position. Do not be conceited. Do not repay anyone evil for evil. Be careful to do what is right in the eyes of everyone. If it is possible, as far as it depends on you, live at peace with everyone. Do not take revenge, my dear friends, but leave room for God's wrath, for it is written: 'It is mine to avenge; I will repay,' says the Lord. Do not be overcome by evil, but overcome evil with good.",
+    ref: "Romans 12:9-21",
+    book: "Romans",
+    theme: "Love"
+  },
+  {
+    id: 18,
+    text: "And do not forget to do good and to share with others, for with such sacrifices God is pleased. Have confidence in your leaders and submit to their authority, because they keep watch over you as those who must give an account.",
+    ref: "Hebrews 13:16-17",
+    book: "Hebrews",
+    theme: "Love"
+  },
+  {
+    id: 19,
+    text: "Do not let any unwholesome talk come out of your mouths, but only what is helpful for building others up according to their needs, that it may benefit those who listen. Get rid of all bitterness, rage and anger, brawling and slander, along with every form of malice. Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you.",
+    ref: "Ephesians 4:29, 31-32",
+    book: "Ephesians",
+    theme: "Love"
+  },
+  {
+    id: 20,
+    text: "And let us consider how we may spur one another on toward love and good deeds.",
+    ref: "Hebrews 10:24",
+    book: "Hebrews",
+    theme: "Love"
+  },
+  {
+    id: 21,
+    text: "Do nothing out of selfish ambition or vain conceit. Rather, in humility value others above yourselves, not looking to your own interests but each of you to the interests of the others.",
+    ref: "Philippians 2:3-4",
+    book: "Philippians",
+    theme: "Love"
+  },
+  {
+    id: 22,
+    text: "No weapon forged against you will prevail, and you will refute every tongue that accuses you. This is the heritage of the servants of the Lord, and this is their vindication from me, declares the Lord.",
+    ref: "Isaiah 54:17",
+    book: "Isaiah",
+    theme: "Protection"
+  },
+  {
+    id: 23,
+    text: "I have learned to be content whatever the circumstances.",
+    ref: "Philippians 4:11",
+    book: "Philippians",
+    theme: "Contentment"
+  },
+  {
+    id: 24,
+    text: "Therefore do not worry about tomorrow, for tomorrow will worry about itself. Each day has enough trouble of its own.",
+    ref: "Matthew 6:34",
+    book: "Matthew",
+    theme: "Contentment"
+  },
+  {
+    id: 25,
+    text: "Do not rebuke an older man harshly, but exhort him as if he were your father. Treat younger men as brothers, older women as mothers, and younger women as sisters, with absolute purity.",
+    ref: "1 Timothy 5:1-2",
+    book: "1 Timothy",
+    theme: "Relationships"
+  },
+  {
+    id: 26,
+    text: "Do everything without grumbling or arguing, so that you may become blameless and pure, children of God without fault in a warped and crooked generation. Then you will shine among them like stars in the sky.",
+    ref: "Philippians 2:14-15",
+    book: "Philippians",
+    theme: "Character"
+  },
+  {
+    id: 27,
+    text: "Am I now trying to win the approval of human beings, or of God? Or am I trying to please people? If I were still trying to please people, I would not be a servant of Christ.",
+    ref: "Galatians 1:10",
+    book: "Galatians",
+    theme: "Approval"
+  },
+  {
+    id: 28,
+    text: "For they loved human praise more than praise from God.",
+    ref: "John 12:43",
+    book: "John",
+    theme: "Approval"
+  }
+];
+
+// ── THEME COLOR MAP ─────────────────────────────────────────
+const themeColors = {
+  "Trust":        "#6a7c3a",
+  "Humility":     "#7a5c3a",
+  "Diligence":    "#5a6b7a",
+  "Wisdom":       "#7a6b3a",
+  "Perseverance": "#6b3a3a",
+  "Love":         "#8a4a4a",
+  "Protection":   "#3a5a7a",
+  "Contentment":  "#5a7a6a",
+  "Relationships":"#6a4a7a",
+  "Character":    "#4a6a5a",
+  "Approval":     "#7a5a6a",
+};
+
+// ── STATE ──────────────────────────────────────────────────
+let currentSearch = '';
+let currentBook   = '';
+let currentTheme  = 'All';
+let currentView   = 'grid';
+let heroIdx       = Math.floor(Math.random() * verses.length);
+
+// ── HERO ───────────────────────────────────────────────────
+function renderHero(v) {
+  document.getElementById('heroText').textContent  = v.text;
+  document.getElementById('heroRef').textContent   = v.ref;
+  document.getElementById('heroBook').textContent  = v.book;
+  document.getElementById('heroTheme').textContent = v.theme;
+}
+
+function cycleHero() {
+  const wrap = document.getElementById('heroWrap');
+  wrap.classList.add('fading');
+  setTimeout(() => {
+    let next;
+    do { next = Math.floor(Math.random() * verses.length); } while (next === heroIdx);
+    heroIdx = next;
+    renderHero(verses[heroIdx]);
+    wrap.classList.remove('fading');
+  }, 400);
+}
+
+document.getElementById('refreshBtn').addEventListener('click', cycleHero);
+document.getElementById('heroShareBtn').addEventListener('click', () => copyShareLink(verses[heroIdx].id));
+renderHero(verses[heroIdx]);
+
+// ── STATS ──────────────────────────────────────────────────
+const bookCounts = {};
+verses.forEach(v => { bookCounts[v.book] = (bookCounts[v.book] || 0) + 1; });
+const themeCounts = {};
+verses.forEach(v => { themeCounts[v.theme] = (themeCounts[v.theme] || 0) + 1; });
+const statsRow = document.getElementById('statsRow');
+[
+  [verses.length,                    'Verses'],
+  [Object.keys(bookCounts).length,   'Books' ],
+  [Object.keys(themeCounts).length,  'Themes'],
+].forEach(([n, label]) => {
+  statsRow.insertAdjacentHTML('beforeend',
+    `<div class="stat-item"><span class="stat-number">${n}</span><span class="stat-label">${label}</span></div>`);
+});
+
+// ── BOOK FILTER ────────────────────────────────────────────
+const bookFilter = document.getElementById('bookFilter');
+Object.keys(bookCounts).sort().forEach(b => {
+  const opt = document.createElement('option');
+  opt.value = b; opt.textContent = b;
+  bookFilter.appendChild(opt);
+});
+bookFilter.addEventListener('change', e => { currentBook = e.target.value; renderVerses(); });
+
+// ── THEMES BAR ─────────────────────────────────────────────
+const allThemes = ['All', ...Object.keys(themeCounts).sort()];
+const themesBar = document.getElementById('themesBar');
+allThemes.forEach(theme => {
+  const btn = document.createElement('button');
+  btn.className = 'theme-pill' + (theme === 'All' ? ' active' : '');
+  btn.textContent = theme;
+  btn.addEventListener('click', () => {
+    currentTheme = theme;
+    document.querySelectorAll('.theme-pill').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderVerses();
+  });
+  themesBar.appendChild(btn);
+});
+
+// ── FILTER CONTROLS ────────────────────────────────────────
+document.getElementById('searchInput').addEventListener('input', e => {
+  currentSearch = e.target.value;
+  const url = new URL(window.location.href);
+  if (currentSearch.trim()) { url.searchParams.set('q', currentSearch.trim()); }
+  else { url.searchParams.delete('q'); }
+  url.searchParams.delete('id');
+  history.replaceState(null, '', url.toString());
+  renderVerses();
+});
+
+document.getElementById('gridBtn').addEventListener('click', () => {
+  currentView = 'grid';
+  document.getElementById('gridBtn').classList.add('active');
+  document.getElementById('listBtn').classList.remove('active');
+  renderVerses();
+});
+
+document.getElementById('listBtn').addEventListener('click', () => {
+  currentView = 'list';
+  document.getElementById('listBtn').classList.add('active');
+  document.getElementById('gridBtn').classList.remove('active');
+  renderVerses();
+});
+
+// ── FILTER ─────────────────────────────────────────────────
+function getFiltered() {
+  return verses.filter(v => {
+    const tokens = currentSearch.toLowerCase().split(/\s+/).filter(Boolean);
+    const haystack = (v.text + ' ' + v.ref + ' ' + v.book + ' ' + v.theme).toLowerCase();
+    const matchSearch = tokens.length === 0 || tokens.every(t => haystack.includes(t));
+    const matchBook   = !currentBook  || v.book  === currentBook;
+    const matchTheme  = currentTheme === 'All'  || v.theme === currentTheme;
+    return matchSearch && matchBook && matchTheme;
+  });
+}
+
+// ── SHARED UTILITIES ───────────────────────────────────────
+const shareIcon = `<svg viewBox="0 0 24 24" style="width:.6rem;height:.6rem;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>`;
+
+let toastTimer = null;
+function showToast() {
+  const t = document.getElementById('toast');
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function copyShareLink(id) {
+  const url = new URL(window.location.href);
+  url.search = '';
+  if (id != null) url.searchParams.set('id', id);
+  if (currentSearch.trim()) url.searchParams.set('q', currentSearch.trim());
+  navigator.clipboard.writeText(url.toString()).then(showToast).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = url.toString(); ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta); showToast();
+  });
+}
+
+function pad(n) { return String(n).padStart(3, '0'); }
+function esc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+// ── RENDER ─────────────────────────────────────────────────
+function renderVerses() {
+  const filtered = getFiltered();
+  const container = document.getElementById('quotesContainer');
+  document.getElementById('resultsInfo').textContent = `${filtered.length} of ${verses.length}`;
+
+  if (filtered.length === 0) {
+    container.innerHTML = `<div class="no-results">No scripture matching your search.<br><span style="font-size:0.9rem;opacity:0.7">Seek and you shall find.</span></div>`;
+    return;
+  }
+
+  if (currentView === 'grid') {
+    container.innerHTML = `<div class="grid-view">${filtered.map(v => {
+      const tc = themeColors[v.theme] || '#6a5a30';
+      return `
+        <div class="quote-card" data-id="${v.id}">
+          <div class="quote-number">${esc(v.ref)}</div>
+          <p class="quote-text">${esc(v.text)}</p>
+          <div class="quote-footer">
+            <div class="quote-attribution">
+              <span class="quote-author">${esc(v.book)}</span>
+              <span class="quote-source">New International Version</span>
+            </div>
+            <div style="display:flex;align-items:flex-end;gap:.5rem;flex-shrink:0">
+              <span class="quote-theme-badge" style="color:${tc};border-color:${tc}55">${esc(v.theme)}</span>
+              <button class="share-btn" data-share-id="${v.id}" title="Copy share link">${shareIcon}Share</button>
+            </div>
+          </div>
+        </div>`;
+    }).join('')}</div>`;
+  } else {
+    container.innerHTML = `<div class="list-view">${filtered.map(v => {
+      const tc = themeColors[v.theme] || '#6a5a30';
+      return `
+        <div class="list-quote-card" data-id="${v.id}">
+          <div class="list-number">${esc(v.ref)}</div>
+          <div class="list-content">
+            <p class="list-text">\u201C${esc(v.text)}\u201D</p>
+            <div class="list-meta">
+              <span class="list-author">${esc(v.book)}</span>
+              <span class="list-source">NIV</span>
+              <span class="list-theme" style="color:${tc}">${esc(v.theme)}</span>
+              <button class="share-btn" data-share-id="${v.id}" title="Copy share link">${shareIcon}Share</button>
+            </div>
+          </div>
+        </div>`;
+    }).join('')}</div>`;
+  }
+
+  container.querySelectorAll('[data-id]').forEach(el => {
+    el.querySelectorAll('.share-btn').forEach(btn => {
+      btn.addEventListener('click', e => { e.stopPropagation(); copyShareLink(parseInt(btn.dataset.shareId)); });
+    });
+    el.addEventListener('click', () => {
+      const v = verses.find(x => x.id === parseInt(el.dataset.id));
+      if (v) openModal(v);
+    });
+  });
+}
+
+// ── MODAL ──────────────────────────────────────────────────
+function openModal(v) {
+  document.getElementById('modalNumber').textContent = v.ref;
+  document.getElementById('modalText').textContent   = `\u201C${v.text}\u201D`;
+  document.getElementById('modalRef').textContent    = v.book;
+  document.getElementById('modalBook').textContent   = 'New International Version';
+  document.getElementById('modalTheme').textContent  = v.theme;
+  document.getElementById('modalShareBtn').onclick   = () => copyShareLink(v.id);
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ── INIT ───────────────────────────────────────────────────
+renderVerses();
+
+// ── URL PARAMETERS ─────────────────────────────────────────
+// ?q=term  pre-fills search; ?id=N opens that verse's modal
+(function () {
+  const params = new URLSearchParams(window.location.search);
+
+  const qParam = params.get('q');
+  if (qParam) {
+    currentSearch = qParam;
+    document.getElementById('searchInput').value = qParam;
+    renderVerses();
+    document.getElementById('collection').scrollIntoView({ behavior: 'instant' });
+  }
+
+  const idParam = params.get('id');
+  if (!idParam) return;
+  const target = verses.find(v => v.id === parseInt(idParam));
+  if (!target) return;
+  document.getElementById('collection').scrollIntoView({ behavior: 'instant' });
+  setTimeout(() => openModal(target), 120);
+})();
+</script>
+</body>
+</html>
