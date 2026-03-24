@@ -20,22 +20,32 @@ layout: null
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/style.css" />
 
-  
 </head>
 
 <body>
 
 <!-- ════ NAV ════ -->
-<nav>
+<nav id="site-nav">
   <div class="nav-inner">
     <a href="#hero" class="nav-logo">Peter Zaffina</a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="nav-links">
       <li><a href="#services">Services</a></li>
       <li><a href="#credentials">Background</a></li>
       <li><a href="https://peter.zaffina.net/blog/">Writing</a></li>
-      <li><a href="https://peter.zaffina.net/about/">About</a></li>
+      <li><a href="https://peter.zaffina.net/blog/about/">About</a></li>
+    </ul>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="nav-drawer" id="nav-drawer" aria-hidden="true">
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#credentials">Background</a></li>
+      <li><a href="https://peter.zaffina.net/blog/">Writing</a></li>
+      <li><a href="https://peter.zaffina.net/blog/about/">About</a></li>
     </ul>
   </div>
 </nav>
@@ -234,7 +244,7 @@ layout: null
         <li><a href="#services">Services</a></li>
         <li><a href="#credentials">Background</a></li>
         <li><a href="https://peter.zaffina.net/blog/">Writing</a></li>
-        <li><a href="https://peter.zaffina.net/about/">About</a></li>
+        <li><a href="https://peter.zaffina.net/blog/about/">About</a></li>
       </ul>
       <ul class="footer-social">
         <li>
@@ -280,9 +290,32 @@ layout: null
       const target = document.querySelector(a.getAttribute('href'));
       if (target) {
         e.preventDefault();
+        closeNav();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
+  });
+
+  // Hamburger
+  const hamburger = document.getElementById('nav-hamburger');
+  const drawer    = document.getElementById('nav-drawer');
+
+  function closeNav() {
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    drawer.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+  }
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = drawer.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    drawer.setAttribute('aria-hidden', String(!isOpen));
+  });
+
+  document.addEventListener('click', e => {
+    if (!e.target.closest('#site-nav')) closeNav();
   });
 </script>
 

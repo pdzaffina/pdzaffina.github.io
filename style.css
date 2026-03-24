@@ -1035,6 +1035,78 @@ article.post .date,
 
 .highlight pre { margin: 0; border: none; padding: 0; background: none; }
 
+/* ── HAMBURGER BUTTON ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  flex-shrink: 0;
+}
+
+.nav-hamburger span {
+  display: block;
+  height: 1.5px;
+  background: var(--gold);
+  border-radius: 1px;
+  transition: transform 0.25s ease, opacity 0.2s ease, width 0.25s ease;
+  transform-origin: center;
+}
+
+.nav-hamburger span:nth-child(3) {
+  width: 65%;
+  margin-left: auto;
+}
+
+/* Open state — X */
+.nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { width: 100%; transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ── NAV DRAWER ── */
+.nav-drawer {
+  display: none;
+  background: rgba(9,13,26,0.98);
+  border-bottom: 1px solid var(--gold-border);
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease;
+}
+
+.nav-drawer.open {
+  max-height: 320px;
+}
+
+.nav-drawer ul {
+  list-style: none;
+  padding: 0.5rem 0 1.25rem;
+  width: min(1100px, 92vw);
+  margin-inline: auto;
+}
+
+.nav-drawer ul li a {
+  display: block;
+  padding: 0.75rem 0;
+  font-family: var(--fb);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--faint);
+  transition: color 0.2s;
+}
+
+.nav-drawer ul li:last-child a { border-bottom: none; }
+.nav-drawer ul li a:hover { color: var(--gold); }
+
 /* ════════════════════════════════════════════════════════════════
    RESPONSIVE
 ════════════════════════════════════════════════════════════════ */
@@ -1058,6 +1130,8 @@ article.post .date,
   section { padding: 5rem 0; }
   .nav-links { display: none; }
   .blog-nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .nav-drawer { display: block; }
   .footer-bottom { flex-direction: column; align-items: flex-start; }
   .blog-content-wrap { padding: 3rem 0 4rem; }
 }
