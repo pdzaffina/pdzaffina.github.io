@@ -44,3 +44,8 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+
+collections:
+  prompts:
+    output: false
+    sort_by: title
