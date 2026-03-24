@@ -4,57 +4,69 @@ title: Prompts
 permalink: /prompts/
 ---
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-
 <style>
 /* ── Reset & scope ──────────────────────────────── */
 .pl-root *, .pl-root *::before, .pl-root *::after {
   box-sizing: border-box;
 }
 
-/* ── Root container — bleed to edges ───────────── */
+/* ── Root container ─────────────────────────────── */
 .pl-root {
   margin-left:  -2rem;
   margin-right: -2rem;
   margin-top:   -1rem;
-  background:   #111;
-  color:        #e8e0d0;
-  font-family:  'Lora', Georgia, serif;
+  background:   #090d1a;
+  color:        #a8b4cc;
+  font-family:  'Cormorant Garamond', Georgia, serif;
   padding-bottom: 5rem;
 }
 
 /* ── Page header ────────────────────────────────── */
 .pl-header {
   padding: 3rem 2rem 2.5rem;
-  border-bottom: 1px solid #2a2a2a;
-  background: linear-gradient(180deg, #161616 0%, #111 100%);
+  border-bottom: 1px solid #1c2840;
+  background: linear-gradient(180deg, #0d1424 0%, #090d1a 100%);
 }
 
 .pl-header-label {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.75rem;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
   letter-spacing: 0.35em;
-  color: #b8914a;
+  color: #b8a060;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.pl-header-label::before {
+  content: '';
+  display: block;
+  width: 1.5rem;
+  height: 1px;
+  background: #b8a060;
+  opacity: 0.6;
 }
 
 .pl-header-title {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Cormorant Garamond', Georgia, serif;
   font-size: clamp(2.8rem, 7vw, 5rem);
-  letter-spacing: 0.05em;
-  color: #f0e8d8;
-  line-height: 1;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  color: #e8eef8;
+  line-height: 0.95;
   margin: 0 0 0.6rem;
+  text-transform: uppercase;
 }
 
 .pl-header-subtitle {
-  font-family: 'Lora', serif;
-  font-size: 1rem;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.1rem;
   font-style: italic;
-  color: #7a7060;
+  font-weight: 400;
+  color: #4e6080;
   margin: 0 0 2rem;
 }
 
@@ -64,17 +76,20 @@ permalink: /prompts/
   gap: 1.5rem 3rem;
 }
 .pl-stat-number {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.6rem;
-  color: #b8914a;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: #b8a060;
   display: block;
   line-height: 1;
 }
 .pl-stat-label {
-  font-size: 0.7rem;
-  letter-spacing: 0.15em;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #5a5040;
+  color: #1c2840;
 }
 
 /* ── Sticky controls ────────────────────────────── */
@@ -82,8 +97,8 @@ permalink: /prompts/
   position: sticky;
   top: 0;
   z-index: 100;
-  background: #161616;
-  border-bottom: 1px solid #2a2a2a;
+  background: #0d1424;
+  border-bottom: 1px solid #1c2840;
   padding: 0.85rem 2rem;
   display: flex;
   align-items: center;
@@ -94,33 +109,38 @@ permalink: /prompts/
 .pl-search {
   flex: 1;
   min-width: 200px;
-  background: #1c1c1c;
-  border: 1px solid #333;
-  color: #e8e0d0;
+  background: #111a2e;
+  border: 1px solid #1c2840;
+  color: #a8b4cc;
   padding: 0.5rem 0.9rem;
-  font-family: 'Lora', serif;
-  font-size: 0.95rem;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1rem;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
 .pl-search:focus {
-  border-color: #b8914a;
-  box-shadow: 0 0 0 2px rgba(184,145,74,0.15);
+  border-color: #b8a060;
+  box-shadow: 0 0 0 2px rgba(184,160,96,0.12);
 }
-.pl-search::placeholder { color: #4a4030; font-style: italic; }
+.pl-search::placeholder {
+  color: #1c2840;
+  font-style: italic;
+}
 
 .pl-count {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.85rem;
-  letter-spacing: 0.12em;
-  color: #5a5040;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #4e6080;
   white-space: nowrap;
 }
 
 /* ── Category tabs ──────────────────────────────── */
 .pl-tabs {
-  background: #141414;
-  border-bottom: 1px solid #222;
+  background: #090d1a;
+  border-bottom: 1px solid #1c2840;
   padding: 0 2rem;
   display: flex;
   gap: 0;
@@ -132,11 +152,12 @@ permalink: /prompts/
 .pl-tab {
   background: none;
   border: none;
-  border-bottom: 2px solid transparent;
-  color: #5a5040;
+  border-bottom: 1px solid transparent;
+  color: #4e6080;
   padding: 0.75rem 1.25rem;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.8rem;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 400;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   cursor: pointer;
@@ -144,10 +165,10 @@ permalink: /prompts/
   transition: color 0.2s, border-color 0.2s;
   margin-bottom: -1px;
 }
-.pl-tab:hover { color: #e8e0d0; }
+.pl-tab:hover { color: #a8b4cc; }
 .pl-tab.active {
-  color: #b8914a;
-  border-bottom-color: #b8914a;
+  color: #b8a060;
+  border-bottom-color: #b8a060;
 }
 
 /* ── Content + grid ─────────────────────────────── */
@@ -165,8 +186,8 @@ permalink: /prompts/
 
 /* ── Card ───────────────────────────────────────── */
 .pl-card {
-  background: #161616;
-  border: 1px solid #252525;
+  background: #0d1424;
+  border: 1px solid #1c2840;
   padding: 1.75rem;
   cursor: pointer;
   display: flex;
@@ -180,41 +201,44 @@ permalink: /prompts/
   position: absolute;
   top: 0; left: 0;
   width: 2px; height: 100%;
-  background: #b8914a;
+  background: #b8a060;
   transform: scaleY(0);
   transform-origin: top;
   transition: transform 0.25s;
 }
 .pl-card:hover {
-  border-color: #3a3020;
-  background: #1a1a1a;
+  border-color: rgba(184,160,96,0.34);
+  background: #111a2e;
   transform: translateY(-2px);
 }
 .pl-card:hover::after { transform: scaleY(1); }
 
 .pl-card-cat {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.68rem;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.62rem;
+  font-weight: 500;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: #b8914a;
+  color: #b8a060;
+  opacity: 0.8;
   margin-bottom: 0.6rem;
 }
 
 .pl-card-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.2rem;
-  letter-spacing: 0.04em;
-  color: #f0e8d8;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: #e8eef8;
   line-height: 1.2;
   margin-bottom: 0.85rem;
 }
 
 .pl-card-excerpt {
-  font-family: 'Lora', serif;
-  font-size: 0.88rem;
-  line-height: 1.7;
-  color: #7a7060;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: #4e6080;
   flex: 1;
   display: -webkit-box;
   -webkit-line-clamp: 4;
@@ -228,16 +252,16 @@ permalink: /prompts/
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  border-top: 1px solid #222;
+  border-top: 1px solid #1c2840;
   padding-top: 0.9rem;
   margin-top: auto;
 }
 
 .pl-card-credit {
-  font-family: 'Lora', serif;
-  font-size: 0.78rem;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 0.85rem;
   font-style: italic;
-  color: #4a4030;
+  color: #1c2840;
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -245,23 +269,24 @@ permalink: /prompts/
 }
 
 .pl-card-cta {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.72rem;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 400;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #b8914a;
+  color: #b8a060;
   background: none;
-  border: 1px solid #3a3020;
-  padding: 0.25rem 0.75rem;
+  border: 1px solid rgba(184,160,96,0.34);
+  padding: 0.28rem 0.8rem;
   cursor: pointer;
   white-space: nowrap;
   flex-shrink: 0;
   transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
 .pl-card-cta:hover {
-  background: rgba(184,145,74,0.1);
-  border-color: #b8914a;
-  color: #d4a85a;
+  background: rgba(184,160,96,0.07);
+  border-color: #b8a060;
+  color: #d4bc82;
 }
 
 /* ── Empty state ────────────────────────────────── */
@@ -269,10 +294,10 @@ permalink: /prompts/
   display: none;
   padding: 5rem 2rem;
   text-align: center;
-  font-family: 'Lora', serif;
-  font-size: 1.1rem;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.2rem;
   font-style: italic;
-  color: #4a4030;
+  color: #1c2840;
   line-height: 2;
 }
 
@@ -289,21 +314,19 @@ permalink: /prompts/
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(4px);
 }
 .pl-overlay.open {
   opacity: 1;
   pointer-events: all;
 }
 
-/* Fixed-height chrome — nothing scrolls on the outer shell */
 .pl-modal {
-  background: #161616;
-  border: 1px solid #3a3020;
-  border-top: 2px solid #b8914a;
+  background: #0d1424;
+  border: 1px solid rgba(184,160,96,0.34);
+  border-top: 2px solid #b8a060;
   max-width: 700px;
   width: 100%;
-  /* Fixed viewport height so header + scroll area + footer are all visible */
   height: min(88vh, 720px);
   display: flex;
   flex-direction: column;
@@ -311,11 +334,10 @@ permalink: /prompts/
   box-shadow: 0 0 80px rgba(0,0,0,0.9);
   transform: translateY(14px);
   transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
-  overflow: hidden; /* clip children, never scroll the modal itself */
+  overflow: hidden;
 }
 .pl-overlay.open .pl-modal { transform: translateY(0); }
 
-/* Sticky header inside modal */
 .pl-modal-head {
   flex-shrink: 0;
   padding: 2rem 3rem 0;
@@ -326,92 +348,99 @@ permalink: /prompts/
   position: absolute;
   top: 1.25rem; right: 1.5rem;
   background: none;
-  border: 1px solid #333;
-  color: #5a5040;
+  border: 1px solid #1c2840;
+  color: #4e6080;
   width: 2rem; height: 2rem;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer;
   font-size: 0.85rem;
   transition: border-color 0.2s, color 0.2s;
 }
-.pl-modal-close:hover { border-color: #b8914a; color: #e8e0d0; }
+.pl-modal-close:hover { border-color: #b8a060; color: #e8eef8; }
 
 .pl-modal-cat {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.72rem;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.62rem;
+  font-weight: 500;
   letter-spacing: 0.3em;
-  color: #b8914a;
+  color: #b8a060;
   text-transform: uppercase;
+  opacity: 0.8;
   margin-bottom: 0.4rem;
 }
 
 .pl-modal-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.6rem;
-  letter-spacing: 0.04em;
-  color: #f0e8d8;
-  line-height: 1.15;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.75rem;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  color: #e8eef8;
+  line-height: 1.1;
   margin-bottom: 1.25rem;
-  padding-right: 2.5rem; /* don't underrun close button */
+  padding-right: 2.5rem;
 }
 
 .pl-modal-rule {
   width: 48px; height: 1px;
-  background: linear-gradient(90deg, #b8914a, transparent);
+  background: linear-gradient(90deg, #b8a060, transparent);
   margin-bottom: 0;
 }
 
-/* Scrollable content window — this is the only thing that scrolls */
 .pl-modal-scroll {
   flex: 1;
   overflow-y: auto;
   padding: 1.25rem 3rem 1rem;
-  /* subtle fade at the bottom edge to hint scrollability */
   mask-image: linear-gradient(180deg, black 85%, transparent 100%);
   -webkit-mask-image: linear-gradient(180deg, black 85%, transparent 100%);
   scrollbar-width: thin;
-  scrollbar-color: #3a3020 transparent;
+  scrollbar-color: #1c2840 transparent;
 }
 .pl-modal-scroll::-webkit-scrollbar { width: 4px; }
 .pl-modal-scroll::-webkit-scrollbar-track { background: transparent; }
-.pl-modal-scroll::-webkit-scrollbar-thumb { background: #3a3020; border-radius: 2px; }
+.pl-modal-scroll::-webkit-scrollbar-thumb { background: #1c2840; border-radius: 2px; }
 
-/* rendered markdown */
 .pl-modal-body {
-  font-family: 'Lora', serif;
-  font-size: 0.97rem;
-  line-height: 1.8;
-  color: #c8c0b0;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: #a8b4cc;
 }
 .pl-modal-body p { margin: 0 0 0.9em; }
 .pl-modal-body h1,
 .pl-modal-body h2,
 .pl-modal-body h3,
 .pl-modal-body h4 {
-  font-family: 'Bebas Neue', sans-serif;
-  letter-spacing: 0.06em;
-  color: #d4a85a;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #d4bc82;
   margin: 1.4em 0 0.5em;
-  font-weight: 400;
 }
-.pl-modal-body h1 { font-size: 1.3em; }
-.pl-modal-body h2 { font-size: 1.15em; }
+.pl-modal-body h1 { font-size: 1.4em; }
+.pl-modal-body h2 { font-size: 1.2em; }
 .pl-modal-body h3 { font-size: 1.05em; }
 .pl-modal-body ul,
 .pl-modal-body ol { margin: 0.5em 0 0.9em 1.5em; padding: 0; }
 .pl-modal-body li { margin-bottom: 0.35em; }
+.pl-modal-body ul li::marker { color: #7a6a3a; }
+.pl-modal-body ol li::marker {
+  color: #b8a060;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.82rem;
+}
 .pl-modal-body code {
-  background: #1e1e1e;
-  color: #c9a96e;
+  background: #172038;
+  color: #d4bc82;
   font-size: 0.85em;
   padding: 0.15em 0.4em;
   border-radius: 2px;
-  font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
+  font-family: 'SF Mono', 'Fira Code', monospace;
 }
 .pl-modal-body pre {
-  background: #1a1a1a;
-  border: 1px solid #2a2a2a;
-  color: #c8c0b0;
+  background: #090d1a;
+  border: 1px solid #1c2840;
+  border-left: 3px solid #7a6a3a;
+  color: #a8b4cc;
   font-size: 0.85em;
   line-height: 1.55;
   padding: 1rem 1.25rem;
@@ -421,15 +450,19 @@ permalink: /prompts/
 }
 .pl-modal-body pre code { background: none; padding: 0; color: inherit; }
 .pl-modal-body blockquote {
-  border-left: 2px solid #b8914a;
-  color: #7a7060;
+  border-left: 2px solid #b8a060;
+  background: rgba(184,160,96,0.07);
+  color: #e8eef8;
   margin: 0.9em 0;
-  padding: 0 1em;
+  padding: 0.75em 1.25em;
   font-style: italic;
 }
-.pl-modal-body hr { border: none; border-top: 1px solid #252525; margin: 1em 0; }
+.pl-modal-body hr {
+  border: none;
+  border-top: 1px solid #1c2840;
+  margin: 1em 0;
+}
 
-/* Always-visible footer with Copy button */
 .pl-modal-footer {
   flex-shrink: 0;
   display: flex;
@@ -438,15 +471,15 @@ permalink: /prompts/
   flex-wrap: wrap;
   gap: 0.75rem;
   padding: 1rem 3rem 1.5rem;
-  border-top: 1px solid #222;
-  background: #161616;
+  border-top: 1px solid #1c2840;
+  background: #0d1424;
 }
 
 .pl-modal-credit-txt {
-  font-family: 'Lora', serif;
-  font-size: 0.85rem;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 0.9rem;
   font-style: italic;
-  color: #4a4030;
+  color: #1c2840;
 }
 
 .pl-modal-actions {
@@ -457,32 +490,34 @@ permalink: /prompts/
 
 .pl-modal-share,
 .pl-modal-copy {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.75rem;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 400;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   padding: 0.5rem 1.1rem;
-  border: 1px solid #3a3020;
+  border: 1px solid rgba(184,160,96,0.34);
   background: none;
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s, color 0.2s;
 }
 
 .pl-modal-share {
-  color: #7a7060;
+  color: #4e6080;
 }
 .pl-modal-share:hover {
-  background: rgba(184,145,74,0.06);
-  border-color: #5a5040;
-  color: #c8c0b0;
+  background: rgba(184,160,96,0.07);
+  border-color: #4e6080;
+  color: #a8b4cc;
 }
 
 .pl-modal-copy {
-  color: #b8914a;
+  color: #b8a060;
 }
 .pl-modal-copy:hover {
-  background: rgba(184,145,74,0.1);
-  border-color: #b8914a;
+  background: rgba(184,160,96,0.1);
+  border-color: #b8a060;
+  color: #d4bc82;
 }
 
 /* ── Toast ──────────────────────────────────────── */
@@ -491,10 +526,11 @@ permalink: /prompts/
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%) translateY(6px);
-  background: #b8914a;
-  color: #111;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.75rem;
+  background: #b8a060;
+  color: #090d1a;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   padding: 0.5rem 1.4rem;
@@ -509,101 +545,75 @@ permalink: /prompts/
 /* ── Responsive ─────────────────────────────────── */
 @media (max-width: 640px) {
 
-  /* Root bleed */
   .pl-root { margin-left: -1rem; margin-right: -1rem; }
 
-  /* Header */
   .pl-header { padding: 2rem 1.25rem 1.75rem; }
   .pl-header-title { font-size: 2.8rem; }
-  .pl-header-subtitle { font-size: 0.9rem; margin-bottom: 1.25rem; }
+  .pl-header-subtitle { font-size: 0.95rem; margin-bottom: 1.25rem; }
   .pl-stats { gap: 1rem 2rem; }
-  .pl-stat-number { font-size: 1.25rem; }
+  .pl-stat-number { font-size: 1.5rem; }
 
-  /* Controls: search full-width, count inline */
-  .pl-controls {
-    padding: 0.75rem 1.25rem;
-    gap: 0.5rem;
-  }
+  .pl-controls { padding: 0.75rem 1.25rem; gap: 0.5rem; }
   .pl-search { min-width: 0; font-size: 1rem; padding: 0.6rem 0.85rem; }
-  .pl-count  { font-size: 0.75rem; }
+  .pl-count  { font-size: 0.68rem; }
 
-  /* Tabs: smaller text, tighter padding */
-  .pl-tabs  { padding: 0 0.75rem; }
-  .pl-tab   { padding: 0.65rem 0.85rem; font-size: 0.7rem; letter-spacing: 0.12em; }
+  .pl-tabs { padding: 0 0.75rem; }
+  .pl-tab  { padding: 0.65rem 0.85rem; font-size: 0.62rem; letter-spacing: 0.12em; }
 
-  /* Cards: single column, slightly less padding */
   .pl-content { padding: 1.25rem; }
   .pl-grid    { grid-template-columns: 1fr; gap: 1rem; }
   .pl-card    { padding: 1.25rem; }
-  .pl-card-title   { font-size: 1.05rem; }
-  .pl-card-excerpt { font-size: 0.85rem; -webkit-line-clamp: 3; }
+  .pl-card-title   { font-size: 1.2rem; }
+  .pl-card-excerpt { font-size: 0.9rem; -webkit-line-clamp: 3; }
 
-  /* Modal: full-screen bottom sheet on mobile */
-  .pl-overlay {
-    padding: 0;
-    align-items: flex-end;
-  }
+  .pl-overlay { padding: 0; align-items: flex-end; }
 
   .pl-modal {
     max-width: 100%;
     width: 100%;
-    /* Take up most of the screen height but leave a gap at top */
     height: 92vh;
     border-radius: 0;
     border-left: none;
     border-right: none;
     border-bottom: none;
-    border-top: 2px solid #b8914a;
-    /* Slide in from bottom */
+    border-top: 2px solid #b8a060;
     transform: translateY(100%);
   }
   .pl-overlay.open .pl-modal { transform: translateY(0); }
 
-  /* Drag handle hint at top of sheet */
   .pl-modal-head::before {
     content: '';
     display: block;
     width: 36px;
     height: 3px;
-    background: #3a3020;
+    background: #1c2840;
     border-radius: 2px;
     margin: 0 auto 1.25rem;
   }
 
-  /* Tighter header padding */
   .pl-modal-head   { padding: 1rem 1.25rem 0; }
-  .pl-modal-title  { font-size: 1.25rem; margin-bottom: 0.9rem; padding-right: 2rem; }
-  .pl-modal-cat    { font-size: 0.65rem; }
+  .pl-modal-title  { font-size: 1.4rem; margin-bottom: 0.9rem; padding-right: 2rem; }
+  .pl-modal-cat    { font-size: 0.6rem; }
 
-  /* Scroll area takes remaining height comfortably */
   .pl-modal-scroll { padding: 1rem 1.25rem 0.75rem; }
 
-  /* Footer: stack vertically on very small screens */
   .pl-modal-footer {
     padding: 0.85rem 1.25rem 1.25rem;
     flex-direction: column;
     align-items: stretch;
     gap: 0.5rem;
   }
-  .pl-modal-credit-txt { font-size: 0.78rem; }
+  .pl-modal-credit-txt { font-size: 0.82rem; }
   .pl-modal-actions    { display: flex; gap: 0.5rem; }
   .pl-modal-share,
   .pl-modal-copy {
     flex: 1;
     text-align: center;
     padding: 0.65rem 0.5rem;
-    font-size: 0.72rem;
+    font-size: 0.68rem;
   }
 
-  /* Close button slightly larger tap target */
-  .pl-modal-close {
-    width: 2.25rem;
-    height: 2.25rem;
-    top: 1rem;
-    right: 1rem;
-  }
-
-  /* Toast sits higher so it clears the modal footer */
+  .pl-modal-close { width: 2.25rem; height: 2.25rem; top: 1rem; right: 1rem; }
   .pl-toast { bottom: 5.5rem; }
 }
 </style>
@@ -632,7 +642,7 @@ permalink: /prompts/
     <div class="pl-grid"  id="plGrid"></div>
     <div class="pl-empty" id="plEmpty">
       No prompts match your search.<br>
-      <span style="font-size:0.85rem;color:#333">Try a different term or category.</span>
+      <span style="font-size:0.85rem;color:#1c2840">Try a different term or category.</span>
     </div>
   </div>
 
@@ -641,18 +651,15 @@ permalink: /prompts/
 <!-- MODAL -->
 <div class="pl-overlay" id="plOverlay">
   <div class="pl-modal">
-    <!-- fixed header -->
     <div class="pl-modal-head">
       <button class="pl-modal-close" id="plModalClose" aria-label="Close">&#x2715;</button>
       <div class="pl-modal-cat"   id="plModalCat"></div>
       <div class="pl-modal-title" id="plModalTitle"></div>
       <div class="pl-modal-rule"></div>
     </div>
-    <!-- scrollable prompt content -->
     <div class="pl-modal-scroll">
       <div class="pl-modal-body" id="plModalBody"></div>
     </div>
-    <!-- always-visible footer -->
     <div class="pl-modal-footer">
       <span class="pl-modal-credit-txt" id="plModalCredit"></span>
       <div class="pl-modal-actions">
@@ -710,7 +717,7 @@ const tabsEl = document.getElementById('plTabs');
   tabsEl.appendChild(btn);
 });
 
-// Search — push ?search= param as user types
+// Search
 const searchEl = document.getElementById('plSearch');
 searchEl.addEventListener('input', e => {
   query = e.target.value.toLowerCase();
@@ -768,7 +775,6 @@ function render() {
   });
 }
 
-// ── URL param helpers ───────────────────────────────────────
 function pushParams(overrides) {
   const url = new URL(window.location.href);
   Object.entries(overrides).forEach(([k, v]) => {
@@ -786,7 +792,6 @@ function shareUrl(promptIdx) {
   return url.toString();
 }
 
-// ── Modal ───────────────────────────────────────────────────
 function openModal(p, pushHistory = true) {
   openPrompt = p;
   const idx = PROMPTS.indexOf(p);
@@ -804,7 +809,7 @@ function closeModal() {
   document.getElementById('plOverlay').classList.remove('open');
   document.body.style.overflow = '';
   openPrompt = null;
-  pushParams({ id: null }); // remove id param, keep search
+  pushParams({ id: null });
 }
 
 document.getElementById('plModalClose').addEventListener('click', closeModal);
@@ -813,7 +818,6 @@ document.getElementById('plOverlay').addEventListener('click', e => {
 });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-// ── Share button ────────────────────────────────────────────
 document.getElementById('plModalShare').addEventListener('click', () => {
   if (!openPrompt) return;
   const url = shareUrl(PROMPTS.indexOf(openPrompt));
@@ -829,7 +833,6 @@ document.getElementById('plModalShare').addEventListener('click', () => {
   });
 });
 
-// ── Copy prompt ─────────────────────────────────────────────
 document.getElementById('plModalCopy').addEventListener('click', () => {
   if (!openPrompt) return;
   navigator.clipboard.writeText(openPrompt.raw).then(() => showToast('Copied!')).catch(() => {
@@ -844,7 +847,6 @@ document.getElementById('plModalCopy').addEventListener('click', () => {
   });
 });
 
-// ── Toast ───────────────────────────────────────────────────
 let toastTimer;
 function showToast(msg) {
   const el = document.getElementById('plToast');
@@ -854,30 +856,25 @@ function showToast(msg) {
   toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
 }
 
-// ── Util ────────────────────────────────────────────────────
 function esc(s) {
   return String(s || '')
     .replace(/&/g,'&amp;').replace(/</g,'&lt;')
     .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// ── Init from URL params ────────────────────────────────────
 (function init() {
   const params = new URLSearchParams(window.location.search);
-
   const searchParam = params.get('search');
   if (searchParam) {
     query = searchParam.toLowerCase();
     searchEl.value = searchParam;
   }
-
   render();
-
   const idParam = params.get('id');
   if (idParam !== null) {
     const idx = parseInt(idParam, 10);
     const target = PROMPTS[idx];
-    if (target) openModal(target, false); // don't re-push the param we just read
+    if (target) openModal(target, false);
   }
 })();
 </script>
