@@ -6,20 +6,20 @@
 
 /* ── DESIGN TOKENS ── */
 :root {
-  --ink:           #141210;
-  --surface-1:     #1a1714;
-  --surface-2:     #201d1a;
-  --surface-3:     #272320;
-  --gold:          #c9a84c;
-  --gold-bright:   #e2c278;
-  --gold-dim:      #8a6820;
-  --gold-ghost:    rgba(201,168,76,0.07);
-  --gold-border:   rgba(201,168,76,0.16);
-  --gold-border-m: rgba(201,168,76,0.34);
-  --cream:         #f0e8d8;
-  --cream-mid:     #c8bfaf;
-  --muted:         #7a7060;
-  --faint:         #2e2b28;
+  --ink:           #090d1a;
+  --surface-1:     #0d1424;
+  --surface-2:     #111a2e;
+  --surface-3:     #172038;
+  --gold:          #b8a060;
+  --gold-bright:   #d4bc82;
+  --gold-dim:      #7a6a3a;
+  --gold-ghost:    rgba(184,160,96,0.07);
+  --gold-border:   rgba(184,160,96,0.16);
+  --gold-border-m: rgba(184,160,96,0.34);
+  --cream:         #e8eef8;
+  --cream-mid:     #a8b4cc;
+  --muted:         #4e6080;
+  --faint:         #1c2840;
   --fd:            'Cormorant Garamond', Georgia, serif;
   --fb:            'DM Sans', system-ui, sans-serif;
 }
@@ -56,7 +56,7 @@ nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  background: rgba(20,18,16,0.94);
+  background: rgba(9,13,26,0.95);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--gold-border);
@@ -115,7 +115,7 @@ nav {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(201,168,76,0.055) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(184,160,96,0.055) 1px, transparent 1px);
   background-size: 40px 40px;
   pointer-events: none;
 }
@@ -127,7 +127,7 @@ nav {
   left: -8%;
   width: 55vw;
   height: 55vw;
-  background: radial-gradient(ellipse, rgba(201,168,76,0.055) 0%, transparent 65%);
+  background: radial-gradient(ellipse, rgba(184,160,96,0.055) 0%, transparent 65%);
   pointer-events: none;
 }
 
@@ -493,7 +493,7 @@ section { padding: 7rem 0; }
   padding: 2.5rem 3rem;
 }
 
-.service-card.connect:hover { background: rgba(201,168,76,0.11); }
+.service-card.connect:hover { background: rgba(184,160,96,0.11); }
 .service-card.connect::after { display: none; }
 
 .connect-text p {
@@ -679,7 +679,7 @@ footer {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  background: rgba(20,18,16,0.94);
+  background: rgba(9,13,26,0.95);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--gold-border);
