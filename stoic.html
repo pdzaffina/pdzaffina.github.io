@@ -15,6 +15,7 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date()); gtag('config', 'G-VW34240TN2');
 </script>
+  
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -937,6 +938,68 @@
     stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
     flex-shrink: 0;
   }
+
+  /* ── SCRIPTURE CROSS-REFERENCE ───────────────────────── */
+  .verse-ref {
+    margin-top: 1rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--border-card);
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+  .verse-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.48rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    opacity: 0.7;
+  }
+  .verse-citation {
+    font-family: 'Cinzel', serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    color: var(--text-accent);
+  }
+  .verse-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.88rem;
+    font-style: italic;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  /* Modal verse block */
+  .modal-verse {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-pill);
+  }
+  .modal-verse-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    opacity: 0.7;
+    margin-bottom: 0.35rem;
+    display: block;
+  }
+  .modal-verse-citation {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--text-accent);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .modal-verse-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
 </style>
 </head>
 <body>
@@ -1031,6 +1094,11 @@
         Copy Share Link
       </button>
     </div>
+    <div class="modal-verse" id="modalVerse" style="display:none;">
+      <span class="modal-verse-label">&#10011; Scripture Parallel</span>
+      <span class="modal-verse-citation" id="modalVerseCitation"></span>
+      <span class="modal-verse-text" id="modalVerseText"></span>
+    </div>
   </div>
 </div>
 <div class="toast" id="toast">Link copied to clipboard</div>
@@ -1053,106 +1121,106 @@ document.getElementById('themeToggle').addEventListener('click', () => {
 });
 
 const quotes = [
-  { id:1,  text:"You have power over your mind, not outside events. Realize this, and you will find strength.", author:"Marcus Aurelius", source:"Meditations", theme:"Control" },
-  { id:2,  text:"The impediment to action advances action. What stands in the way becomes the way.", author:"Marcus Aurelius", source:"Meditations", theme:"Adversity" },
-  { id:3,  text:"Waste no more time arguing what a good man should be. Be one.", author:"Marcus Aurelius", source:"Meditations", theme:"Virtue" },
-  { id:4,  text:"Very little is needed to make a happy life; it is all within yourself, in your way of thinking.", author:"Marcus Aurelius", source:"Meditations", theme:"Happiness" },
-  { id:5,  text:"The best revenge is to be unlike him who performed the injury.", author:"Marcus Aurelius", source:"Meditations", theme:"Virtue" },
-  { id:6,  text:"It never ceases to amaze me: we all love ourselves more than other people, but care more about their opinion than our own.", author:"Marcus Aurelius", source:"Meditations", theme:"Self-Knowledge" },
-  { id:7,  text:"The soul becomes dyed with the colour of its thoughts.", author:"Marcus Aurelius", source:"Meditations", theme:"Mind" },
-  { id:8,  text:"If it is not right, do not do it; if it is not true, do not say it.", author:"Marcus Aurelius", source:"Meditations", theme:"Virtue" },
-  { id:9,  text:"Choose not to be harmed and you won't feel harmed. Don't feel harmed and you haven't been.", author:"Marcus Aurelius", source:"Meditations", theme:"Perception" },
-  { id:10, text:"Accept the things to which fate binds you, and love the people with whom fate brings you together.", author:"Marcus Aurelius", source:"Meditations", theme:"Acceptance" },
-  { id:11, text:"When you wake up in the morning, tell yourself: The people I deal with today will be meddling, ungrateful, arrogant, dishonest, jealous and surly.", author:"Marcus Aurelius", source:"Meditations", theme:"Resilience" },
-  { id:12, text:"You could leave life right now. Let that determine what you do and say and think.", author:"Marcus Aurelius", source:"Meditations", theme:"Mortality" },
-  { id:13, text:"The happiness of your life depends upon the quality of your thoughts.", author:"Marcus Aurelius", source:"Meditations", theme:"Mind" },
-  { id:14, text:"Be tolerant with others and strict with yourself.", author:"Marcus Aurelius", source:"Meditations", theme:"Virtue" },
-  { id:15, text:"If anyone can refute me, show me I'm making a mistake or looking at things from the wrong perspective. I'll gladly change.", author:"Marcus Aurelius", source:"Meditations", theme:"Wisdom" },
-  { id:16, text:"Never esteem anything as of advantage to you that will make you break your word or lose your self-respect.", author:"Marcus Aurelius", source:"Meditations", theme:"Integrity" },
-  { id:17, text:"A man's life is a mere moment, his existence a flux, his perception clouded, his body's composition corruptible.", author:"Marcus Aurelius", source:"Meditations", theme:"Mortality" },
-  { id:18, text:"Do not indulge in dreams of what you have not, but count the blessings actually present in your life.", author:"Marcus Aurelius", source:"Meditations", theme:"Gratitude" },
-  { id:19, text:"Think of the life you have lived until now as over and, as a dead man, see what's left as a bonus.", author:"Marcus Aurelius", source:"Meditations", theme:"Mortality" },
-  { id:20, text:"External things are not the problem. It's your assessment of them. Which you can erase right now.", author:"Marcus Aurelius", source:"Meditations", theme:"Perception" },
-  { id:21, text:"It's time you realized that you have something in you more powerful and miraculous than the things that affect you and make you dance like a puppet.", author:"Marcus Aurelius", source:"Meditations", theme:"Inner Strength" },
-  { id:22, text:"Loss is nothing else but change, and change is Nature's delight.", author:"Marcus Aurelius", source:"Meditations", theme:"Change" },
-  { id:23, text:"Receive without conceit, release without struggle.", author:"Marcus Aurelius", source:"Meditations", theme:"Acceptance" },
-  { id:24, text:"Confine yourself to the present.", author:"Marcus Aurelius", source:"Meditations", theme:"Presence" },
-  { id:25, text:"Begin at once to live, and count each separate day as a separate life.", author:"Marcus Aurelius", source:"Meditations", theme:"Presence" },
-  { id:26, text:"We suffer more often in imagination than in reality.", author:"Seneca", source:"Letters from a Stoic", theme:"Mind" },
-  { id:27, text:"If a man knows not which port he sails, no wind is favorable.", author:"Seneca", source:"Letters from a Stoic", theme:"Purpose" },
-  { id:28, text:"Life is long if you know how to use it.", author:"Seneca", source:"On the Shortness of Life", theme:"Time" },
-  { id:29, text:"People are frugal in guarding their personal property; but as soon as it comes to squandering time they are most wasteful of the one thing in which it is right to be stingy.", author:"Seneca", source:"On the Shortness of Life", theme:"Time" },
-  { id:30, text:"He who fears death will never do anything worthy of a man who is alive.", author:"Seneca", source:"Letters from a Stoic", theme:"Mortality" },
-  { id:31, text:"It is not that I'm so brave; it is just that those other guys are in such a hurry.", author:"Seneca", source:"Letters from a Stoic", theme:"Courage" },
-  { id:32, text:"Wealth is the slave of a wise man. The master of a fool.", author:"Seneca", source:"Letters from a Stoic", theme:"Wealth" },
-  { id:33, text:"As long as you live, keep learning how to live.", author:"Seneca", source:"Letters from a Stoic", theme:"Wisdom" },
-  { id:34, text:"While we are postponing, life speeds by.", author:"Seneca", source:"On the Shortness of Life", theme:"Time" },
-  { id:35, text:"Difficulties strengthen the mind, as labor does the body.", author:"Seneca", source:"Letters from a Stoic", theme:"Adversity" },
-  { id:36, text:"The greatest blessings of mankind are within us and within our reach. A wise man is content with his lot.", author:"Seneca", source:"Letters from a Stoic", theme:"Happiness" },
-  { id:37, text:"No person has the power to have everything they want, but it is in their power not to want what they don't have.", author:"Seneca", source:"Letters from a Stoic", theme:"Desires" },
-  { id:38, text:"Ignorance is the cause of fear.", author:"Seneca", source:"Natural Questions", theme:"Fear" },
-  { id:39, text:"It is a rough road that leads to the heights of greatness.", author:"Seneca", source:"Letters from a Stoic", theme:"Adversity" },
-  { id:40, text:"Nothing, to my way of thinking, is a better proof of a well-ordered mind than a man's ability to stop just where he is and pass some time in his own company.", author:"Seneca", source:"Letters from a Stoic", theme:"Solitude" },
-  { id:41, text:"He who is brave is free.", author:"Seneca", source:"Letters from a Stoic", theme:"Freedom" },
-  { id:42, text:"Cease to hope and you will cease to fear.", author:"Seneca", source:"Letters from a Stoic", theme:"Equanimity" },
-  { id:43, text:"Hang on to your youthful enthusiasms. You'll be able to use them better when you are older.", author:"Seneca", source:"Letters from a Stoic", theme:"Character" },
-  { id:44, text:"This is our big mistake: to think we look forward to death. Most of death is already gone. Whatever time has passed is owned by death.", author:"Seneca", source:"Letters from a Stoic", theme:"Mortality" },
-  { id:45, text:"The time will come when diligent research over long periods will bring to light things which now lie hidden.", author:"Seneca", source:"Natural Questions", theme:"Knowledge" },
-  { id:46, text:"Hurry up and live.", author:"Seneca", source:"Letters from a Stoic", theme:"Time" },
-  { id:47, text:"How long are you going to wait before you demand the best for yourself?", author:"Seneca", source:"Letters from a Stoic", theme:"Purpose" },
-  { id:48, text:"Omnia aliena sunt, tempus tantum nostrum est. All things are alien; time alone is ours.", author:"Seneca", source:"Letters from a Stoic", theme:"Time" },
-  { id:49, text:"I shall never be ashamed of citing a bad author if the line is good.", author:"Seneca", source:"Letters from a Stoic", theme:"Wisdom" },
-  { id:50, text:"True happiness is to enjoy the present, without anxious dependence upon the future.", author:"Seneca", source:"Letters from a Stoic", theme:"Presence" },
-  { id:51, text:"It's not what happens to you, but how you react to it that matters.", author:"Epictetus", source:"Enchiridion", theme:"Perception" },
-  { id:52, text:"Make the best use of what is in your power, and take the rest as it happens.", author:"Epictetus", source:"Enchiridion", theme:"Control" },
-  { id:53, text:"We have two ears and one mouth so that we can listen twice as much as we speak.", author:"Epictetus", source:"Discourses", theme:"Wisdom" },
-  { id:54, text:"No man is free who is not master of himself.", author:"Epictetus", source:"Discourses", theme:"Freedom" },
-  { id:55, text:"Men are disturbed not by things, but by the view which they take of them.", author:"Epictetus", source:"Enchiridion", theme:"Perception" },
-  { id:56, text:"First say to yourself what you would be; and then do what you have to do.", author:"Epictetus", source:"Discourses", theme:"Purpose" },
-  { id:57, text:"Don't seek for everything to happen as you wish it would, but rather wish that everything happens as it actually will. Then your life will flow well.", author:"Epictetus", source:"Enchiridion", theme:"Acceptance" },
-  { id:58, text:"It is impossible for a man to learn what he thinks he already knows.", author:"Epictetus", source:"Discourses", theme:"Wisdom" },
-  { id:59, text:"No great thing is created suddenly.", author:"Epictetus", source:"Discourses", theme:"Patience" },
-  { id:60, text:"Know, first, who you are, and then adorn yourself accordingly.", author:"Epictetus", source:"Discourses", theme:"Self-Knowledge" },
-  { id:61, text:"Curb your desire. Don't set your heart on so many things and you will get what you need.", author:"Epictetus", source:"Enchiridion", theme:"Desires" },
-  { id:62, text:"It is the nature of the wise to resist pleasures, but the foolish to be a slave to them.", author:"Epictetus", source:"Discourses", theme:"Self-Discipline" },
-  { id:63, text:"If you want something good, get it yourself.", author:"Epictetus", source:"Discourses", theme:"Action" },
-  { id:64, text:"A ship should not ride on a single anchor, nor life on a single hope.", author:"Epictetus", source:"Discourses", theme:"Resilience" },
-  { id:65, text:"It is difficulties that show what men are.", author:"Epictetus", source:"Discourses", theme:"Adversity" },
-  { id:66, text:"Seek not the good in external things; seek it in yourself.", author:"Epictetus", source:"Discourses", theme:"Inner Strength" },
-  { id:67, text:"The key is to keep company only with people who uplift you, whose presence calls forth your best.", author:"Epictetus", source:"Enchiridion", theme:"Relationships" },
-  { id:68, text:"If you are ever tempted to look for outside approval, realize that you have compromised your own integrity.", author:"Epictetus", source:"Enchiridion", theme:"Integrity" },
-  { id:69, text:"Wealth consists not in having great possessions, but in having few wants.", author:"Epictetus", source:"Enchiridion", theme:"Wealth" },
-  { id:70, text:"He is a wise man who does not grieve for the things which he has not, but rejoices for those which he has.", author:"Epictetus", source:"Discourses", theme:"Gratitude" },
-  { id:71, text:"Only the educated are free.", author:"Epictetus", source:"Discourses", theme:"Freedom" },
-  { id:72, text:"Never say about anything, I have lost it; but I have restored it.", author:"Epictetus", source:"Enchiridion", theme:"Loss" },
-  { id:73, text:"How long are you going to wait before you demand the best of yourself?", author:"Epictetus", source:"Discourses", theme:"Self-Discipline" },
-  { id:74, text:"The greater the difficulty, the more glory in surmounting it.", author:"Epictetus", source:"Discourses", theme:"Adversity" },
-  { id:75, text:"Practice yourself in little things, and thence proceed to greater.", author:"Epictetus", source:"Discourses", theme:"Growth" },
-  { id:76, text:"Man conquers the world by conquering himself.", author:"Zeno of Citium", source:"Fragments", theme:"Self-Discipline" },
-  { id:77, text:"All the good are friends of one another.", author:"Zeno of Citium", source:"Fragments", theme:"Virtue" },
-  { id:78, text:"No loss should be more regrettable to us than losing our time, for it's irretrievable.", author:"Zeno of Citium", source:"Fragments", theme:"Time" },
-  { id:79, text:"Steel your sensibilities, so that life shall hurt you as little as possible.", author:"Zeno of Citium", source:"Fragments", theme:"Resilience" },
-  { id:80, text:"A bad feeling is a commotion of the mind repugnant to reason, and against nature.", author:"Zeno of Citium", source:"Fragments", theme:"Mind" },
-  { id:81, text:"Extravagance is its own destroyer.", author:"Zeno of Citium", source:"Fragments", theme:"Moderation" },
-  { id:82, text:"Well-being is attained little by little, and nevertheless is no little thing itself.", author:"Zeno of Citium", source:"Fragments", theme:"Happiness" },
-  { id:83, text:"The goal of life is living in agreement with Nature.", author:"Zeno of Citium", source:"Fragments", theme:"Nature" },
-  { id:84, text:"If you accomplish something good with hard work, the labor passes quickly, but the good endures.", author:"Musonius Rufus", source:"Lectures", theme:"Virtue" },
-  { id:85, text:"Only in good actions is there true joy.", author:"Musonius Rufus", source:"Lectures", theme:"Happiness" },
-  { id:86, text:"We should not prize material things or dread the lack of them.", author:"Musonius Rufus", source:"Lectures", theme:"Wealth" },
-  { id:87, text:"The person who is truly educated is the one who is able to bear the things that happen to them and endure misfortune.", author:"Musonius Rufus", source:"Lectures", theme:"Resilience" },
-  { id:88, text:"Begin at once, before it slips your mind, to apply reason to life.", author:"Musonius Rufus", source:"Lectures", theme:"Action" },
-  { id:89, text:"Lead me, Zeus, and you too, Fate, wherever you have appointed for me to go.", author:"Cleanthes", source:"Hymn to Zeus", theme:"Acceptance" },
-  { id:90, text:"The sun does not abandon its course on account of the blindness of some.", author:"Cleanthes", source:"Fragments", theme:"Purpose" },
-  { id:91, text:"Take care of your body as if you were going to live forever; and take care of your soul as if you were going to die tomorrow.", author:"Chrysippus", source:"Fragments", theme:"Balance" },
-  { id:92, text:"The universe is a single living creature which encompasses all living creatures within it.", author:"Chrysippus", source:"Fragments", theme:"Nature" },
-  { id:93, text:"When you arise in the morning, think of what a precious privilege it is to be alive, to breathe, to think, to enjoy, to love.", author:"Marcus Aurelius", source:"Meditations", theme:"Gratitude" },
-  { id:94, text:"Nowhere can man find a quieter or more untroubled retreat than in his own soul.", author:"Marcus Aurelius", source:"Meditations", theme:"Solitude" },
-  { id:95, text:"The object of life is not to be on the side of the majority, but to escape finding oneself in the ranks of the insane.", author:"Marcus Aurelius", source:"Meditations", theme:"Integrity" },
-  { id:96, text:"Everything we hear is an opinion, not a fact. Everything we see is a perspective, not the truth.", author:"Marcus Aurelius", source:"Meditations", theme:"Perception" },
-  { id:97, text:"A gem cannot be polished without friction, nor a man perfected without trials.", author:"Seneca", source:"Letters from a Stoic", theme:"Adversity" },
-  { id:98, text:"We are more often frightened than hurt; and we suffer more in imagination than in reality.", author:"Seneca", source:"Letters from a Stoic", theme:"Fear" },
-  { id:99, text:"Associate with those who will make a better man of you.", author:"Seneca", source:"Letters from a Stoic", theme:"Relationships" },
-  { id:100, text:"You want to live but do you know how to live? You are scared of dying and tell me, is the kind of life you lead really any different from being dead?", author:"Seneca", source:"Letters from a Stoic", theme:"Purpose" },
+  { id:1,  text:"You have power over your mind, not outside events. Realize this, and you will find strength.", author:"Marcus Aurelius", source:"Meditations", theme:"Control", verse: { ref: "Philippians 4:6-7", text: "Do not be anxious about anything... the peace of God will guard your hearts." } },
+  { id:2,  text:"The impediment to action advances action. What stands in the way becomes the way.", author:"Marcus Aurelius", source:"Meditations", theme:"Adversity", verse: { ref: "Romans 5:3-4", text: "Suffering produces perseverance; perseverance, character; character, hope." } },
+  { id:3,  text:"Waste no more time arguing what a good man should be. Be one.", author:"Marcus Aurelius", source:"Meditations", theme:"Virtue", verse: { ref: "Matthew 5:16", text: "Let your light shine before others, that they may see your good deeds." } },
+  { id:4,  text:"Very little is needed to make a happy life; it is all within yourself, in your way of thinking.", author:"Marcus Aurelius", source:"Meditations", theme:"Happiness", verse: { ref: "1 Timothy 6:6", text: "Godliness with contentment is great gain." } },
+  { id:5,  text:"The best revenge is to be unlike him who performed the injury.", author:"Marcus Aurelius", source:"Meditations", theme:"Virtue", verse: { ref: "Romans 12:21", text: "Do not be overcome by evil, but overcome evil with good." } },
+  { id:6,  text:"It never ceases to amaze me: we all love ourselves more than other people, but care more about their opinion than our own.", author:"Marcus Aurelius", source:"Meditations", theme:"Self-Knowledge", verse: { ref: "Galatians 1:10", text: "If I were still trying to please people, I would not be a servant of Christ." } },
+  { id:7,  text:"The soul becomes dyed with the colour of its thoughts.", author:"Marcus Aurelius", source:"Meditations", theme:"Mind", verse: { ref: "Proverbs 23:7", text: "As a man thinks in his heart, so he is." } },
+  { id:8,  text:"If it is not right, do not do it; if it is not true, do not say it.", author:"Marcus Aurelius", source:"Meditations", theme:"Virtue", verse: { ref: "Micah 6:8", text: "Act justly, love mercy, and walk humbly with your God." } },
+  { id:9,  text:"Choose not to be harmed and you won't feel harmed. Don't feel harmed and you haven't been.", author:"Marcus Aurelius", source:"Meditations", theme:"Perception", verse: { ref: "Isaiah 26:3", text: "You will keep in perfect peace those whose minds are steadfast." } },
+  { id:10, text:"Accept the things to which fate binds you, and love the people with whom fate brings you together.", author:"Marcus Aurelius", source:"Meditations", theme:"Acceptance", verse: { ref: "Romans 8:28", text: "In all things God works for the good of those who love him." } },
+  { id:11, text:"When you wake up in the morning, tell yourself: The people I deal with today will be meddling, ungrateful, arrogant, dishonest, jealous and surly.", author:"Marcus Aurelius", source:"Meditations", theme:"Resilience", verse: { ref: "Romans 12:18", text: "If it is possible, as far as it depends on you, live at peace with everyone." } },
+  { id:12, text:"You could leave life right now. Let that determine what you do and say and think.", author:"Marcus Aurelius", source:"Meditations", theme:"Mortality", verse: { ref: "Psalm 90:12", text: "Teach us to number our days, that we may gain a heart of wisdom." } },
+  { id:13, text:"The happiness of your life depends upon the quality of your thoughts.", author:"Marcus Aurelius", source:"Meditations", theme:"Mind", verse: { ref: "Proverbs 23:7", text: "As a man thinks in his heart, so he is." } },
+  { id:14, text:"Be tolerant with others and strict with yourself.", author:"Marcus Aurelius", source:"Meditations", theme:"Virtue", verse: { ref: "Matthew 7:3-5", text: "First take the plank out of your own eye, then you will see clearly." } },
+  { id:15, text:"If anyone can refute me, show me I'm making a mistake or looking at things from the wrong perspective. I'll gladly change.", author:"Marcus Aurelius", source:"Meditations", theme:"Wisdom", verse: { ref: "Proverbs 12:1", text: "Whoever loves discipline loves knowledge; whoever hates correction is stupid." } },
+  { id:16, text:"Never esteem anything as of advantage to you that will make you break your word or lose your self-respect.", author:"Marcus Aurelius", source:"Meditations", theme:"Integrity", verse: { ref: "Proverbs 22:1", text: "A good name is more desirable than great riches." } },
+  { id:17, text:"A man's life is a mere moment, his existence a flux, his perception clouded, his body's composition corruptible.", author:"Marcus Aurelius", source:"Meditations", theme:"Mortality", verse: { ref: "James 4:14", text: "What is your life? You are a mist that appears for a little while and then vanishes." } },
+  { id:18, text:"Do not indulge in dreams of what you have not, but count the blessings actually present in your life.", author:"Marcus Aurelius", source:"Meditations", theme:"Gratitude", verse: { ref: "Philippians 4:11", text: "I have learned to be content whatever the circumstances." } },
+  { id:19, text:"Think of the life you have lived until now as over and, as a dead man, see what's left as a bonus.", author:"Marcus Aurelius", source:"Meditations", theme:"Mortality", verse: { ref: "Colossians 3:2", text: "Set your minds on things above, not on earthly things." } },
+  { id:20, text:"External things are not the problem. It's your assessment of them. Which you can erase right now.", author:"Marcus Aurelius", source:"Meditations", theme:"Perception", verse: { ref: "Proverbs 4:23", text: "Above all else, guard your heart, for everything you do flows from it." } },
+  { id:21, text:"It's time you realized that you have something in you more powerful and miraculous than the things that affect you and make you dance like a puppet.", author:"Marcus Aurelius", source:"Meditations", theme:"Inner Strength", verse: { ref: "2 Timothy 1:7", text: "God has not given us a spirit of fear, but of power, love and a sound mind." } },
+  { id:22, text:"Loss is nothing else but change, and change is Nature's delight.", author:"Marcus Aurelius", source:"Meditations", theme:"Change", verse: { ref: "Ecclesiastes 3:1", text: "There is a time for everything, and a season for every activity under the heavens." } },
+  { id:23, text:"Receive without conceit, release without struggle.", author:"Marcus Aurelius", source:"Meditations", theme:"Acceptance", verse: { ref: "Job 1:21", text: "The Lord gave and the Lord has taken away; may the name of the Lord be praised." } },
+  { id:24, text:"Confine yourself to the present.", author:"Marcus Aurelius", source:"Meditations", theme:"Presence", verse: { ref: "Matthew 6:34", text: "Do not worry about tomorrow, for tomorrow will worry about itself." } },
+  { id:25, text:"Begin at once to live, and count each separate day as a separate life.", author:"Marcus Aurelius", source:"Meditations", theme:"Presence", verse: { ref: "Lamentations 3:22-23", text: "His compassions are new every morning; great is your faithfulness." } },
+  { id:26, text:"We suffer more often in imagination than in reality.", author:"Seneca", source:"Letters from a Stoic", theme:"Mind", verse: { ref: "2 Corinthians 10:5", text: "Take captive every thought to make it obedient to Christ." } },
+  { id:27, text:"If a man knows not which port he sails, no wind is favorable.", author:"Seneca", source:"Letters from a Stoic", theme:"Purpose", verse: { ref: "Proverbs 29:18", text: "Where there is no vision, the people perish." } },
+  { id:28, text:"Life is long if you know how to use it.", author:"Seneca", source:"On the Shortness of Life", theme:"Time", verse: { ref: "Ephesians 5:16", text: "Make the most of every opportunity, because the days are evil." } },
+  { id:29, text:"People are frugal in guarding their personal property; but as soon as it comes to squandering time they are most wasteful of the one thing in which it is right to be stingy.", author:"Seneca", source:"On the Shortness of Life", theme:"Time", verse: { ref: "Ephesians 5:16", text: "Make the most of every opportunity, because the days are evil." } },
+  { id:30, text:"He who fears death will never do anything worthy of a man who is alive.", author:"Seneca", source:"Letters from a Stoic", theme:"Mortality", verse: { ref: "Hebrews 2:15", text: "Free those who all their lives were held in slavery by their fear of death." } },
+  { id:31, text:"It is not that I'm so brave; it is just that those other guys are in such a hurry.", author:"Seneca", source:"Letters from a Stoic", theme:"Courage", verse: null },
+  { id:32, text:"Wealth is the slave of a wise man. The master of a fool.", author:"Seneca", source:"Letters from a Stoic", theme:"Wealth", verse: { ref: "1 Timothy 6:10", text: "The love of money is a root of all kinds of evil." } },
+  { id:33, text:"As long as you live, keep learning how to live.", author:"Seneca", source:"Letters from a Stoic", theme:"Wisdom", verse: { ref: "Proverbs 9:9", text: "Give instruction to a wise man and he will be yet wiser." } },
+  { id:34, text:"While we are postponing, life speeds by.", author:"Seneca", source:"On the Shortness of Life", theme:"Time", verse: { ref: "Psalm 90:12", text: "Teach us to number our days, that we may gain a heart of wisdom." } },
+  { id:35, text:"Difficulties strengthen the mind, as labor does the body.", author:"Seneca", source:"Letters from a Stoic", theme:"Adversity", verse: { ref: "James 1:2-3", text: "The testing of your faith produces perseverance." } },
+  { id:36, text:"The greatest blessings of mankind are within us and within our reach. A wise man is content with his lot.", author:"Seneca", source:"Letters from a Stoic", theme:"Happiness", verse: { ref: "Philippians 4:11", text: "I have learned to be content whatever the circumstances." } },
+  { id:37, text:"No person has the power to have everything they want, but it is in their power not to want what they don't have.", author:"Seneca", source:"Letters from a Stoic", theme:"Desires", verse: { ref: "1 Timothy 6:8", text: "If we have food and clothing, we will be content with that." } },
+  { id:38, text:"Ignorance is the cause of fear.", author:"Seneca", source:"Natural Questions", theme:"Fear", verse: { ref: "2 Timothy 1:7", text: "God has not given us a spirit of fear, but of power, love and a sound mind." } },
+  { id:39, text:"It is a rough road that leads to the heights of greatness.", author:"Seneca", source:"Letters from a Stoic", theme:"Adversity", verse: { ref: "Proverbs 15:19", text: "The way of the sluggard is blocked with thorns, but the path of the upright is a highway." } },
+  { id:40, text:"Nothing, to my way of thinking, is a better proof of a well-ordered mind than a man's ability to stop just where he is and pass some time in his own company.", author:"Seneca", source:"Letters from a Stoic", theme:"Solitude", verse: { ref: "Psalm 46:10", text: "Be still, and know that I am God." } },
+  { id:41, text:"He who is brave is free.", author:"Seneca", source:"Letters from a Stoic", theme:"Freedom", verse: { ref: "John 8:36", text: "If the Son sets you free, you will be free indeed." } },
+  { id:42, text:"Cease to hope and you will cease to fear.", author:"Seneca", source:"Letters from a Stoic", theme:"Equanimity", verse: null },
+  { id:43, text:"Hang on to your youthful enthusiasms. You'll be able to use them better when you are older.", author:"Seneca", source:"Letters from a Stoic", theme:"Character", verse: { ref: "Ecclesiastes 11:9", text: "Rejoice, young man, while you are young; let your heart give you joy." } },
+  { id:44, text:"This is our big mistake: to think we look forward to death. Most of death is already gone. Whatever time has passed is owned by death.", author:"Seneca", source:"Letters from a Stoic", theme:"Mortality", verse: { ref: "Hebrews 9:27", text: "People are destined to die once, and after that to face judgment." } },
+  { id:45, text:"The time will come when diligent research over long periods will bring to light things which now lie hidden.", author:"Seneca", source:"Natural Questions", theme:"Knowledge", verse: { ref: "Proverbs 25:2", text: "It is the glory of God to conceal a matter; to search out a matter is the glory of kings." } },
+  { id:46, text:"Hurry up and live.", author:"Seneca", source:"Letters from a Stoic", theme:"Time", verse: { ref: "Ephesians 5:16", text: "Make the most of every opportunity, because the days are evil." } },
+  { id:47, text:"How long are you going to wait before you demand the best for yourself?", author:"Seneca", source:"Letters from a Stoic", theme:"Purpose", verse: { ref: "Haggai 1:5", text: "Give careful thought to your ways." } },
+  { id:48, text:"Omnia aliena sunt, tempus tantum nostrum est. All things are alien; time alone is ours.", author:"Seneca", source:"Letters from a Stoic", theme:"Time", verse: { ref: "Psalm 90:12", text: "Teach us to number our days, that we may gain a heart of wisdom." } },
+  { id:49, text:"I shall never be ashamed of citing a bad author if the line is good.", author:"Seneca", source:"Letters from a Stoic", theme:"Wisdom", verse: null },
+  { id:50, text:"True happiness is to enjoy the present, without anxious dependence upon the future.", author:"Seneca", source:"Letters from a Stoic", theme:"Presence", verse: { ref: "Matthew 6:34", text: "Do not worry about tomorrow, for tomorrow will worry about itself." } },
+  { id:51, text:"It's not what happens to you, but how you react to it that matters.", author:"Epictetus", source:"Enchiridion", theme:"Perception", verse: { ref: "Proverbs 16:32", text: "Better a patient person than a warrior, one with self-control than one who takes a city." } },
+  { id:52, text:"Make the best use of what is in your power, and take the rest as it happens.", author:"Epictetus", source:"Enchiridion", theme:"Control", verse: { ref: "Proverbs 3:5-6", text: "Trust in the Lord with all your heart and lean not on your own understanding." } },
+  { id:53, text:"We have two ears and one mouth so that we can listen twice as much as we speak.", author:"Epictetus", source:"Discourses", theme:"Wisdom", verse: { ref: "James 1:19", text: "Everyone should be quick to listen, slow to speak and slow to become angry." } },
+  { id:54, text:"No man is free who is not master of himself.", author:"Epictetus", source:"Discourses", theme:"Freedom", verse: { ref: "John 8:36", text: "If the Son sets you free, you will be free indeed." } },
+  { id:55, text:"Men are disturbed not by things, but by the view which they take of them.", author:"Epictetus", source:"Enchiridion", theme:"Perception", verse: { ref: "Proverbs 4:23", text: "Above all else, guard your heart, for everything you do flows from it." } },
+  { id:56, text:"First say to yourself what you would be; and then do what you have to do.", author:"Epictetus", source:"Discourses", theme:"Purpose", verse: { ref: "Luke 14:28", text: "Suppose one of you wants to build a tower. Won't you first sit down and estimate the cost?" } },
+  { id:57, text:"Don't seek for everything to happen as you wish it would, but rather wish that everything happens as it actually will. Then your life will flow well.", author:"Epictetus", source:"Enchiridion", theme:"Acceptance", verse: { ref: "Luke 22:42", text: "Not my will, but yours be done." } },
+  { id:58, text:"It is impossible for a man to learn what he thinks he already knows.", author:"Epictetus", source:"Discourses", theme:"Wisdom", verse: { ref: "Proverbs 26:12", text: "Do you see a person wise in their own eyes? There is more hope for a fool than for them." } },
+  { id:59, text:"No great thing is created suddenly.", author:"Epictetus", source:"Discourses", theme:"Patience", verse: { ref: "Galatians 6:9", text: "Let us not become weary in doing good, for at the proper time we will reap a harvest." } },
+  { id:60, text:"Know, first, who you are, and then adorn yourself accordingly.", author:"Epictetus", source:"Discourses", theme:"Self-Knowledge", verse: { ref: "Psalm 139:14", text: "I am fearfully and wonderfully made." } },
+  { id:61, text:"Curb your desire. Don't set your heart on so many things and you will get what you need.", author:"Epictetus", source:"Enchiridion", theme:"Desires", verse: { ref: "Hebrews 13:5", text: "Keep your lives free from the love of money and be content with what you have." } },
+  { id:62, text:"It is the nature of the wise to resist pleasures, but the foolish to be a slave to them.", author:"Epictetus", source:"Discourses", theme:"Self-Discipline", verse: { ref: "Galatians 5:23", text: "Self-control is a fruit of the Spirit." } },
+  { id:63, text:"If you want something good, get it yourself.", author:"Epictetus", source:"Discourses", theme:"Action", verse: { ref: "James 2:17", text: "Faith by itself, if it is not accompanied by action, is dead." } },
+  { id:64, text:"A ship should not ride on a single anchor, nor life on a single hope.", author:"Epictetus", source:"Discourses", theme:"Resilience", verse: { ref: "Proverbs 11:14", text: "For lack of guidance a nation falls, but victory is won through many advisers." } },
+  { id:65, text:"It is difficulties that show what men are.", author:"Epictetus", source:"Discourses", theme:"Adversity", verse: { ref: "James 1:3", text: "The testing of your faith produces perseverance." } },
+  { id:66, text:"Seek not the good in external things; seek it in yourself.", author:"Epictetus", source:"Discourses", theme:"Inner Strength", verse: { ref: "Matthew 6:33", text: "Seek first his kingdom and his righteousness, and all these things will be given to you." } },
+  { id:67, text:"The key is to keep company only with people who uplift you, whose presence calls forth your best.", author:"Epictetus", source:"Enchiridion", theme:"Relationships", verse: { ref: "1 Corinthians 15:33", text: "Do not be misled: Bad company corrupts good character." } },
+  { id:68, text:"If you are ever tempted to look for outside approval, realize that you have compromised your own integrity.", author:"Epictetus", source:"Enchiridion", theme:"Integrity", verse: { ref: "Galatians 1:10", text: "If I were still trying to please people, I would not be a servant of Christ." } },
+  { id:69, text:"Wealth consists not in having great possessions, but in having few wants.", author:"Epictetus", source:"Enchiridion", theme:"Wealth", verse: { ref: "1 Timothy 6:6", text: "Godliness with contentment is great gain." } },
+  { id:70, text:"He is a wise man who does not grieve for the things which he has not, but rejoices for those which he has.", author:"Epictetus", source:"Discourses", theme:"Gratitude", verse: { ref: "1 Thessalonians 5:18", text: "Give thanks in all circumstances; for this is God's will for you." } },
+  { id:71, text:"Only the educated are free.", author:"Epictetus", source:"Discourses", theme:"Freedom", verse: { ref: "Proverbs 4:7", text: "The beginning of wisdom is this: Get wisdom." } },
+  { id:72, text:"Never say about anything, I have lost it; but I have restored it.", author:"Epictetus", source:"Enchiridion", theme:"Loss", verse: { ref: "Job 1:21", text: "The Lord gave and the Lord has taken away; may the name of the Lord be praised." } },
+  { id:73, text:"How long are you going to wait before you demand the best of yourself?", author:"Epictetus", source:"Discourses", theme:"Self-Discipline", verse: { ref: "Haggai 1:5", text: "Give careful thought to your ways." } },
+  { id:74, text:"The greater the difficulty, the more glory in surmounting it.", author:"Epictetus", source:"Discourses", theme:"Adversity", verse: { ref: "Romans 5:3", text: "We also glory in our sufferings, because we know that suffering produces perseverance." } },
+  { id:75, text:"Practice yourself in little things, and thence proceed to greater.", author:"Epictetus", source:"Discourses", theme:"Growth", verse: { ref: "Luke 16:10", text: "Whoever can be trusted with very little can also be trusted with much." } },
+  { id:76, text:"Man conquers the world by conquering himself.", author:"Zeno of Citium", source:"Fragments", theme:"Self-Discipline", verse: { ref: "Proverbs 16:32", text: "Better a patient person than a warrior, one with self-control than one who takes a city." } },
+  { id:77, text:"All the good are friends of one another.", author:"Zeno of Citium", source:"Fragments", theme:"Virtue", verse: { ref: "1 John 4:7", text: "Let us love one another, for love comes from God." } },
+  { id:78, text:"No loss should be more regrettable to us than losing our time, for it's irretrievable.", author:"Zeno of Citium", source:"Fragments", theme:"Time", verse: { ref: "Ephesians 5:16", text: "Make the most of every opportunity, because the days are evil." } },
+  { id:79, text:"Steel your sensibilities, so that life shall hurt you as little as possible.", author:"Zeno of Citium", source:"Fragments", theme:"Resilience", verse: { ref: "Romans 5:4", text: "Perseverance produces character; and character, hope." } },
+  { id:80, text:"A bad feeling is a commotion of the mind repugnant to reason, and against nature.", author:"Zeno of Citium", source:"Fragments", theme:"Mind", verse: null },
+  { id:81, text:"Extravagance is its own destroyer.", author:"Zeno of Citium", source:"Fragments", theme:"Moderation", verse: { ref: "Proverbs 23:20-21", text: "Do not join those who drink too much or gorge themselves; drunkards and gluttons become poor." } },
+  { id:82, text:"Well-being is attained little by little, and nevertheless is no little thing itself.", author:"Zeno of Citium", source:"Fragments", theme:"Happiness", verse: { ref: "Zechariah 4:10", text: "Do not despise these small beginnings, for the Lord rejoices to see the work begin." } },
+  { id:83, text:"The goal of life is living in agreement with Nature.", author:"Zeno of Citium", source:"Fragments", theme:"Nature", verse: { ref: "Romans 1:20", text: "God's invisible qualities have been clearly seen, being understood from what has been made." } },
+  { id:84, text:"If you accomplish something good with hard work, the labor passes quickly, but the good endures.", author:"Musonius Rufus", source:"Lectures", theme:"Virtue", verse: { ref: "1 Corinthians 15:58", text: "Your labor in the Lord is not in vain." } },
+  { id:85, text:"Only in good actions is there true joy.", author:"Musonius Rufus", source:"Lectures", theme:"Happiness", verse: { ref: "Proverbs 21:15", text: "When justice is done, it brings joy to the righteous." } },
+  { id:86, text:"We should not prize material things or dread the lack of them.", author:"Musonius Rufus", source:"Lectures", theme:"Wealth", verse: { ref: "Matthew 6:19-21", text: "Do not store up for yourselves treasures on earth." } },
+  { id:87, text:"The person who is truly educated is the one who is able to bear the things that happen to them and endure misfortune.", author:"Musonius Rufus", source:"Lectures", theme:"Resilience", verse: { ref: "James 1:12", text: "Blessed is the one who perseveres under trial." } },
+  { id:88, text:"Begin at once, before it slips your mind, to apply reason to life.", author:"Musonius Rufus", source:"Lectures", theme:"Action", verse: { ref: "Haggai 1:5", text: "Give careful thought to your ways." } },
+  { id:89, text:"Lead me, Zeus, and you too, Fate, wherever you have appointed for me to go.", author:"Cleanthes", source:"Hymn to Zeus", theme:"Acceptance", verse: { ref: "Luke 22:42", text: "Not my will, but yours be done." } },
+  { id:90, text:"The sun does not abandon its course on account of the blindness of some.", author:"Cleanthes", source:"Fragments", theme:"Purpose", verse: { ref: "Matthew 5:45", text: "He causes his sun to rise on the evil and the good." } },
+  { id:91, text:"Take care of your body as if you were going to live forever; and take care of your soul as if you were going to die tomorrow.", author:"Chrysippus", source:"Fragments", theme:"Balance", verse: { ref: "1 Corinthians 6:19-20", text: "Your bodies are temples of the Holy Spirit." } },
+  { id:92, text:"The universe is a single living creature which encompasses all living creatures within it.", author:"Chrysippus", source:"Fragments", theme:"Nature", verse: { ref: "Colossians 1:17", text: "In him all things hold together." } },
+  { id:93, text:"When you arise in the morning, think of what a precious privilege it is to be alive, to breathe, to think, to enjoy, to love.", author:"Marcus Aurelius", source:"Meditations", theme:"Gratitude", verse: { ref: "Lamentations 3:22-23", text: "His compassions are new every morning; great is your faithfulness." } },
+  { id:94, text:"Nowhere can man find a quieter or more untroubled retreat than in his own soul.", author:"Marcus Aurelius", source:"Meditations", theme:"Solitude", verse: { ref: "Matthew 11:28-29", text: "Come to me, all you who are weary and burdened, and I will give you rest." } },
+  { id:95, text:"The object of life is not to be on the side of the majority, but to escape finding oneself in the ranks of the insane.", author:"Marcus Aurelius", source:"Meditations", theme:"Integrity", verse: null },
+  { id:96, text:"Everything we hear is an opinion, not a fact. Everything we see is a perspective, not the truth.", author:"Marcus Aurelius", source:"Meditations", theme:"Perception", verse: { ref: "1 Corinthians 13:12", text: "For now we see only a reflection as in a mirror; then we shall see face to face." } },
+  { id:97, text:"A gem cannot be polished without friction, nor a man perfected without trials.", author:"Seneca", source:"Letters from a Stoic", theme:"Adversity", verse: { ref: "Romans 5:3-4", text: "Suffering produces perseverance; perseverance, character; character, hope." } },
+  { id:98, text:"We are more often frightened than hurt; and we suffer more in imagination than in reality.", author:"Seneca", source:"Letters from a Stoic", theme:"Fear", verse: { ref: "Psalm 56:3", text: "When I am afraid, I put my trust in you." } },
+  { id:99, text:"Associate with those who will make a better man of you.", author:"Seneca", source:"Letters from a Stoic", theme:"Relationships", verse: { ref: "Proverbs 13:20", text: "Walk with the wise and become wise, for a companion of fools suffers harm." } },
+  { id:100, text:"You want to live but do you know how to live? You are scared of dying and tell me, is the kind of life you lead really any different from being dead?", author:"Seneca", source:"Letters from a Stoic", theme:"Purpose", verse: { ref: "John 10:10", text: "I have come that they may have life, and have it to the full." } },
 ];
 
 const themeColors = {
@@ -1323,6 +1391,11 @@ function renderQuotes() {
               <button class="share-btn" data-share-id="${q.id}" title="Copy share link">${shareIcon}Share</button>
             </div>
           </div>
+          ${q.verse ? `<div class="verse-ref">
+            <span class="verse-label">&#10011; Scripture Parallel</span>
+            <span class="verse-citation">${esc(q.verse.ref)}</span>
+            <span class="verse-text">${esc(q.verse.text)}</span>
+          </div>` : ''}
         </div>`;
     }).join('')}</div>`;
   } else {
@@ -1339,6 +1412,11 @@ function renderQuotes() {
               <span class="list-theme" style="color:${tc}">${esc(q.theme)}</span>
               <button class="share-btn" data-share-id="${q.id}" title="Copy share link">${shareIcon}Share</button>
             </div>
+            ${q.verse ? `<div class="verse-ref" style="margin-top:.65rem;padding-top:.65rem;">
+              <span class="verse-label">&#10011; Scripture Parallel</span>
+              <span class="verse-citation">${esc(q.verse.ref)}</span>
+              <span class="verse-text">${esc(q.verse.text)}</span>
+            </div>` : ''}
           </div>
         </div>`;
     }).join('')}</div>`;
@@ -1364,6 +1442,15 @@ function openModal(q) {
   document.getElementById('modalSource').textContent = q.source;
   document.getElementById('modalTheme').textContent  = q.theme;
   document.getElementById('modalShareBtn').onclick = () => copyShareLink(q.id);
+  // Scripture cross-reference
+  const mv = document.getElementById('modalVerse');
+  if (q.verse) {
+    document.getElementById('modalVerseCitation').textContent = q.verse.ref;
+    document.getElementById('modalVerseText').textContent     = q.verse.text;
+    mv.style.display = 'block';
+  } else {
+    mv.style.display = 'none';
+  }
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
