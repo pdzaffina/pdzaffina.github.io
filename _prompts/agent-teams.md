@@ -1,6 +1,6 @@
 ---
 layout: prompt
-category: Agents
+category: AGENTS
 title: Agent Teams
 published: true
 credit: Allie K. Miller (https://www.linkedin.com/in/alliekmiller/)
