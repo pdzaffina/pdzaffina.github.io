@@ -1,6 +1,5 @@
 ---
 layout: page
-title: Prompts
 permalink: /prompts/
 ---
 
