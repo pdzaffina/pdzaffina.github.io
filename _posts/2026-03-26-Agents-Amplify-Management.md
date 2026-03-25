@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "AI Agents Won't Fix What Bad Management Already Broke"
-published: false
+published: true
 tags:
   - Leadership
   - AI
