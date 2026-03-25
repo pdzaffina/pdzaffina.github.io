@@ -1,6 +1,9 @@
 ---
 layout: prompt
+category: Agents
 title: Agent Teams
+published: true
+credit: Allie K. Miller (https://www.linkedin.com/in/alliekmiller/)
 ---
 ```
 Create an agent team to stress-test my Q1 enterprise growth strategy.
