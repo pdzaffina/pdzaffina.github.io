@@ -123,7 +123,7 @@ permalink: /prompts/
   box-shadow: 0 0 0 2px rgba(184,160,96,0.12);
 }
 .pl-search::placeholder {
-  color: #1c2840;
+  color: #ffffff; /* #1c2840; */
   font-style: italic;
 }
 
