@@ -17,12 +17,14 @@
   --gold-border:   rgba(184,160,96,0.16);
   --gold-border-m: rgba(184,160,96,0.34);
   --cream:         #e8eef8;
-  --cream-mid:     #a8b4cc;
+  --cream-mid:     #000000;
   --muted:         #4e6080;
   --faint:         #1c2840;
   --fd:            'Cormorant Garamond', Georgia, serif;
   --fb:            'DM Sans', system-ui, sans-serif;
 }
+
+/* font color --cream-mid: #a8b4cc */
 
 /* ── RESET ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
