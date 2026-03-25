@@ -1,8 +1,8 @@
 ---
 layout: page
+title: Prompts
 permalink: /prompts/
 ---
-<head><title>Prompts</title></head>
 
 <style>
 /* ── Reset & scope ──────────────────────────────── */
