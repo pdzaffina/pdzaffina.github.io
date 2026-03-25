@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: prompts-page
 title: Prompts
 permalink: /prompts/
 ---
