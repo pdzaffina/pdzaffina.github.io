@@ -1138,3 +1138,7 @@ article.post .date,
   .footer-bottom { flex-direction: column; align-items: flex-start; }
   .blog-content-wrap { padding: 3rem 0 4rem; }
 }
+
+article.post p {
+  font-size: 1.25rem !important;
+}
