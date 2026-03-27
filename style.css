@@ -786,7 +786,7 @@ article.post .date,
 /* ── ENTRY PROSE ── */
 .entry {
   font-family: var(--fd);
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   font-weight: 400;
   color: var(--cream-mid);
   line-height: 1.85;
