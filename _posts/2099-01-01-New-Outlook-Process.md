@@ -5,7 +5,7 @@ tags:
   - Leadership
 ---
 
-Part one was about what broke and what shifted. This is about what I actually did.
+[Part one](https://peter.zaffina.net/blog/New-Outlook/)  was about what broke and what shifted. This is about what I actually did.
 
 I want to be specific, because "I did the work on myself" is the least useful sentence in the leadership vocabulary. It signals virtue without conveying information. What follows is the actual inventory: the people, the practices, and the tools that helped me get from where I was to somewhere more functional.
 
