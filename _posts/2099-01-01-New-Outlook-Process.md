@@ -1,0 +1,56 @@
+---
+layout: post
+title: "The Toolkit That Held Me Together"
+tags:
+  - Leadership
+---
+
+Part one was about what broke and what shifted. This is about what I actually did.
+
+I want to be specific, because "I did the work on myself" is the least useful sentence in the leadership vocabulary. It signals virtue without conveying information. What follows is the actual inventory: the people, the practices, and the tools that helped me get from where I was to somewhere more functional.
+
+## TribalNet and the Ceiling Question
+
+One of the things I was sitting with was a question I kept circling without naming directly: is there a ceiling here, and if so, is it structural or is it me?
+
+Robert Castle writes about a tech ceiling that exists at the director level, where technical credibility stops being the primary currency and political and relational fluency take over. I had read his work before. I read it again with different eyes. The distinction he draws is not that technical leaders lack the capacity to lead at higher levels. It's that the game changes in ways that aren't always made visible, and many people hit the ceiling without ever being told the rules shifted.
+
+TribalNet gave me a different kind of data. Being in a room with peers across tribal governments doing serious technology leadership work recalibrated my sense of what's possible in this sector. It reminded me that the ceiling I was bumping against was contextual, not permanent. That matters. Despair is often a failure of context.
+
+## Over-Functioning Is a Choice. A Bad One.
+
+My friend's question stayed with me longer than almost anything else from those months: why are you over-functioning to hold this together?
+
+The honest answer was that I had confused effort with agency. If I worked hard enough, stayed late enough, carried enough of the load, I could offset structural constraints. That is not how organizations work. Systems are designed a certain way, for reasons that accumulated long before I arrived, and the design doesn't bend because one person pushes harder. What actually happens is that the over-functioner absorbs the cost of a broken system and makes it invisible to the people who could fix it.
+
+I stopped. Not all at once, but deliberately. I let the system show its own constraints instead of buffering them. That was uncomfortable. It was also the right call.
+
+## The People Who Told Me the Truth
+
+Several names appear in my notes because they showed up at the right time.
+
+Christopher Voss on negotiation gave me language for what was happening in conversations where I felt unheard. His framing, that being heard is a precondition for being understood, helped me stop trying to win arguments and start trying to create the conditions where real communication could happen. It's a subtle shift with significant operational consequences.
+
+Mel Robbins advice on "Let them" gave me something more basic but no less useful: a way to move when the emotional weather was bad and movement felt impossible. The framework is almost embarrassingly simple. It works anyway.
+
+Vanessa Van Edwards on human behavior helped me read the room more accurately. When you're under sustained stress, your pattern recognition degrades. Having a more structured framework for reading people helped me stay calibrated in situations where I was most likely to misread them.
+
+## Writing as Processing
+
+I started writing not to publish, but to think. There's a difference, and it matters.
+
+When I'm working through something difficult, my interior monologue is fast and circular. Writing forces linearity. It requires me to put one thought after another in sequence, which means I have to figure out what actually comes first. That discipline surfaces things that looping internal dialogue never does.
+
+I also started naming emotions specifically, as a practice rather than an instinct. Not "I'm stressed" but something more precise: I'm anxious about a decision I can't influence. I'm angry about something that already happened. I'm grieving a path that closed. The specificity matters because the response to each of those is different. Treating all of them as "stress" and pushing through is how you end up in the police station with Jeanie Bueller.
+
+The gratitude journal is the piece of this that sounds most like a self-help cliche. I'm including it anyway because it worked. Not in a motivational-poster way. In a neurological-recalibration way. The brain under sustained pressure filters for threat by default. Deliberately naming what is working, what is good, what is present, counteracts that filter. You don't have to believe in the mechanism for the mechanism to function.
+
+## What This Actually Adds Up To
+
+None of these tools is sufficient on its own. That's the point. What held me together was a system, not a single intervention. Scripture and Stoicism gave me a philosophical frame. Honest peers gave me accurate feedback. Specific thinkers gave me operational vocabulary for specific problems. Writing gave me a processing practice. The journal gave me a counterweight to threat-filtered thinking.
+
+The combination is not a program you can package. It's a set of deliberate choices made under pressure about what to pay attention to and what to put down.
+
+I'm still inside the organization I was inside when this started. The constraints haven't changed. What changed is that I'm no longer paying an emotional tax on things I cannot move, and I'm no longer absorbing the cost of structural problems to keep them invisible.
+
+That is not a small thing.
