@@ -101,5 +101,6 @@ const quotes = [
   { id:99, text:"Associate with those who will make a better man of you.", author:"Seneca", source:"Letters from a Stoic", theme:"Relationships" },
   { id:101, text:"First learn the meaning of what you say, and then speak.", author:"Epictetus", source:"Discourses", theme:"Control", verse: { ref: "Proverbs 29:20", text: "Do you see a man who is hasty in his words? There is more hope for a fool than for him." } },
   { id:102, text:"Observe constantly that all things take place by change.", author:"Marcus Aurelius", source:"Meditations", theme:"Change", verse: { ref: "Ecclesiastes 3:1", text: "There is a time for everything, and a season for every activity under the heavens." } },
+  { id:103, text:"he nearer a man comes to a calm mind, the closer he is to strength.", author:"Marcus Aurelius", source:"Meditations", theme:"Control", verse: { ref: "Psalm 46:10", text: "Be still, and know that I am God"} },
   { id:100, text:"You want to live but do you know how to live? You are scared of dying and tell me, is the kind of life you lead really any different from being dead?", author:"Seneca", source:"Letters from a Stoic", theme:"Purpose" },
 ];
