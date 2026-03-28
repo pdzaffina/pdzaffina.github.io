@@ -26,11 +26,13 @@ The honest answer was that I had confused effort with agency. If I worked hard e
 
 I stopped. Not all at once, but deliberately. I let the system show its own constraints instead of buffering them. That was uncomfortable. It was also the right call.
 
-## The People Who Told Me the Truth
+## Voices Worth Following
 
 Several names appear in my notes because they showed up at the right time.
 
 Christopher Voss on negotiation gave me language for what was happening in conversations where I felt unheard. His framing, that being heard is a precondition for being understood, helped me stop trying to win arguments and start trying to create the conditions where real communication could happen. It's a subtle shift with significant operational consequences.
+
+Jefferson Fisher on communication did something different. Where Voss gave me strategy, Fisher gave me the moment-level mechanics: how to slow down inside a hard conversation, how to respond instead of react, how to hold your ground without escalating. His core argument is that the person who controls the pace controls the conversation. That landed for me as a leader who was, at the time, letting urgency dictate my register in situations that required steadiness. The practical application is unglamorous. Pause longer than feels natural. Say less than feels necessary. Let silence do work you've been trying to do with words.
 
 Mel Robbins advice on "Let them" gave me something more basic but no less useful: a way to move when the emotional weather was bad and movement felt impossible. The framework is almost embarrassingly simple. It works anyway.
 
