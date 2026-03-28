@@ -3,6 +3,7 @@ layout: post
 title: "The Toolkit That Held Me Together"
 tags:
   - Leadership
+  - Personal
 ---
 
 [Part one](https://peter.zaffina.net/blog/New-Outlook/)  was about what broke and what shifted. This is about what I actually did.
