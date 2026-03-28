@@ -437,16 +437,15 @@ permalink: /prompts/
   font-family: 'SF Mono', 'Fira Code', monospace;
 }
 .pl-modal-body pre {
-  background: #090d1a;
-  border: 1px solid #1c2840;
-  border-left: 3px solid #7a6a3a;
+  background: transparent;
+  border: none;
+  border-left: 2px solid rgba(184,160,96,0.3);
   color: #a8b4cc;
   font-size: 0.85em;
   line-height: 1.55;
-  padding: 1rem 1.25rem;
+  padding: 0.5rem 0 0.5rem 1rem;
   overflow-x: auto;
   margin: 0.9em 0;
-  border-radius: 2px;
 }
 .pl-modal-body pre code { background: none; padding: 0; color: inherit; }
 .pl-modal-body blockquote {
