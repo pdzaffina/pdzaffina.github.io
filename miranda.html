@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Miranda Edit</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Overpass+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #f7f4f0;
+    --white: #0c0c0c;
+    --cream: #1a1a1a;
+    --charcoal: #ede8e1;
+    --slate: #e0d9d0;
+    --gold: #1a1a1a;
+    --muted: #6b6560;
+    --accent: #8c1c1c;
+    --bg: #f7f4f0;
+    --card: #ede8e1;
+    --card-hover: #e0d9d0;
+    --border: rgba(0,0,0,0.12);
+    --num-color: rgba(0,0,0,0.08);
+    --nigel-color: rgba(140,28,28,0.6);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--white); font-family: 'Overpass Mono', monospace; font-weight: 300; overflow-x: hidden; }
+
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 80px 60px; position: relative; border-bottom: 1px solid var(--border); background: var(--bg); }
+  .hero::before { content: 'M'; font-family: 'Cormorant Garamond', serif; font-size: 600px; font-weight: 300; color: rgba(0,0,0,0.04); position: absolute; right: -40px; top: 50%; transform: translateY(-50%); line-height: 1; pointer-events: none; }
+  .label { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(80px, 12vw, 160px); font-weight: 300; line-height: 0.85; letter-spacing: -0.02em; margin-bottom: 40px; color: var(--white); }
+  .hero-title em { font-style: italic; color: var(--accent); display: block; }
+  .hero-sub { font-size: 10px; letter-spacing: 0.2em; color: var(--muted); line-height: 2; max-width: 480px; }
+
+  section { padding: 100px 60px; max-width: 1400px; margin: 0 auto; }
+  .section-header { display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: 32px; margin-bottom: 64px; }
+  .section-number { font-family: 'Cormorant Garamond', serif; font-size: 80px; font-weight: 300; color: var(--num-color); line-height: 1; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300; letter-spacing: -0.01em; border-bottom: 1px solid var(--border); padding-bottom: 16px; color: var(--white); }
+
+  .foundation-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .item-card { background: var(--card); padding: 36px 32px; position: relative; transition: all 0.4s; cursor: default; }
+  .item-card:hover { background: var(--card-hover); transform: translateY(-4px); }
+  .item-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 8px; line-height: 1.2; color: var(--white); }
+  .item-desc { font-size: 10px; line-height: 1.9; color: var(--muted); margin-bottom: 20px; }
+  .item-voice { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px; color: var(--nigel-color); padding-top: 16px; border-top: 1px solid var(--border); }
+  .item-priority { position: absolute; top: 16px; right: 16px; width: 8px; height: 8px; border-radius: 50%; }
+  .priority-essential { background: var(--accent); }
+  .priority-important { background: #555; }
+  .priority-accent { background: #bbb; }
+
+  .palette-section { background: var(--white); padding: 80px 60px; }
+  .palette-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2px; margin-top: 48px; }
+  .swatch { aspect-ratio: 1; }
+  .swatch-inner { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
+  .swatch-name { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .swatch-note { font-size: 8px; letter-spacing: 0.1em; opacity: 0.6; margin-top: 4px; }
+
+  .outfits { background: var(--bg); padding: 100px 60px; max-width: 1400px; margin: 0 auto; }
+  .outfit-row { display: grid; grid-template-columns: 200px 1fr; gap: 40px; margin-bottom: 2px; background: var(--card); padding: 40px; align-items: center; transition: background 0.3s; }
+  .outfit-row:hover { background: var(--card-hover); }
+  .outfit-label { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-style: italic; font-weight: 300; color: var(--accent); line-height: 1.2; }
+  .outfit-pieces { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .piece { background: rgba(0,0,0,0.05); border: 1px solid var(--border); padding: 10px 16px; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); }
+  .separator { color: rgba(0,0,0,0.2); font-size: 18px; }
+
+  .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .rule-card { background: var(--card); padding: 40px; }
+  .rule-num { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; color: var(--num-color); line-height: 1; margin-bottom: 12px; }
+  .rule-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; margin-bottom: 12px; color: var(--white); }
+  .rule-body { font-size: 10px; line-height: 2; color: var(--muted); }
+  .rule-highlight { color: var(--accent); }
+
+  .legend { display: flex; gap: 32px; margin-bottom: 32px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .legend-item { display: flex; align-items: center; gap: 10px; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  footer { background: var(--white); padding: 60px; text-align: center; border-top: 1px solid var(--border); }
+  .f-title { font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: 0.4em; color: var(--accent); margin-bottom: 12px; }
+  .f-sub { font-size: 9px; letter-spacing: 0.2em; color: var(--muted); line-height: 2; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .hero > * { animation: fadeUp 0.8s ease forwards; opacity: 0; }
+  .hero .label { animation-delay: 0.1s; }
+  .hero .hero-title { animation-delay: 0.3s; }
+  .hero .hero-sub { animation-delay: 0.5s; }
+
+  @media (max-width: 900px) {
+    .hero { padding: 60px 24px; }
+    .foundation-grid { grid-template-columns: 1fr; }
+    .palette-grid { grid-template-columns: repeat(3,1fr); }
+    .rules-grid { grid-template-columns: 1fr; }
+    .outfit-row { grid-template-columns: 1fr; }
+    section, .outfits, footer, .palette-section { padding: 60px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="label">A curated wardrobe study &nbsp;&middot;&nbsp; The Devil Wears Prada</div>
+  <h1 class="hero-title">The<br><em>Miranda</em><br>Edit.</h1>
+  <p class="hero-sub">Miranda Priestly does not dress to impress. She dresses to remind you of the distance between you and her. Structured. Pale. Immovable. Power dressed as restraint.</p>
+</div>
+
+<div class="palette-section">
+  <div style="max-width:1400px;margin:0 auto;">
+    <div class="label">The Palette</div>
+    <div class="section-title" style="font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;border-bottom:1px solid rgba(0,0,0,0.12);padding-bottom:16px;color:#0c0c0c;">Miranda dresses in a language only she speaks.</div>
+    <div class="palette-grid">
+      <div class="swatch"><div class="swatch-inner" style="background:#f7f4f0; border: 1px solid #e0dbd3;"><span class="swatch-name" style="color:#0c0c0c;">Ivory</span><span class="swatch-note" style="color:#666;">The dominant tone</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#d8d3cc;"><span class="swatch-name" style="color:#0c0c0c;">Pearl Grey</span><span class="swatch-note" style="color:#555;">Her signature</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#b0a9a0;"><span class="swatch-name" style="color:#0c0c0c;">Greige</span><span class="swatch-note" style="color:#444;">Transition tone</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#1a1a1a;"><span class="swatch-name" style="color:#f5f2ed;">Black</span><span class="swatch-note" style="color:#999;">Punctuation only</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#7a7570;"><span class="swatch-name" style="color:#f5f2ed;">Warm Stone</span><span class="swatch-note" style="color:#ccc;">Occasional depth</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#8c1c1c;"><span class="swatch-name" style="color:#f5f2ed;">Crimson</span><span class="swatch-note" style="color:#ccc;">Once. Never twice.</span></div></div>
+    </div>
+    <p style="font-size:9px;letter-spacing:0.2em;color:var(--muted);margin-top:20px;">Light colors carry authority when the fit is perfect and the posture is unimpeachable.</p>
+  </div>
+</div>
+
+<section>
+  <div class="section-header">
+    <div class="section-number">01</div>
+    <div><div class="label">The Foundation</div><h2 class="section-title">Miranda's wardrobe is a weapon, not a wardrobe.</h2></div>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot priority-essential"></div> Non-negotiable</div>
+    <div class="legend-item"><div class="legend-dot priority-important"></div> Essential next</div>
+    <div class="legend-item"><div class="legend-dot priority-accent"></div> The finishing details</div>
+  </div>
+  <div class="foundation-grid">
+    <div class="item-card"><div class="item-priority priority-essential"></div><div class="item-name">Ivory or Cream Blazer</div><div class="item-desc">Tailored, structured, never relaxed. The blazer is Miranda's armor. Fits perfectly across the shoulders. Not a single button undone that wasn't planned.</div><div class="item-voice">"That's all."</div></div>
+    <div class="item-card"><div class="item-priority priority-essential"></div><div class="item-name">Pearl Grey Sheath Dress</div><div class="item-desc">Knee-length, fitted, understated. Miranda's palette lives in the pale register. A grey sheath communicates that you have arrived and you are not interested in your arrival being announced.</div><div class="item-voice">Power does not raise its voice.</div></div>
+    <div class="item-card"><div class="item-priority priority-essential"></div><div class="item-name">Wide-Leg White Trousers</div><div class="item-desc">Pressed to a knife edge. Wide leg, high waist, immaculate. The volume is deliberate. Miranda uses proportion as punctuation.</div><div class="item-voice">The cut tells them everything they need to know.</div></div>
+    <div class="item-card"><div class="item-priority priority-essential"></div><div class="item-name">Structured Tote in Nude or White</div><div class="item-desc">A clean, architectural bag. No logos necessary. The structure itself is the statement. Leather, stiff, minimal hardware.</div><div class="item-voice">A bag that requires no explanation.</div></div>
+    <div class="item-card"><div class="item-priority priority-essential"></div><div class="item-name">Cream Silk Blouse</div><div class="item-desc">Draped, not clingy. Tucked into high-waisted trousers or worn under the ivory blazer. Silk or a convincing satin. The fabric is what does the work.</div><div class="item-voice">Fabric remembers how it was treated.</div></div>
+    <div class="item-card"><div class="item-priority priority-essential"></div><div class="item-name">Nude or Ivory Pointed Heels</div><div class="item-desc">A pointed-toe pump in nude or bone. Elongates. Authorizes. Miranda does not shuffle. The heel changes the walk and the walk changes everything.</div><div class="item-voice">The shoes are never an afterthought.</div></div>
+    <div class="item-card"><div class="item-priority priority-important"></div><div class="item-name">Camel Wool Coat</div><div class="item-desc">Full length or three-quarter. Camel or ivory. Draped over the shoulders or belted. Never a parka. The coat is the opening statement before the room knows you have arrived.</div><div class="item-voice">The entrance begins at the coat check.</div></div>
+    <div class="item-card"><div class="item-priority priority-important"></div><div class="item-name">Black Tailored Trousers</div><div class="item-desc">The one concession to black. Slim, pressed, never casual. Paired with something pale on top. Miranda uses black as punctuation, not as a base.</div><div class="item-voice">Black is a full stop, not a paragraph.</div></div>
+    <div class="item-card"><div class="item-priority priority-important"></div><div class="item-name">Silk or Cashmere Turtleneck in Ivory</div><div class="item-desc">A luxurious base layer in the palest possible shade. Tucked into wide-leg trousers. The Priestly monochrome at its most austere.</div><div class="item-voice">Everything is intentional. Always.</div></div>
+    <div class="item-card"><div class="item-priority priority-accent"></div><div class="item-name">Statement Necklace, Silver</div><div class="item-desc">One architectural piece. Sculptural, not decorative. Silver or white gold. Worn over the silk turtleneck or the blazer. One piece. No earrings needed.</div><div class="item-voice">Jewelry should not need a caption.</div></div>
+    <div class="item-card"><div class="item-priority priority-accent"></div><div class="item-name">Greige Wrap Dress</div><div class="item-desc">Fluid but controlled. A wrap dress in a neutral greige bridges the palest looks with something that moves. Worn to a lunch, not a boardroom.</div><div class="item-voice">Even leisure is curated.</div></div>
+    <div class="item-card"><div class="item-priority priority-accent"></div><div class="item-name">White Button-Down, Oversized</div><div class="item-desc">Deliberately oversized, tucked into the front of wide-leg trousers. One of Miranda's rare nods to ease. The volume of the shirt balances the volume of the trouser.</div><div class="item-voice">Proportion is the whole argument.</div></div>
+  </div>
+</section>
+
+<div class="outfits">
+  <div class="section-header">
+    <div class="section-number">02</div>
+    <div><div class="label">The Formulas</div><h2 class="section-title">Miranda does not repeat herself. Her wardrobe does.</h2></div>
+  </div>
+  <div class="outfit-row"><div class="outfit-label">The<br>Power<br>Entry</div><div class="outfit-pieces"><div class="piece">Ivory Blazer</div><span class="separator">+</span><div class="piece">Cream Silk Blouse</div><span class="separator">+</span><div class="piece">Black Tailored Trousers</div><span class="separator">+</span><div class="piece">Nude Pointed Heels</div></div></div>
+  <div class="outfit-row"><div class="outfit-label">The<br>Full<br>Pale</div><div class="outfit-pieces"><div class="piece">Ivory Turtleneck</div><span class="separator">+</span><div class="piece">Wide-Leg White Trousers</div><span class="separator">+</span><div class="piece">Silver Statement Necklace</div><span class="separator">+</span><div class="piece">Nude Heels</div></div></div>
+  <div class="outfit-row"><div class="outfit-label">The<br>Editorial<br>Grey</div><div class="outfit-pieces"><div class="piece">Pearl Grey Sheath Dress</div><span class="separator">+</span><div class="piece">Camel Coat (draped)</div><span class="separator">+</span><div class="piece">Structured Nude Tote</div><span class="separator">+</span><div class="piece">Ivory Heels</div></div></div>
+  <div class="outfit-row"><div class="outfit-label">The<br>Rare<br>Ease</div><div class="outfit-pieces"><div class="piece">White Oversized Button-Down</div><span class="separator">+</span><div class="piece">Wide-Leg Trousers</div><span class="separator">+</span><div class="piece">Nude Flat Mule</div></div></div>
+</div>
+
+<section>
+  <div class="section-header">
+    <div class="section-number">03</div>
+    <div><div class="label">The Miranda Doctrine</div><h2 class="section-title">The rules are not suggestions.</h2></div>
+  </div>
+  <div class="rules-grid">
+    <div class="rule-card"><div class="rule-num">I.</div><div class="rule-title">Pale is the power move.</div><div class="rule-body">Anyone can wear black. Pale requires confidence. Ivory, cream, pearl grey in a perfectly tailored garment announces that you are not worried about anything. <span class="rule-highlight">Fear wears black. Power wears ivory.</span></div></div>
+    <div class="rule-card"><div class="rule-num">II.</div><div class="rule-title">Fit above all.</div><div class="rule-body">Miranda's looks cost their authority entirely from fit. A $60 cream blazer tailored properly will silence a room. A $600 one off the rack will not. <span class="rule-highlight">The tailor is the most important person in this wardrobe.</span></div></div>
+    <div class="rule-card"><div class="rule-num">III.</div><div class="rule-title">Proportion is the argument.</div><div class="rule-body">Wide trousers with a fitted top. A draped blouse with a narrow skirt. Miranda's silhouettes are always in deliberate tension. <span class="rule-highlight">The body is a canvas. Treat it like one.</span></div></div>
+    <div class="rule-card"><div class="rule-num">IV.</div><div class="rule-title">One color family per outfit.</div><div class="rule-body">Ivory to cream to greige. That is the full range of one look. Miranda does not mix warm and cool tones. The palette is a monologue, not a conversation. <span class="rule-highlight">Coherence is the luxury.</span></div></div>
+    <div class="rule-card"><div class="rule-num">V.</div><div class="rule-title">Accessories are architecture.</div><div class="rule-body">One piece. Chosen last. Never decorative for its own sake. The necklace completes the structure. The bag is part of the silhouette. <span class="rule-highlight">If you can remove it without noticing, it should not be there.</span></div></div>
+    <div class="rule-card"><div class="rule-num">VI.</div><div class="rule-title">Never appear rushed.</div><div class="rule-body">Miranda's clothes are always pressed, always set, always arrived. The wardrobe communicates that you had time, even when you did not. <span class="rule-highlight">Effort should be invisible. Intention should not.</span></div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-title">The Miranda Edit &nbsp;&middot;&nbsp; A Power Wardrobe</div>
+  <div class="f-sub">Total estimated investment: $300 &ndash; $600 &nbsp;&middot;&nbsp; Tailoring: non-negotiable<br><br>"Everyone wants to be us."</div>
+</footer>
+
+</body>
+</html>

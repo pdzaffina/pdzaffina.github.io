@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Emily Edit</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Overpass+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #120a10;
+    --white: #f0eaee;
+    --card: #1a1018;
+    --card-hover: #221420;
+    --accent: #c44a7a;
+    --accent2: #8a2a4a;
+    --gold: #b89a5a;
+    --muted: #7a6870;
+    --border: rgba(196,74,122,0.12);
+    --num-color: rgba(196,74,122,0.12);
+    --voice-color: rgba(196,74,122,0.6);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--white); font-family: 'Overpass Mono', monospace; font-weight: 300; overflow-x: hidden; }
+
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 80px 60px; position: relative; border-bottom: 1px solid var(--border); }
+  .hero::before { content: 'E'; font-family: 'Cormorant Garamond', serif; font-size: 600px; font-weight: 300; color: rgba(196,74,122,0.04); position: absolute; right: -40px; top: 50%; transform: translateY(-50%); line-height: 1; pointer-events: none; }
+  .label { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(80px, 12vw, 160px); font-weight: 300; line-height: 0.85; letter-spacing: -0.02em; margin-bottom: 40px; }
+  .hero-title em { font-style: italic; color: var(--accent); display: block; }
+  .hero-sub { font-size: 10px; letter-spacing: 0.2em; color: var(--muted); line-height: 2; max-width: 480px; }
+
+  section { padding: 100px 60px; max-width: 1400px; margin: 0 auto; }
+  .section-header { display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: 32px; margin-bottom: 64px; }
+  .section-number { font-family: 'Cormorant Garamond', serif; font-size: 80px; font-weight: 300; color: var(--num-color); line-height: 1; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300; letter-spacing: -0.01em; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
+
+  .foundation-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .item-card { background: var(--card); padding: 36px 32px; position: relative; transition: all 0.4s; cursor: default; }
+  .item-card:hover { background: var(--card-hover); transform: translateY(-4px); }
+  .item-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 8px; line-height: 1.2; }
+  .item-desc { font-size: 10px; line-height: 1.9; color: var(--muted); margin-bottom: 20px; }
+  .item-voice { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px; color: var(--voice-color); padding-top: 16px; border-top: 1px solid var(--border); }
+  .item-priority { position: absolute; top: 16px; right: 16px; width: 8px; height: 8px; border-radius: 50%; }
+  .priority-essential { background: var(--accent); }
+  .priority-important { background: var(--accent2); }
+  .priority-accent { background: var(--muted); }
+
+  .palette-section { background: var(--card); padding: 80px 60px; }
+  .palette-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2px; margin-top: 48px; }
+  .swatch { aspect-ratio: 1; }
+  .swatch-inner { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
+  .swatch-name { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .swatch-note { font-size: 8px; letter-spacing: 0.1em; opacity: 0.6; margin-top: 4px; }
+
+  .outfits { background: var(--bg); padding: 100px 60px; max-width: 1400px; margin: 0 auto; }
+  .outfit-row { display: grid; grid-template-columns: 200px 1fr; gap: 40px; margin-bottom: 2px; background: var(--card); padding: 40px; align-items: center; transition: background 0.3s; }
+  .outfit-row:hover { background: var(--card-hover); }
+  .outfit-label { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-style: italic; font-weight: 300; color: var(--accent); line-height: 1.2; }
+  .outfit-pieces { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .piece { background: rgba(0,0,0,0.3); border: 1px solid var(--border); padding: 10px 16px; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .separator { color: rgba(255,255,255,0.1); font-size: 18px; }
+
+  .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .rule-card { background: var(--card); padding: 40px; }
+  .rule-num { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; color: var(--num-color); line-height: 1; margin-bottom: 12px; }
+  .rule-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; margin-bottom: 12px; }
+  .rule-body { font-size: 10px; line-height: 2; color: var(--muted); }
+  .rule-highlight { color: var(--accent); }
+
+  .legend { display: flex; gap: 32px; margin-bottom: 32px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .legend-item { display: flex; align-items: center; gap: 10px; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  footer { background: var(--card); padding: 60px; text-align: center; border-top: 1px solid var(--border); }
+  .f-title { font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: 0.4em; color: var(--accent); margin-bottom: 12px; }
+  .f-sub { font-size: 9px; letter-spacing: 0.2em; color: var(--muted); line-height: 2; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .hero > * { animation: fadeUp 0.8s ease forwards; opacity: 0; }
+  .hero .label { animation-delay: 0.1s; }
+  .hero .hero-title { animation-delay: 0.3s; }
+  .hero .hero-sub { animation-delay: 0.5s; }
+
+  @media (max-width: 900px) {
+    .hero { padding: 60px 24px; }
+    .foundation-grid { grid-template-columns: 1fr; }
+    .palette-grid { grid-template-columns: repeat(3,1fr); }
+    .rules-grid { grid-template-columns: 1fr; }
+    .outfit-row { grid-template-columns: 1fr; }
+    section, .outfits, footer, .palette-section { padding: 60px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="label">A curated wardrobe study &nbsp;&middot;&nbsp; The Devil Wears Prada</div>
+  <h1 class="hero-title">The<br><em>Emily</em><br>Edit.</h1>
+  <p class="hero-sub">Emily Charlton dressed like she had something to prove, because she did. Sharp, aggressive, highly edited. She used fashion as armor and ambition simultaneously. Her wardrobe never let anyone forget she was the one who got there first.</p>
+</div>
+
+<div class="palette-section">
+  <div style="max-width:1400px;margin:0 auto;">
+    <div class="label">The Palette</div>
+    <div class="section-title" style="font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;border-bottom:1px solid rgba(196,74,122,0.12);padding-bottom:16px;">Emily dressed like she was already at the party you were not invited to.</div>
+    <div class="palette-grid">
+      <div class="swatch"><div class="swatch-inner" style="background:#0a0a0a;"><span class="swatch-name" style="color:#f0eaee;">Jet Black</span><span class="swatch-note" style="color:#aaa;">The foundation</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#c44a7a;"><span class="swatch-name" style="color:#f0eaee;">Hot Pink</span><span class="swatch-note" style="color:#ddd;">Her signature</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#8a2a4a;"><span class="swatch-name" style="color:#f0eaee;">Deep Rose</span><span class="swatch-note" style="color:#ccc;">Depth</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#d4c8c0;"><span class="swatch-name" style="color:#1a1a1a;">Blush</span><span class="swatch-note" style="color:#555;">Rare softness</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#2e2e2e;"><span class="swatch-name" style="color:#f0eaee;">Charcoal</span><span class="swatch-note" style="color:#aaa;">When not black</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#c0a060;"><span class="swatch-name" style="color:#1a1a1a;">Gold</span><span class="swatch-note" style="color:#555;">Hardware, detail</span></div></div>
+    </div>
+    <p style="font-size:9px;letter-spacing:0.2em;color:var(--muted);margin-top:20px;">Emily's palette is aggressive on purpose. Black and hot pink is not a combination for the uncertain. That is entirely the point.</p>
+  </div>
+</div>
+
+<section>
+  <div class="section-header">
+    <div class="section-number">01</div>
+    <div><div class="label">The Foundation</div><h2 class="section-title">Emily dressed like she was already winning.</h2></div>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot priority-essential"></div> The core look</div>
+    <div class="legend-item"><div class="legend-dot priority-important"></div> The depth pieces</div>
+    <div class="legend-item"><div class="legend-dot priority-accent"></div> The finishing weapons</div>
+  </div>
+  <div class="foundation-grid">
+    <div class="item-card"><div class="item-priority priority-essential"></div><div class="item-name">Slim Black Dress, Knee-Length</div><div class="item-desc">Emily's most repeated silhouette. Fitted, black, precise. Not a bodycon, not a shift. Something in between that says structured ambition. The dress that reads as a uniform of intent.</div><div class="item-voice">She dressed like promotion was already hers.</div></div>
+    <div class="item-card"><div class="item-priority priority-essential"></div><div class="item-name">Hot Pink or Deep Rose Blazer</div><div class="item-desc">Emily's willingness to wear hot pink without irony is what separates her from a thousand other black-wearing fashion assistants. A pink blazer over a black dress is a complete statement of character.</div><div class="item-voice">If you're going to be noticed, be impossible to ignore.</div></div>
+    <div class="item-card"><div class="item-priority priority-essential"></div><div class="item-name">Black Skinny Trousers</div><div class="item-desc">Sharp, slim, hemmed exactly right. Emily's trousers never broke on the shoe. That precision is not incidental. It is the whole argument.</div><div class="item-voice">Imprecision is something Emily Charlton cannot afford.</div></div>
+    <div class="item-card"><div class="item-priority priority-essential"></div><div class="item-name">Black Pointed-Toe Stiletto</div><div class="item-desc">Emily does not wear block heels. The pointed toe and the stiletto are a declaration. They change the speed of the walk and the authority of the entrance. Non-negotiable.</div><div class="item-voice">The heels are not for comfort. They are for height she already had.</div></div>
+    <div class="item-card"><div class="item-priority priority-essential"></div><div class="item-name">Fitted Black Turtleneck</div><div class="item-desc">Emily's everyday armor. Slim, black, worn with the black trousers for full monochrome or with a statement skirt. Always tucked. Always intentional.</div><div class="item-voice">All black is not a default. It is a position.</div></div>
+    <div class="item-card"><div class="item-priority priority-essential"></div><div class="item-name">Statement Coat in Pink or Fuchsia</div><div class="item-desc">Emily understood that the coat is the first and last impression. A hot pink or fuchsia coat over all-black is the Emily Charlton uniform made explicit. It requires confidence bordering on aggression.</div><div class="item-voice">You see the coat before you see the person. She knew this.</div></div>
+    <div class="item-card"><div class="item-priority priority-important"></div><div class="item-name">Structured Mini Skirt in Black</div><div class="item-desc">A structured, A-line or pencil mini in black. Emily's silhouette used hem length with intention. The mini with the turtleneck is a complete editorial look that reads as more put-together than it has any right to.</div><div class="item-voice">She did not dress for the weather. She dressed for the room.</div></div>
+    <div class="item-card"><div class="item-priority priority-important"></div><div class="item-name">Blush or Pale Pink Silk Blouse</div><div class="item-desc">Emily's occasional softness. A pale pink silk blouse tucked into black trousers gives the pink-heavy palette something to rest against. The only moment of visible vulnerability in the wardrobe.</div><div class="item-voice">Even Emily Charlton has exactly one soft thing in her closet.</div></div>
+    <div class="item-card"><div class="item-priority priority-important"></div><div class="item-name">Black Leather Belt, Thin</div><div class="item-desc">Worn over the turtleneck dress or the blazer as a waist definition tool. Emily's silhouette was always cinched. The belt is the punctuation mark at the waist.</div><div class="item-voice">Structure does not happen by accident.</div></div>
+    <div class="item-card"><div class="item-priority priority-accent"></div><div class="item-name">Gold Statement Earrings</div><div class="item-desc">Large, gold, architectural. Emily's jewelry is never quiet. A pair of oversized gold earrings visible from across the Runway offices. The accessory that confirms the outfit.</div><div class="item-voice">They should be able to see you before they hear you.</div></div>
+    <div class="item-card"><div class="item-priority priority-accent"></div><div class="item-name">Black Chain-Strap Bag</div><div class="item-desc">Small, structured, gold chain. Not a tote. Not a backpack. A bag that fits a phone, a lip gloss, and the absolute minimum. Emily Charlton does not carry things she does not need.</div><div class="item-voice">She did not carry things. She brought weapons.</div></div>
+    <div class="item-card"><div class="item-priority priority-accent"></div><div class="item-name">Dark Wash Straight Jeans</div><div class="item-desc">Emily's version of casual. A dark, straight-leg jean worn with a fitted black top and the pointed stiletto. Even her days off look like she is working on something.</div><div class="item-voice">Emily does not have casual. She has slightly less formal.</div></div>
+  </div>
+</section>
+
+<div class="outfits">
+  <div class="section-header">
+    <div class="section-number">02</div>
+    <div><div class="label">The Formulas</div><h2 class="section-title">Emily dressed in declarations, not suggestions.</h2></div>
+  </div>
+  <div class="outfit-row"><div class="outfit-label">The<br>Daily<br>Armor</div><div class="outfit-pieces"><div class="piece">Fitted Black Turtleneck</div><span class="separator">+</span><div class="piece">Black Skinny Trousers</div><span class="separator">+</span><div class="piece">Black Stiletto</div><span class="separator">+</span><div class="piece">Gold Statement Earrings</div></div></div>
+  <div class="outfit-row"><div class="outfit-label">The<br>Full<br>Emily</div><div class="outfit-pieces"><div class="piece">Hot Pink Blazer</div><span class="separator">+</span><div class="piece">Slim Black Dress</div><span class="separator">+</span><div class="piece">Black Stiletto</div><span class="separator">+</span><div class="piece">Black Chain Bag</div></div></div>
+  <div class="outfit-row"><div class="outfit-label">The<br>Rare<br>Pink</div><div class="outfit-pieces"><div class="piece">Blush Silk Blouse</div><span class="separator">+</span><div class="piece">Black Skinny Trousers</div><span class="separator">+</span><div class="piece">Thin Black Belt</div><span class="separator">+</span><div class="piece">Black Pointed Heel</div></div></div>
+  <div class="outfit-row"><div class="outfit-label">The<br>First<br>Impression</div><div class="outfit-pieces"><div class="piece">Fuchsia Statement Coat</div><span class="separator">+</span><div class="piece">All Black Underneath</div><span class="separator">+</span><div class="piece">Gold Earrings</div><span class="separator">+</span><div class="piece">Black Stiletto</div></div></div>
+</div>
+
+<section>
+  <div class="section-header">
+    <div class="section-number">03</div>
+    <div><div class="label">The Emily Code</div><h2 class="section-title">What she would tell you if she had a second.</h2></div>
+  </div>
+  <div class="rules-grid">
+    <div class="rule-card"><div class="rule-num">I.</div><div class="rule-title">Black is not the absence of color.</div><div class="rule-body">Emily wears black because she has decided to. It is a position, not a default. When you wear black with intention it reads as power. When you wear it out of habit it reads as nothing. <span class="rule-highlight">Know why you are wearing it.</span></div></div>
+    <div class="rule-card"><div class="rule-num">II.</div><div class="rule-title">One loud piece, everything else precise.</div><div class="rule-body">The pink blazer works because every other element is exact. Black trousers, hem perfect. Black shoe, no scuff. The loud piece only speaks if the rest are silent. <span class="rule-highlight">Volume in one place. Discipline everywhere else.</span></div></div>
+    <div class="rule-card"><div class="rule-num">III.</div><div class="rule-title">The coat is the announcement.</div><div class="rule-body">Emily's statement coats are not about warmth. They are about who sees her entering a room before anyone else does. The coat delivers the opening line. <span class="rule-highlight">Your entrance begins before the door opens.</span></div></div>
+    <div class="rule-card"><div class="rule-num">IV.</div><div class="rule-title">Hem and cuff are not optional details.</div><div class="rule-body">Emily's trousers never broke. Her sleeves were always right. The difference between looking dressed and looking put-together is entirely in the hem and the cuff. <span class="rule-highlight">The finish is not the last thing. It is the only thing.</span></div></div>
+    <div class="rule-card"><div class="rule-num">V.</div><div class="rule-title">Dress for who you intend to become.</div><div class="rule-body">Emily dressed for a level she had not yet reached. The wardrobe preceded the title. It was not delusion. It was a specific kind of commitment. <span class="rule-highlight">Let the clothes be the advance notice.</span></div></div>
+    <div class="rule-card"><div class="rule-num">VI.</div><div class="rule-title">Pink is the bravest color in the room.</div><div class="rule-body">In a world of black and charcoal, hot pink requires more confidence than any other choice. Emily knew this. That is why she owned it without apology. <span class="rule-highlight">Wear the color that frightens you slightly. That one is yours.</span></div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-title">The Emily Edit &nbsp;&middot;&nbsp; A Wardrobe with Ambition</div>
+  <div class="f-sub">Total estimated investment: $300 &ndash; $550 &nbsp;&middot;&nbsp; Tailoring: sharp or nothing<br><br>"I'm Emily. I'm Miranda Priestly's first assistant."</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Andy Edit</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Overpass+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1115;
+    --white: #edeae4;
+    --card: #171a1f;
+    --card-hover: #1e2128;
+    --gold: #a07c4a;
+    --muted: #6b6e75;
+    --accent: #5b8ca8;
+    --accent2: #c4832a;
+    --border: rgba(255,255,255,0.07);
+    --num-color: rgba(91,140,168,0.15);
+    --voice-color: rgba(91,140,168,0.65);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--white); font-family: 'Overpass Mono', monospace; font-weight: 300; overflow-x: hidden; }
+
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 80px 60px; position: relative; border-bottom: 1px solid var(--border); }
+  .hero::before { content: 'A'; font-family: 'Cormorant Garamond', serif; font-size: 600px; font-weight: 300; color: rgba(91,140,168,0.04); position: absolute; right: -40px; top: 50%; transform: translateY(-50%); line-height: 1; pointer-events: none; }
+
+  .arc-bar { display: flex; gap: 2px; margin-bottom: 48px; }
+  .arc-step { flex: 1; padding: 12px 16px; font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase; border-top: 2px solid transparent; color: var(--muted); }
+  .arc-step.active { border-color: var(--accent); color: var(--accent); }
+  .arc-step.done { border-color: var(--accent2); color: var(--accent2); }
+
+  .label { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(80px, 12vw, 160px); font-weight: 300; line-height: 0.85; letter-spacing: -0.02em; margin-bottom: 40px; }
+  .hero-title em { font-style: italic; color: var(--accent); display: block; }
+  .hero-sub { font-size: 10px; letter-spacing: 0.2em; color: var(--muted); line-height: 2; max-width: 480px; }
+
+  .phase-divider { background: var(--card); padding: 40px 60px; max-width: 100%; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .phase-divider-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: baseline; gap: 24px; }
+  .phase-label { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; }
+  .phase-label.before { color: var(--muted); }
+  .phase-label.after { color: var(--accent2); }
+  .phase-title { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; }
+
+  section { padding: 100px 60px; max-width: 1400px; margin: 0 auto; }
+  .section-header { display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: 32px; margin-bottom: 64px; }
+  .section-number { font-family: 'Cormorant Garamond', serif; font-size: 80px; font-weight: 300; color: var(--num-color); line-height: 1; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300; letter-spacing: -0.01em; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
+
+  .foundation-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .item-card { background: var(--card); padding: 36px 32px; position: relative; transition: all 0.4s; cursor: default; }
+  .item-card:hover { background: var(--card-hover); transform: translateY(-4px); }
+  .item-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 8px; line-height: 1.2; }
+  .item-desc { font-size: 10px; line-height: 1.9; color: var(--muted); margin-bottom: 20px; }
+  .item-voice { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px; color: var(--voice-color); padding-top: 16px; border-top: 1px solid var(--border); }
+  .item-priority { position: absolute; top: 16px; right: 16px; width: 8px; height: 8px; border-radius: 50%; }
+  .priority-essential { background: var(--accent); }
+  .priority-important { background: var(--accent2); }
+  .priority-accent { background: var(--muted); }
+  .phase-tag { position: absolute; bottom: 16px; right: 16px; font-size: 7px; letter-spacing: 0.3em; text-transform: uppercase; padding: 3px 8px; border: 1px solid; }
+  .phase-tag.before { color: var(--muted); border-color: var(--muted); }
+  .phase-tag.after { color: var(--accent2); border-color: var(--accent2); }
+
+  .palette-section { background: var(--card); padding: 80px 60px; }
+  .palette-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2px; margin-top: 48px; }
+  .swatch { aspect-ratio: 1; }
+  .swatch-inner { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
+  .swatch-name { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .swatch-note { font-size: 8px; letter-spacing: 0.1em; opacity: 0.6; margin-top: 4px; }
+
+  .outfits { background: var(--bg); padding: 100px 60px; max-width: 1400px; margin: 0 auto; }
+  .outfit-row { display: grid; grid-template-columns: 200px 1fr; gap: 40px; margin-bottom: 2px; background: var(--card); padding: 40px; align-items: center; transition: background 0.3s; }
+  .outfit-row:hover { background: var(--card-hover); }
+  .outfit-label { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-style: italic; font-weight: 300; line-height: 1.2; }
+  .outfit-label.before { color: var(--muted); }
+  .outfit-label.after { color: var(--accent2); }
+  .outfit-pieces { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .piece { background: rgba(0,0,0,0.3); border: 1px solid var(--border); padding: 10px 16px; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .separator { color: rgba(255,255,255,0.12); font-size: 18px; }
+
+  .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .rule-card { background: var(--card); padding: 40px; }
+  .rule-num { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; color: var(--num-color); line-height: 1; margin-bottom: 12px; }
+  .rule-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; margin-bottom: 12px; }
+  .rule-body { font-size: 10px; line-height: 2; color: var(--muted); }
+  .rule-highlight { color: var(--accent); }
+
+  .legend { display: flex; gap: 32px; margin-bottom: 32px; padding: 20px 0; border-bottom: 1px solid var(--border); }
+  .legend-item { display: flex; align-items: center; gap: 10px; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  footer { background: var(--card); padding: 60px; text-align: center; border-top: 1px solid var(--border); }
+  .f-title { font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: 0.4em; color: var(--accent); margin-bottom: 12px; }
+  .f-sub { font-size: 9px; letter-spacing: 0.2em; color: var(--muted); line-height: 2; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .hero > * { animation: fadeUp 0.8s ease forwards; opacity: 0; }
+  .hero .label { animation-delay: 0.1s; }
+  .hero .arc-bar { animation-delay: 0.2s; }
+  .hero .hero-title { animation-delay: 0.3s; }
+  .hero .hero-sub { animation-delay: 0.5s; }
+
+  @media (max-width: 900px) {
+    .hero { padding: 60px 24px; }
+    .foundation-grid { grid-template-columns: 1fr; }
+    .palette-grid { grid-template-columns: repeat(3,1fr); }
+    .rules-grid { grid-template-columns: 1fr; }
+    .outfit-row { grid-template-columns: 1fr; }
+    section, .outfits, footer, .palette-section { padding: 60px 24px; }
+    .phase-divider { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="label">A curated wardrobe study &nbsp;&middot;&nbsp; The Devil Wears Prada</div>
+  <div class="arc-bar">
+    <div class="arc-step done">Act I &nbsp; Before Runway</div>
+    <div class="arc-step active">Act II &nbsp; The Transformation</div>
+    <div class="arc-step">Act III &nbsp; Her Own Voice</div>
+  </div>
+  <h1 class="hero-title">The<br><em>Andy</em><br>Edit.</h1>
+  <p class="hero-sub">Andy Sachs did not arrive knowing how to dress. That is what makes her the most instructive character in the film. This is the arc: where she started, how she transformed, and the wardrobe that belongs to who she became at the end.</p>
+</div>
+
+<div class="palette-section">
+  <div style="max-width:1400px;margin:0 auto;">
+    <div class="label">The Palette Arc</div>
+    <div class="section-title" style="font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;border-bottom:1px solid rgba(255,255,255,0.07);padding-bottom:16px;">She learned to speak the language. Then she chose to stop.</div>
+    <div class="palette-grid">
+      <div class="swatch"><div class="swatch-inner" style="background:#3b4a5c;"><span class="swatch-name" style="color:#edeae4;">Slate Blue</span><span class="swatch-note" style="color:#aaa;">Her default. Comfortable.</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#2e3a2e;"><span class="swatch-name" style="color:#edeae4;">Forest</span><span class="swatch-note" style="color:#aaa;">Before. Grounded.</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#c4832a;"><span class="swatch-name" style="color:#edeae4;">Burnt Orange</span><span class="swatch-note" style="color:#ccc;">The transformation</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#1a1a1a;"><span class="swatch-name" style="color:#edeae4;">Black</span><span class="swatch-note" style="color:#999;">Runway-ready</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#b8a88a;"><span class="swatch-name" style="color:#1a1a1a;">Camel</span><span class="swatch-note" style="color:#555;">Her editorial voice</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#e8e2d9;"><span class="swatch-name" style="color:#1a1a1a;">Cream</span><span class="swatch-note" style="color:#555;">Who she becomes</span></div></div>
+    </div>
+    <p style="font-size:9px;letter-spacing:0.2em;color:var(--muted);margin-top:20px;">Start with your natural palette. Build toward the editorial. Keep what feels like you.</p>
+  </div>
+</div>
+
+<div class="phase-divider">
+  <div class="phase-divider-inner">
+    <span class="phase-label before">Phase One</span>
+    <span class="phase-title" style="color:var(--muted);">Before Runway &mdash; The Cerulean Problem</span>
+  </div>
+</div>
+
+<section>
+  <div class="section-header">
+    <div class="section-number">01</div>
+    <div><div class="label">Start Here</div><h2 class="section-title">Comfortable, considered, entirely too safe.</h2></div>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--muted);"></div> Before Runway</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--accent2);"></div> After Transformation</div>
+  </div>
+  <div class="foundation-grid">
+    <div class="item-card"><div class="item-priority priority-essential"></div><div class="phase-tag before">Before</div><div class="item-name">Dark Wash Slim Jeans</div><div class="item-desc">Andy's pre-Runway uniform. Slim but not styled. Wear them well-fitted and dark. A non-distressed dark jean is the honest starting point of a real wardrobe.</div><div class="item-voice">You wear the cerulean sweater without knowing you chose it.</div></div>
+    <div class="item-card"><div class="item-priority priority-essential"></div><div class="phase-tag before">Before</div><div class="item-name">Fitted Crewneck in Navy or Forest</div><div class="item-desc">Clean, fitted, in a dark natural color. Not a fashion choice yet, but a solid one. The kind of sweater that communicates competence without ambition.</div><div class="item-voice">She was not trying to impress anyone. That was the problem.</div></div>
+    <div class="item-card"><div class="item-priority priority-essential"></div><div class="phase-tag before">Before</div><div class="item-name">White Slim Tee</div><div class="item-desc">A fitted, quality white tee. The building block. Before the Chanel boots, there has to be a reliable basic. Get three and treat them well.</div><div class="item-voice">Everyone starts somewhere.</div></div>
+    <div class="item-card"><div class="item-priority priority-important"></div><div class="phase-tag after">After</div><div class="item-name">Camel Belted Trench Coat</div><div class="item-desc">The moment Andy's wardrobe takes its first real breath. A belted camel trench is the single item that elevates any outfit beneath it. This is the first investment worth making.</div><div class="item-voice">The coat told them she was paying attention now.</div></div>
+    <div class="item-card"><div class="item-priority priority-important"></div><div class="phase-tag after">After</div><div class="item-name">Black Wide-Leg Trousers</div><div class="item-desc">Post-transformation Andy understood that proportion matters. Wide-leg, pressed, high-waisted. Worn with a tucked blouse. The volume does the work.</div><div class="item-voice">She stopped dressing like she was apologizing for being there.</div></div>
+    <div class="item-card"><div class="item-priority priority-important"></div><div class="phase-tag after">After</div><div class="item-name">Silk Blouse in Burnt Orange or Rust</div><div class="item-desc">Andy's most memorable editorial looks leaned warm. A silk or satin-look blouse in orange, rust, or camel. Tucked into wide-leg trousers or a fitted skirt.</div><div class="item-voice">Color is a decision. She had finally started deciding.</div></div>
+    <div class="item-card"><div class="item-priority priority-important"></div><div class="phase-tag after">After</div><div class="item-name">Black Knee-Length A-Line Skirt</div><div class="item-desc">Classic, structured, effortlessly editorial. Worn with the silk blouse or a fitted turtleneck. The skirt that appears in every good wardrobe at some point.</div><div class="item-voice">She had learned to let the clothes lead.</div></div>
+    <div class="item-card"><div class="item-priority priority-important"></div><div class="phase-tag after">After</div><div class="item-name">Black Block-Heel Ankle Boot</div><div class="item-desc">The compromise between Nigel's editorial demands and Andy's actual life. A clean black ankle boot with a modest block heel. Walks across both worlds.</div><div class="item-voice">The boots changed how she walked. The walk changed everything else.</div></div>
+    <div class="item-card"><div class="item-priority priority-important"></div><div class="phase-tag after">After</div><div class="item-name">Tailored Blazer in Camel</div><div class="item-desc">Post-Runway Andy understood blazers. Camel, slim, slightly cropped. Worn over the silk blouse or a fitted tee. The blazer that announces she has arrived without needing to say so.</div><div class="item-voice">She dressed for the job she was figuring out she wanted.</div></div>
+    <div class="item-card"><div class="item-priority priority-accent"></div><div class="phase-tag after">After</div><div class="item-name">Cream or Ivory Fitted Turtleneck</div><div class="item-desc">Andy absorbed the editorial palette by the end. A cream turtleneck tucked into dark wide-leg trousers or worn under the camel blazer. The look that says she learned from the best and then chose her own direction.</div><div class="item-voice">She kept what mattered and left the rest behind.</div></div>
+    <div class="item-card"><div class="item-priority priority-accent"></div><div class="phase-tag after">After</div><div class="item-name">Slim Black Leather Belt</div><div class="item-desc">The detail that transforms a blouse tucked into trousers from an afterthought into an outfit. Thin, minimal, always present.</div><div class="item-voice">Details are where the story gets specific.</div></div>
+    <div class="item-card"><div class="item-priority priority-accent"></div><div class="phase-tag after">After</div><div class="item-name">Gold Hoop Earrings, Medium</div><div class="item-desc">The one accessory Andy carried into her transformed wardrobe. A medium gold hoop. Worn with everything. The personal detail that survived the makeover.</div><div class="item-voice">She kept this. It was always hers.</div></div>
+  </div>
+</section>
+
+<div class="outfits">
+  <div class="section-header">
+    <div class="section-number">02</div>
+    <div><div class="label">The Arc in Outfits</div><h2 class="section-title">Before and after, in concrete terms.</h2></div>
+  </div>
+  <div class="outfit-row"><div class="outfit-label before">Before<br>Runway</div><div class="outfit-pieces"><div class="piece">Dark Wash Jeans</div><span class="separator">+</span><div class="piece">Navy Crewneck</div><span class="separator">+</span><div class="piece">White Tee (underneath)</div><span class="separator">+</span><div class="piece">Clean White Sneaker</div></div></div>
+  <div class="outfit-row"><div class="outfit-label after">The<br>Turning<br>Point</div><div class="outfit-pieces"><div class="piece">Camel Trench</div><span class="separator">+</span><div class="piece">Black Wide-Leg Trousers</div><span class="separator">+</span><div class="piece">Fitted White Tee (tucked)</div><span class="separator">+</span><div class="piece">Black Ankle Boot</div></div></div>
+  <div class="outfit-row"><div class="outfit-label after">Full<br>Transformation</div><div class="outfit-pieces"><div class="piece">Rust Silk Blouse</div><span class="separator">+</span><div class="piece">Black A-Line Skirt</div><span class="separator">+</span><div class="piece">Black Ankle Boot</div><span class="separator">+</span><div class="piece">Gold Hoops</div></div></div>
+  <div class="outfit-row"><div class="outfit-label after">Andy<br>At The<br>End</div><div class="outfit-pieces"><div class="piece">Camel Blazer</div><span class="separator">+</span><div class="piece">Cream Turtleneck</div><span class="separator">+</span><div class="piece">Black Wide-Leg Trousers</div><span class="separator">+</span><div class="piece">Black Boot + Slim Belt</div></div></div>
+</div>
+
+<section>
+  <div class="section-header">
+    <div class="section-number">03</div>
+    <div><div class="label">The Lesson</div><h2 class="section-title">What the transformation actually teaches.</h2></div>
+  </div>
+  <div class="rules-grid">
+    <div class="rule-card"><div class="rule-num">I.</div><div class="rule-title">Start with what fits, not what trends.</div><div class="rule-body">Andy's pre-Runway pieces were not wrong. They were unshaped. A well-fitted dark jean and a good crewneck are a real starting point. <span class="rule-highlight">Begin with clothes that fit before you begin with clothes that fashion.</span></div></div>
+    <div class="rule-card"><div class="rule-num">II.</div><div class="rule-title">One investment piece changes everything.</div><div class="rule-body">The camel trench was Andy's inflection point. A single well-chosen coat transforms every outfit beneath it. Buy the coat before anything else. <span class="rule-highlight">The coat is the argument. The rest are supporting evidence.</span></div></div>
+    <div class="rule-card"><div class="rule-num">III.</div><div class="rule-title">Learn the rules before you break them.</div><div class="rule-body">Andy dressed badly not because she lacked taste, but because she had not yet learned the grammar. Fit, proportion, palette. Learn those three things. <span class="rule-highlight">You cannot have a personal style without first understanding style.</span></div></div>
+    <div class="rule-card"><div class="rule-num">IV.</div><div class="rule-title">Warm tones are underused.</div><div class="rule-body">Camel, rust, burnt orange. Andy's best post-transformation looks leaned warm. Most people default to black and navy and miss an entire register of flattering color. <span class="rule-highlight">Try camel. It will change your mirror.</span></div></div>
+    <div class="rule-card"><div class="rule-num">V.</div><div class="rule-title">Keep what was always yours.</div><div class="rule-body">Andy kept her gold hoops through the whole transformation. The wardrobe changed; the detail that was specifically her did not. <span class="rule-highlight">Style is the part of yourself that survives the makeover.</span></div></div>
+    <div class="rule-card"><div class="rule-num">VI.</div><div class="rule-title">Know when to leave.</div><div class="rule-body">At the end, Andy walked away from the wardrobe that did not belong to who she was. Taking the good lessons with her. This is the final rule. <span class="rule-highlight">Wear the clothes. Do not let the clothes wear you.</span></div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-title">The Andy Edit &nbsp;&middot;&nbsp; A Wardrobe in Three Acts</div>
+  <div class="f-sub">Total estimated investment: $250 &ndash; $500 &nbsp;&middot;&nbsp; Build the arc over time<br><br>"I'm hearing this differently now."</div>
+</footer>
+
+</body>
+</html>
