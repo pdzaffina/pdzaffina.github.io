@@ -1,6 +1,6 @@
 ---
 layout:post
-title: "The Cerulean Architecture: Why Ready is the Only Production Standard That Matters"
+title: "The Cerulean AI Architecture: Why Ready is the Only Production Standard That Matters"
 tags:
   - AI
 ---
