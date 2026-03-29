@@ -1,1 +1,359 @@
-<h1>Hello</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Nigel Edit</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Overpass+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f2ed;
+    --cream: #e8e2d9;
+    --charcoal: #1c1c1c;
+    --slate: #2e2e2e;
+    --gold: #b89a5a;
+    --muted: #7a7570;
+    --accent: #c4392a;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--black); color: var(--white); font-family: 'Overpass Mono', monospace; font-weight: 300; overflow-x: hidden; }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; position: relative; }
+  .hero-left { background: var(--black); display: flex; flex-direction: column; justify-content: center; padding: 80px 60px; position: relative; z-index: 1; }
+  .hero-left::after { content: ''; position: absolute; right: 0; top: 10%; bottom: 10%; width: 1px; background: linear-gradient(to bottom, transparent, var(--gold), transparent); }
+  .hero-right { position: relative; overflow: hidden; }
+  .hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: grayscale(30%) contrast(1.05); }
+  .hero-right::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(10,10,10,0.4) 0%, transparent 40%), linear-gradient(to top, rgba(10,10,10,0.5) 0%, transparent 50%); }
+
+  .label { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(64px, 8vw, 110px); font-weight: 300; line-height: 0.9; letter-spacing: -0.02em; margin-bottom: 32px; }
+  .hero-title em { font-style: italic; color: var(--gold); display: block; }
+  .hero-sub { font-size: 10px; letter-spacing: 0.2em; color: var(--muted); line-height: 2; max-width: 340px; }
+
+  /* PHOTO STRIP */
+  .photo-strip { display: grid; grid-template-columns: repeat(4, 1fr); height: 420px; gap: 2px; }
+  .strip-item { position: relative; overflow: hidden; }
+  .strip-item img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: grayscale(20%) contrast(1.08); transition: transform 0.6s ease, filter 0.4s ease; }
+  .strip-item:hover img { transform: scale(1.04); filter: grayscale(0%) contrast(1.05); }
+  .strip-item::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 50%); }
+  .strip-caption { position: absolute; bottom: 20px; left: 20px; z-index: 1; font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); }
+
+  /* SECTIONS */
+  section { padding: 100px 60px; max-width: 1400px; margin: 0 auto; }
+  .section-header { display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: 32px; margin-bottom: 64px; }
+  .section-number { font-family: 'Cormorant Garamond', serif; font-size: 80px; font-weight: 300; color: rgba(184,154,90,0.2); line-height: 1; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300; letter-spacing: -0.01em; border-bottom: 1px solid rgba(184,154,90,0.3); padding-bottom: 16px; }
+
+  /* CARDS */
+  .foundation-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .item-card { background: var(--charcoal); position: relative; transition: all 0.4s; cursor: default; overflow: hidden; }
+  .item-card:hover { background: var(--slate); }
+  .item-card:hover .card-img img { transform: scale(1.05); filter: grayscale(0%); }
+  .card-img { width: 100%; height: 220px; overflow: hidden; position: relative; }
+  .card-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: grayscale(25%) contrast(1.05); transition: transform 0.5s ease, filter 0.4s ease; }
+  .card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, var(--charcoal) 0%, transparent 60%); }
+  .card-body { padding: 28px 28px 32px; }
+  .item-name { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 8px; line-height: 1.2; }
+  .item-desc { font-size: 10px; line-height: 1.9; color: var(--muted); margin-bottom: 20px; }
+  .item-nigel { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px; color: rgba(184,154,90,0.7); padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.05); }
+  .item-priority { position: absolute; top: 16px; right: 16px; width: 8px; height: 8px; border-radius: 50%; z-index: 2; }
+  .priority-essential { background: var(--accent); }
+  .priority-important { background: var(--gold); }
+  .priority-accent { background: var(--muted); }
+
+  /* PALETTE */
+  .palette-section { background: var(--charcoal); padding: 80px 60px; }
+  .palette-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 2px; margin-top: 48px; }
+  .swatch { aspect-ratio: 1; }
+  .swatch-inner { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; padding: 16px; }
+  .swatch-name { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .swatch-note { font-size: 8px; letter-spacing: 0.1em; opacity: 0.6; margin-top: 4px; }
+
+  /* EDITORIAL INTERLUDE */
+  .interlude { display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 2px; height: 560px; }
+  .interlude-item { position: relative; overflow: hidden; }
+  .interlude-item img { width: 100%; height: 100%; object-fit: cover; object-position: center top; filter: grayscale(15%) contrast(1.06); transition: transform 0.7s ease; }
+  .interlude-item:hover img { transform: scale(1.03); }
+  .interlude-item::after { content: ''; position: absolute; inset: 0; background: rgba(10,10,10,0.15); }
+
+  /* OUTFITS */
+  .outfits { background: var(--black); padding: 100px 60px; max-width: 1400px; margin: 0 auto; }
+  .outfit-row { display: grid; grid-template-columns: 200px 1fr; gap: 40px; margin-bottom: 2px; background: var(--charcoal); padding: 40px; align-items: center; transition: background 0.3s; }
+  .outfit-row:hover { background: var(--slate); }
+  .outfit-label { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-style: italic; font-weight: 300; color: var(--gold); line-height: 1.2; }
+  .outfit-pieces { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .piece { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08); padding: 10px 16px; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; }
+  .separator { color: rgba(255,255,255,0.15); font-size: 18px; }
+
+  /* RULES */
+  .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .rule-card { background: var(--charcoal); padding: 40px; }
+  .rule-num { font-family: 'Cormorant Garamond', serif; font-size: 56px; font-weight: 300; color: rgba(184,154,90,0.15); line-height: 1; margin-bottom: 12px; }
+  .rule-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; margin-bottom: 12px; }
+  .rule-body { font-size: 10px; line-height: 2; color: var(--muted); }
+  .rule-highlight { color: var(--gold); }
+
+  .legend { display: flex; gap: 32px; margin-bottom: 32px; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .legend-item { display: flex; align-items: center; gap: 10px; font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  footer { background: var(--charcoal); padding: 60px; text-align: center; border-top: 1px solid rgba(184,154,90,0.2); }
+  .f-title { font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: 0.4em; color: var(--gold); margin-bottom: 12px; }
+  .f-sub { font-size: 9px; letter-spacing: 0.2em; color: var(--muted); line-height: 2; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-left > * { animation: fadeUp 0.8s ease forwards; opacity: 0; }
+  .hero-left .label { animation-delay: 0.1s; }
+  .hero-left .hero-title { animation-delay: 0.3s; }
+  .hero-left .hero-sub { animation-delay: 0.5s; }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 50vh; }
+    .foundation-grid { grid-template-columns: 1fr; }
+    .palette-grid { grid-template-columns: repeat(3,1fr); }
+    .rules-grid { grid-template-columns: 1fr; }
+    .outfit-row { grid-template-columns: 1fr; }
+    .photo-strip { grid-template-columns: 1fr 1fr; height: auto; }
+    .strip-item { height: 260px; }
+    .interlude { grid-template-columns: 1fr; height: auto; }
+    .interlude-item { height: 300px; }
+    section, .outfits, footer { padding: 60px 24px; }
+    .palette-section { padding: 60px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="label">A curated wardrobe study &nbsp;&middot;&nbsp; The Devil Wears Prada</div>
+    <h1 class="hero-title">The<br><em>Nigel</em><br>Edit.</h1>
+    <p class="hero-sub">Stanley Tucci's Nigel is the gold standard of understated editorial dressing. Sharp. Considered. Never trying too hard. This is that wardrobe.</p>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&q=85&fit=crop&crop=faces,top" alt="Man in sharp suit" loading="eager" />
+  </div>
+</div>
+
+<!-- PHOTO STRIP -->
+<div class="photo-strip">
+  <div class="strip-item">
+    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&q=80&fit=crop&crop=top" alt="Suit detail" loading="lazy" />
+    <span class="strip-caption">The Suit</span>
+  </div>
+  <div class="strip-item">
+    <img src="https://images.unsplash.com/photo-1490367532201-b9bc1dc483f6?w=500&q=80&fit=crop&crop=top" alt="Turtleneck look" loading="lazy" />
+    <span class="strip-caption">The Turtleneck</span>
+  </div>
+  <div class="strip-item">
+    <img src="https://images.unsplash.com/photo-1537941585958-23d71c7eba0f?w=500&q=80&fit=crop&crop=top" alt="Blazer editorial" loading="lazy" />
+    <span class="strip-caption">The Blazer</span>
+  </div>
+  <div class="strip-item">
+    <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=500&q=80&fit=crop&crop=top" alt="Menswear detail" loading="lazy" />
+    <span class="strip-caption">The Details</span>
+  </div>
+</div>
+
+<!-- COLOR PALETTE -->
+<div class="palette-section">
+  <div style="max-width:1400px;margin:0 auto;">
+    <div class="label">Your Working Palette</div>
+    <div class="section-title" style="font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;border-bottom:1px solid rgba(184,154,90,0.3);padding-bottom:16px;">Nigel never wore noise.</div>
+    <div class="palette-grid">
+      <div class="swatch"><div class="swatch-inner" style="background:#0a0a0a;"><span class="swatch-name" style="color:#f5f2ed;">Jet Black</span><span class="swatch-note" style="color:#7a7570;">Anchor color</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#2e2e2e;"><span class="swatch-name" style="color:#f5f2ed;">Charcoal</span><span class="swatch-note" style="color:#aaa;">Suits, trousers</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#5a5a5a;"><span class="swatch-name" style="color:#f5f2ed;">Graphite</span><span class="swatch-note" style="color:#ccc;">Layering</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#e8e2d9;"><span class="swatch-name" style="color:#1c1c1c;">Cream</span><span class="swatch-note" style="color:#555;">Shirts, contrast</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#3b3028;"><span class="swatch-name" style="color:#f5f2ed;">Espresso</span><span class="swatch-note" style="color:#aaa;">Seasonal warmth</span></div></div>
+      <div class="swatch"><div class="swatch-inner" style="background:#8b1a1a;"><span class="swatch-name" style="color:#f5f2ed;">Burgundy</span><span class="swatch-note" style="color:#ccc;">One accent max</span></div></div>
+    </div>
+    <p style="font-size:9px;letter-spacing:0.2em;color:var(--muted);margin-top:20px;">Black and charcoal carry 80% of the wardrobe. Cream and burgundy do the editorial work.</p>
+  </div>
+</div>
+
+<!-- FOUNDATION WARDROBE -->
+<section>
+  <div class="section-header">
+    <div class="section-number">01</div>
+    <div>
+      <div class="label">The Foundation</div>
+      <h2 class="section-title">What you actually need to own.</h2>
+    </div>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot priority-essential"></div> Buy first</div>
+    <div class="legend-item"><div class="legend-dot priority-important"></div> Add next</div>
+    <div class="legend-item"><div class="legend-dot priority-accent"></div> When ready</div>
+  </div>
+  <div class="foundation-grid">
+
+    <div class="item-card">
+      <div class="item-priority priority-essential"></div>
+      <div class="card-img"><img src="https://images.unsplash.com/photo-1594938298603-c8148c4b984c?w=600&q=80&fit=crop&crop=top" alt="Charcoal suit" loading="lazy" /></div>
+      <div class="card-body">
+        <div class="item-name">Slim Fit Suit in Charcoal</div>
+        <div class="item-desc">Solid charcoal or dark grey. Slim but not skinny. Look for two-piece suits that anchor the whole wardrobe. Get it tailored for $30 at any dry cleaner.</div>
+        <div class="item-nigel">The suit is not the outfit. It is the frame.</div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-priority priority-essential"></div>
+      <div class="card-img"><img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?w=600&q=80&fit=crop&crop=top" alt="Navy blazer" loading="lazy" /></div>
+      <div class="card-body">
+        <div class="item-name">Navy Blazer</div>
+        <div class="item-desc">A structured, slim navy blazer. This is the workhorse. Goes over a white shirt, a black turtleneck, even a tee. Look for a wrinkle-resistant construction that holds its shape.</div>
+        <div class="item-nigel">Navy is the new black, worn by those who know better.</div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-priority priority-essential"></div>
+      <div class="card-img"><img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=600&q=80&fit=crop&crop=top" alt="Dress trousers" loading="lazy" /></div>
+      <div class="card-body">
+        <div class="item-name">Black Dress Trousers x2</div>
+        <div class="item-desc">Two pairs. Wear one while the other rests. Flat front, slim leg. Department store private labels offer good construction at $40-$70.</div>
+        <div class="item-nigel">A man who irons his trousers has already won.</div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-priority priority-essential"></div>
+      <div class="card-img"><img src="https://images.unsplash.com/photo-1598032895397-b9472444bf93?w=600&q=80&fit=crop&crop=top" alt="White dress shirt" loading="lazy" /></div>
+      <div class="card-body">
+        <div class="item-name">White Oxford Shirts x3</div>
+        <div class="item-desc">Look for a respectable slim-fit white button-down. Buy three. Iron them. Nigel's shirts were always immaculate.</div>
+        <div class="item-nigel">A crisp white shirt is the most powerful garment on earth.</div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-priority priority-essential"></div>
+      <div class="card-img"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80&fit=crop&crop=top" alt="Black turtleneck" loading="lazy" /></div>
+      <div class="card-body">
+        <div class="item-name">Black Turtleneck x2</div>
+        <div class="item-desc">Nigel's most iconic silhouette: a slim black turtleneck under a blazer. Look for slim-cut options that read much more expensive than they are.</div>
+        <div class="item-nigel">The turtleneck is the editorial shorthand for "I know things."</div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-priority priority-important"></div>
+      <div class="card-img"><img src="https://images.unsplash.com/photo-1516257984-b1b4d707412e?w=600&q=80&fit=crop&crop=top" alt="V-neck sweater" loading="lazy" /></div>
+      <div class="card-body">
+        <div class="item-name">Charcoal V-Neck Sweater</div>
+        <div class="item-desc">A fine-gauge merino or cotton-blend V-neck in charcoal or black. Goes over a white shirt with the collar and cuffs showing. The Nigel "relaxed but still editor" look.</div>
+        <div class="item-nigel">Layering is architecture. Plan it before you dress.</div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-priority priority-important"></div>
+      <div class="card-img"><img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=600&q=80&fit=crop&crop=top" alt="Herringbone trousers" loading="lazy" /></div>
+      <div class="card-body">
+        <div class="item-name">Grey Herringbone Trousers</div>
+        <div class="item-desc">A subtle texture broadens the wardrobe without adding color. Herringbone reads as intentional and editorial. Pairs with black, navy, and charcoal without conflict.</div>
+        <div class="item-nigel">Texture is the quiet conversation your outfit has without you speaking.</div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-priority priority-important"></div>
+      <div class="card-img"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80&fit=crop&crop=center" alt="Black leather shoes" loading="lazy" /></div>
+      <div class="card-body">
+        <div class="item-name">Black Derby Shoes</div>
+        <div class="item-desc">A clean cap-toe or plain-toe black leather derby. Polish them. Nigel's shoes were always pristine. Nothing breaks the silhouette like scuffed shoes.</div>
+        <div class="item-nigel">Shoes end the sentence. Make sure it is a good one.</div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-priority priority-important"></div>
+      <div class="card-img"><img src="https://images.unsplash.com/photo-1604176354204-9268737828e4?w=600&q=80&fit=crop&crop=top" alt="Dark wash jeans" loading="lazy" /></div>
+      <div class="card-body">
+        <div class="item-name">Dark Wash Slim Jeans</div>
+        <div class="item-desc">Nigel occasionally dressed down. When he did, it was a perfectly fitted dark jean, never distressed. Go slim, dark, no embellishments whatsoever.</div>
+        <div class="item-nigel">Even casual must be considered. Especially casual.</div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-priority priority-accent"></div>
+      <div class="card-img"><img src="https://images.unsplash.com/photo-1588359348347-9bc6cbbb689e?w=600&q=80&fit=crop&crop=top" alt="Burgundy tie" loading="lazy" /></div>
+      <div class="card-body">
+        <div class="item-name">Burgundy Silk-Look Tie</div>
+        <div class="item-desc">One statement tie. Burgundy or deep wine. Look for ties that photograph as expensive. Keep it to a simple knot. No novelty patterns.</div>
+        <div class="item-nigel">One accent. One. The rest is restraint.</div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-priority priority-accent"></div>
+      <div class="card-img"><img src="https://images.unsplash.com/photo-1548883354-94bcfe321cbb?w=600&q=80&fit=crop&crop=top" alt="Black chinos" loading="lazy" /></div>
+      <div class="card-body">
+        <div class="item-name">Black Slim Chinos</div>
+        <div class="item-desc">A slim chino in black reads as a dressed-up casual pant. More relaxed than dress trousers but still sharp. The backbone of a smart-casual look.</div>
+        <div class="item-nigel">The chino is what separates the dressed from the merely clothed.</div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-priority priority-accent"></div>
+      <div class="card-img"><img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80&fit=crop&crop=center" alt="Leather belt" loading="lazy" /></div>
+      <div class="card-body">
+        <div class="item-name">Black Leather Belt</div>
+        <div class="item-desc">Match your belt to your shoes, always. One clean, simple black leather belt with a minimal buckle. $25-$40.</div>
+        <div class="item-nigel">The accessories either confirm the outfit or betray it.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDITORIAL INTERLUDE -->
+<div class="interlude">
+  <div class="interlude-item"><img src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?w=600&q=80&fit=crop&crop=top" alt="Menswear editorial" loading="lazy" /></div>
+  <div class="interlude-item"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=900&q=85&fit=crop&crop=faces,top" alt="Sharp dressed man" loading="lazy" /></div>
+  <div class="interlude-item"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80&fit=crop&crop=faces,top" alt="Confident portrait" loading="lazy" /></div>
+</div>
+
+<!-- OUTFIT FORMULAS -->
+<div class="outfits">
+  <div class="section-header">
+    <div class="section-number">02</div>
+    <div><div class="label">The Formulas</div><h2 class="section-title">Nigel dressed in systems, not outfits.</h2></div>
+  </div>
+  <div class="outfit-row"><div class="outfit-label">The<br>Runway<br>Ready</div><div class="outfit-pieces"><div class="piece">Charcoal Suit</div><span class="separator">+</span><div class="piece">White Oxford</div><span class="separator">+</span><div class="piece">Burgundy Tie</div><span class="separator">+</span><div class="piece">Black Derby</div></div></div>
+  <div class="outfit-row"><div class="outfit-label">The<br>Editorial<br>Core</div><div class="outfit-pieces"><div class="piece">Black Turtleneck</div><span class="separator">+</span><div class="piece">Navy Blazer</div><span class="separator">+</span><div class="piece">Black Dress Trousers</div><span class="separator">+</span><div class="piece">Black Derby</div></div></div>
+  <div class="outfit-row"><div class="outfit-label">The<br>Layered<br>Intellectual</div><div class="outfit-pieces"><div class="piece">White Oxford</div><span class="separator">+</span><div class="piece">Charcoal V-Neck</div><span class="separator">+</span><div class="piece">Herringbone Trousers</div><span class="separator">+</span><div class="piece">Black Belt + Derby</div></div></div>
+  <div class="outfit-row"><div class="outfit-label">The<br>Smart<br>Casual</div><div class="outfit-pieces"><div class="piece">Black Turtleneck</div><span class="separator">+</span><div class="piece">Dark Wash Jeans</div><span class="separator">+</span><div class="piece">Black Derby or Clean White Sneaker</div></div></div>
+</div>
+
+<!-- THE RULES -->
+<section>
+  <div class="section-header">
+    <div class="section-number">03</div>
+    <div><div class="label">Non-Negotiables</div><h2 class="section-title">What Nigel would never compromise on.</h2></div>
+  </div>
+  <div class="rules-grid">
+    <div class="rule-card"><div class="rule-num">I.</div><div class="rule-title">Tailoring is not optional.</div><div class="rule-body">A $30 alteration on a $150 suit looks better than a $600 suit off the rack. Find a tailor. Take in the waist, shorten the sleeves, hem the trousers. <span class="rule-highlight">Fit is the only luxury you actually need.</span></div></div>
+    <div class="rule-card"><div class="rule-num">II.</div><div class="rule-title">Iron everything.</div><div class="rule-body">Every shirt, every trouser, every time. Nigel's clothes were never wrinkled. A perfectly pressed shirt reads as expensive. A wrinkled one reads as careless. <span class="rule-highlight">Press means credibility.</span></div></div>
+    <div class="rule-card"><div class="rule-num">III.</div><div class="rule-title">Limit your palette ruthlessly.</div><div class="rule-body">Black, charcoal, navy, cream. That is it for 80% of the wardrobe. Burgundy or grey for accents. Nigel never dressed in multiple competing colors. <span class="rule-highlight">Monochrome is not boring. It is confident.</span></div></div>
+    <div class="rule-card"><div class="rule-num">IV.</div><div class="rule-title">Shoes and belt must match.</div><div class="rule-body">Black shoes, black belt. Brown shoes, brown belt. No exceptions. This is the most visible signal of whether someone understands dressing or is just wearing clothes. <span class="rule-highlight">The accessories either confirm the outfit or betray it.</span></div></div>
+    <div class="rule-card"><div class="rule-num">V.</div><div class="rule-title">One statement. Not three.</div><div class="rule-body">A great turtleneck is the statement. The blazer, trousers, and shoes are just the frame. When everything competes, nothing wins. <span class="rule-highlight">Nigel knew this. That is why you remember him.</span></div></div>
+    <div class="rule-card"><div class="rule-num">VI.</div><div class="rule-title">Buy fewer things, better things.</div><div class="rule-body">A charcoal suit, two white shirts, a turtleneck, and black trousers is already more than most people own that works together. <span class="rule-highlight">Restraint is the point. It has always been the point.</span></div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="f-title">The Nigel Edit &nbsp;&middot;&nbsp; A Budget Editorial Wardrobe</div>
+  <div class="f-sub">Total estimated investment: $400 &ndash; $700 &nbsp;&middot;&nbsp; Add tailoring: $60 &ndash; $120<br><br>"Before this, you were just a person in clothes. Now you will be dressed."</div>
+</footer>
+
+</body>
+</html>
