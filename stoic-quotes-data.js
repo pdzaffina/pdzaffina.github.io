@@ -103,4 +103,5 @@ const quotes = [
   { id:101, text:"First learn the meaning of what you say, and then speak.", author:"Epictetus", source:"Discourses", theme:"Control", verse: { ref: "Proverbs 29:20", text: "Do you see a man who is hasty in his words? There is more hope for a fool than for him." } },
   { id:102, text:"Observe constantly that all things take place by change.", author:"Marcus Aurelius", source:"Meditations", theme:"Change", verse: { ref: "Ecclesiastes 3:1", text: "There is a time for everything, and a season for every activity under the heavens." } },
   { id:103, text:"The nearer a man comes to a calm mind, the closer he is to strength.", author:"Marcus Aurelius", source:"Meditations", theme:"Control", verse: { ref: "Psalm 46:10", text: "Be still, and know that I am God"} },
+{ id:104, text:"Men are born for the sake of each other. So either teach or tolerate.", author:"Marcus Aurelius", source:"Meditations", theme:"Control", verse: { ref: "Colossians 3:13", text: "Bear with each other and forgive one another if any of you has a grievance against someone. Forgive as the Lord forgave you."} },
 ];
