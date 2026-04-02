@@ -17,11 +17,11 @@
   --gold-border:   rgba(184,160,96,0.16);
   --gold-border-m: rgba(184,160,96,0.34);
   --cream:         #e8eef8;
-  --cream-mid:     #ffffff;
-  --muted:         #ffffff;
+  --cream-mid:     #ffffff; /* Keeping this as pure white is good for dark mode */
+  --muted:         #cbd5e1; /* Changed from white to a soft blue-gray for less "glare" */
   --faint:         #1c2840;
   --fd:            'Cormorant Garamond', Georgia, serif;
-  --fb:            'DM Sans', system-ui, sans-serif;
+  --fb:            'Inter', 'DM Sans', system-ui, sans-serif;
 }
 
 /* font color --cream-mid: #a8b4cc -- changed to white */
@@ -31,7 +31,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 
-body {
+/* body {
   background: var(--surface-1);
   color: var(--cream-mid);
   font-family: var(--fb);
@@ -39,6 +39,15 @@ body {
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+} */
+
+body {
+  background: var(--surface-1);
+  color: var(--cream-mid);
+  font-family: var(--fb); /* Use the Sans-Serif here */
+  font-weight: 400;       /* Increased from 300 to 400 */
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
 }
 
 ::-webkit-scrollbar { width: 4px; }
@@ -784,13 +793,22 @@ article.post .date,
 }
 
 /* ── ENTRY PROSE ── */
-.entry {
+/* .entry {
   font-family: var(--fd);
   font-size: 1.4rem;
   font-weight: 400;
   color: var(--cream-mid);
   line-height: 1.85;
   margin-bottom: 1.5rem;
+} */
+
+.entry {
+  font-family: var(--fb); /* Change from --fd to --fb */
+  font-size: 1.15rem;     /* Slightly smaller but cleaner font size */
+  font-weight: 400;
+  color: var(--cream-mid);
+  line-height: 1.85;
+  letter-spacing: 0.01em; /* Subtle spacing helps legibility */
 }
 
 .entry p { margin-bottom: 1.5rem; }
@@ -825,12 +843,22 @@ article.post .date,
   margin: 1.75rem 0 0.5rem;
 }
 
-.entry a {
+/* .entry a {
   color: var(--gold);
   text-decoration: underline;
   text-decoration-color: var(--gold-border-m);
   text-underline-offset: 3px;
   transition: color 0.2s, text-decoration-color 0.2s;
+} */
+
+.entry a {
+  color: var(--gold-bright); 
+  text-decoration-thickness: 1px;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--ink);
 }
 
 .entry a:hover {
@@ -882,6 +910,10 @@ article.post .date,
   display: block;
   margin: 2rem auto;
   border: 1px solid var(--gold-border);
+}
+
+.entry h2, .entry h3, .hero-name, .section-heading {
+  font-family: var(--fd) !important;
 }
 
 /* ── CODE ── */
@@ -1139,6 +1171,12 @@ article.post .date,
   .blog-content-wrap { padding: 3rem 0 4rem; }
 }
 
-article.post p {
+/* article.post p {
   font-size: 1.25rem;
+} */
+
+article.post p {
+  font-size: 1.15rem; /* Balanced size */
+  margin-bottom: 1.75rem; /* More space between ideas */
+  max-width: 65ch; /* Limit line length to roughly 65 characters */
 }
