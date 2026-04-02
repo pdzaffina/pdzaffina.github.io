@@ -20,9 +20,10 @@
   --cream-mid:     #ffffff; /* Keeping this as pure white is good for dark mode */
   --muted:         #cbd5e1; /* Changed from white to a soft blue-gray for less "glare" */
   --faint:         #1c2840;
-  --fd:            'Inter', sans-serif;
+  --fd:            'Cinzel', serif;
+  --fb:            'Libre Baskerville', serif;
   /* --fd:            'Cormorant Garamond', Georgia, serif; */
-  --fb:            'Inter', 'DM Sans', system-ui, sans-serif;
+  /* --fb:            'Inter', 'DM Sans', system-ui, sans-serif; */
 }
 
 /* font color --cream-mid: #a8b4cc -- changed to white */
