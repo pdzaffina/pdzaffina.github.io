@@ -20,7 +20,8 @@
   --cream-mid:     #ffffff; /* Keeping this as pure white is good for dark mode */
   --muted:         #cbd5e1; /* Changed from white to a soft blue-gray for less "glare" */
   --faint:         #1c2840;
-  --fd:            'Cormorant Garamond', Georgia, serif;
+  --fd:            'Playfair Display', serif;
+  /* --fd:            'Cormorant Garamond', Georgia, serif; */
   --fb:            'Inter', 'DM Sans', system-ui, sans-serif;
 }
 
@@ -1179,4 +1180,9 @@ article.post p {
   font-size: 1.15rem; /* Balanced size */
   margin-bottom: 1.75rem; /* More space between ideas */
   max-width: 65ch; /* Limit line length to roughly 65 characters */
+}
+
+h1, h2, .hero-name {
+  font-weight: 700; /* Use a heavier weight to combat the dark background */
+  letter-spacing: -0.02em; /* Tighter tracking for a premium feel */
 }
