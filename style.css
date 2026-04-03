@@ -1194,3 +1194,10 @@ h2, h3 {
   font-weight: 400;
   font-style: italic; /* Italics in Baskerville look very high-end */
 }
+
+h1, h2, .hero-name {
+  background: linear-gradient(to right, var(--gold-bright), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block; /* Required for the background-clip to work well */
+}
