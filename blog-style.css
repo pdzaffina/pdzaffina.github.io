@@ -16,13 +16,13 @@
   --ink-muted:     #78716c;
   --ink-faint:     #a8a29e;
 
-  /* Accent — deep terracotta/sienna, not gold */
-  --accent:        #9b3e2a;
-  --accent-bright: #b84d36;
-  --accent-dim:    #7a3120;
-  --accent-ghost:  rgba(155,62,42,0.07);
-  --accent-border: rgba(155,62,42,0.18);
-  --accent-border-m: rgba(155,62,42,0.38);
+  /* Accent — deep navy blue */
+  --accent:        #1e3a6e;
+  --accent-bright: #2d54a0;
+  --accent-dim:    #152b52;
+  --accent-ghost:  rgba(30,58,110,0.06);
+  --accent-border: rgba(30,58,110,0.16);
+  --accent-border-m: rgba(30,58,110,0.35);
 
   /* Typographic Scale */
   --fd: 'Playfair Display', Georgia, 'Times New Roman', serif;
