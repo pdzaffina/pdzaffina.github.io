@@ -1183,21 +1183,8 @@ article.post p {
   max-width: 65ch; /* Limit line length to roughly 65 characters */
 }
 
-.hero-name, .nav-logo {
-  font-family: var(--fd);
-  font-weight: 700;
-  letter-spacing: 0.1em;
-}
-
-h2, h3 {
-  font-family: var(--fs);
-  font-weight: 400;
-  font-style: italic; /* Italics in Baskerville look very high-end */
-}
-
-h1, h2, .hero-name {
-  background: linear-gradient(to right, var(--gold-bright), var(--gold));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block; /* Required for the background-clip to work well */
+h1, h2, .section-label {
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em; /* Breathing room makes it feel "expensive" */
 }
