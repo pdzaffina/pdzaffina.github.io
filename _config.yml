@@ -51,3 +51,5 @@ collections:
     sort_by: title
 
 future: false
+
+timezone: America/Chicago
