@@ -297,8 +297,43 @@
     padding: 0.25rem 0.75rem;
     border: 1px solid var(--text-gold);
     color: var(--text-accent);
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
     background: rgba(200,168,75,0.08);
+  }
+
+  /* ── HERO SCRIPTURE PARALLEL ─────────────────────────── */
+  .hero-verse {
+    margin-top: 0.25rem;
+    margin-bottom: 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(200,168,75,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    opacity: 0.85;
+  }
+  .hero-verse-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.1rem;
+  }
+  .hero-verse-citation {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--text-accent);
+  }
+  .hero-verse-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--text-muted);
+    line-height: 1.55;
+    max-width: 580px;
   }
 
   .hero-refresh-btn {
@@ -1028,6 +1063,11 @@
       <span class="hero-source" id="heroSource"></span>
     </div>
     <span class="hero-theme-pill" id="heroTheme"></span>
+    <div class="hero-verse" id="heroVerse" style="display:none;">
+      <span class="hero-verse-label">&#10011; Scripture Parallel</span>
+      <span class="hero-verse-citation" id="heroVerseCitation"></span>
+      <span class="hero-verse-text" id="heroVerseText"></span>
+    </div>
   </div>
 
   <div class="hero-share-row">
@@ -1148,6 +1188,14 @@ function renderHero(q) {
   document.getElementById('heroAuthor').textContent = q.author;
   document.getElementById('heroSource').textContent = q.source;
   document.getElementById('heroTheme').textContent  = q.theme;
+  const hv = document.getElementById('heroVerse');
+  if (q.verse) {
+    document.getElementById('heroVerseCitation').textContent = q.verse.ref;
+    document.getElementById('heroVerseText').textContent     = q.verse.text;
+    hv.style.display = 'flex';
+  } else {
+    hv.style.display = 'none';
+  }
 }
 
 function cycleHero() {
