@@ -349,5 +349,12 @@ const quotes = [
     author: "Colin Powell",
     source: "My American Journey (1995)",
     theme: "Leadership"
-  }
+  },
+{
+    id: 51,
+    text: "All models are wrong, but some are useful.",
+    author: "George Box",
+    source: "Empirical model-building and response surfaces, Paper (1987)",
+    theme: "Systems Thinking"
+}
 ];
