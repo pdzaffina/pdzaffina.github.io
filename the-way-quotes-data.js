@@ -356,5 +356,12 @@ const quotes = [
     author: "George Box",
     source: "Empirical model-building and response surfaces, Paper (1987)",
     theme: "Systems Thinking"
+},
+{
+id: 52,
+text: "Some of your best work won't be noticed. No applause. No validation. Do it anyway. Because character is built in private.",
+author: "Bruce Lee",
+source: "Unattributed video.",
+theme: "Character"
 }
 ];
