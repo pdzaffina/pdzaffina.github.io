@@ -363,5 +363,12 @@ text: "Some of your best work won't be noticed. No applause. No validation. Do i
 author: "Bruce Lee",
 source: "Unattributed video.",
 theme: "Character"
+},
+{
+id: 53,
+text: "Est Solarus oth Mithas\" (translated from the Solamnic language as \"My honor is my life\").",
+author: "Sturm Brightblade",
+source: "Dragonlance Saga",
+theme: "Character"
 }
 ];
