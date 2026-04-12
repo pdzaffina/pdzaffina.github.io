@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "I've Always Been the Guy in the Room"
+title: "The Label Changes. The Work Doesn't"
 tags:
   - Leadership
   - Change Management 
