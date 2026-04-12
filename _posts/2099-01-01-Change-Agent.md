@@ -1,7 +1,9 @@
 ---
 layout: post
 title: "I've Always Been the Guy in the Room"
-published: false
+tags:
+  - Leadership
+  - Change Management 
 ---
 
 I walk into most rooms today as the AI guy. Sometimes the IT guy. In rooms where neither label quite fits, I'm just 
