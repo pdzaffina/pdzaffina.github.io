@@ -1188,3 +1188,31 @@ h1, h2, .section-label {
   text-transform: uppercase;
   letter-spacing: 0.05em; /* Breathing room makes it feel "expensive" */
 }
+
+/* ── Newsletter ── */
+.newsletter-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.newsletter-dl-link {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--gold, #b8965a);
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.newsletter-dl-link:hover {
+  opacity: 0.75;
+}
+
+@media (max-width: 768px) {
+  .newsletter-inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
