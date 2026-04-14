@@ -12,7 +12,7 @@ For over a century, this has been the gold standard for executive trust. We seek
 
 The strategic risk has shifted. In 1899, the bottleneck was a lack of individual initiative. In 2026, the bottleneck is uncoordinated velocity. If we demand Rowan style blind execution from an AI empowered workforce without updating our frameworks, we do not just get the letter delivered. We risk a high speed collision with regulatory, financial, and strategic guardrails. To maintain a competitive moat, leadership must evolve the Garcia mandate from a test of raw grit into a framework for algorithmic initiative.
 
-**The mandate for the modern C Suite is to pivot from demanding blind execution to architecting high fidelity feedback loops where AI handles the how so talent can obsess over the why.**
+**The mandate for the modern C Suite is to pivot from demanding blind execution to architecting high fidelity feedback loops where AI handles the *how* so talent can obsess over the *why*.**
 
 ### The Technical Tax of the Modern Messenger
 
