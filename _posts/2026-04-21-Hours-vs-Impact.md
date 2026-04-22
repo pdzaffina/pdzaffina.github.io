@@ -14,6 +14,8 @@ In practice, it doesn’t work that way.
 
 Time tracking gives you activity. What leadership actually needs is impact. Those are not the same thing.
 
+I’m sure this might come across as resistance, especially if you’re trying to get a clearer picture of what IT is doing day to day. That’s a fair goal. The problem is that time tracking feels like visibility, but it doesn’t actually provide it.
+
 ## The Illusion of Clarity
 
 Timesheets feel like visibility because they produce structured data. Hours are categorized, totals add up, reports look clean.
