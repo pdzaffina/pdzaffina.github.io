@@ -7,9 +7,7 @@ tags:
   - courage
 ---
 
-A few weeks ago I wrote about a framework built on four traits: courage, candor, curiosity, and competence. The response made clear that the failure modes were the part people wanted to dig into. So this is the first in a series on what it looks like when each trait is missing, how to spot it, and what to actually do about it. Starting with courage, because its absence is the easiest to rationalize and the most expensive to ignore.
-
-In a recent post I laid out a framework built around four traits: courage, candor, curiosity, and competence. The argument was that healthy teams need all four, and that each one has a specific failure mode when it goes missing. The response made clear that the failure modes were the part people wanted to dig into. So this is the first in a series doing exactly that. For each trait, I want to cover what the absence looks like in practice, why it gets misread, and what to actually do about it. Starting with courage, because its absence is the easiest to rationalize and the most expensive to ignore.
+In a recent post I wrote about a framework built on four traits: courage, candor, curiosity, and competence. The response made clear that the failure modes were the part people wanted to dig into. So this is the first in a series on what it looks like when each trait is missing, how to spot it, and what to actually do about it. Starting with courage, because its absence is the easiest to rationalize and the most expensive to ignore.
 
 ## The Pattern
 
@@ -25,7 +23,7 @@ Courage problems are usually misread as capability problems or culture problems,
 
 That is an accountability structure problem, not a character problem. When the only outcomes that get noticed are failures, and the outcomes that go unnoticed are the decisions never made, you have built a system that selects for inaction. The team is responding rationally to the incentives in front of them.
 
-This matters because the intervention for a character problem looks very different from the intervention for a structure problem. Telling people to be bolder, to take more ownership, to lean in, will not fix a system that punishes the people who do.
+This matters because the intervention for a character problem looks very different from the intervention for a structure problem. **Telling people to be bolder, to take more ownership, to lean in, will not fix a system that punishes the people who do.**
 
 ## Where the Leader Has the Most Leverage
 
