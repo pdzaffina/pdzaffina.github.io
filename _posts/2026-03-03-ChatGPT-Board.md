@@ -8,6 +8,9 @@ tags:
   - AI Agents
 ---
 
+Executives often face a "speed of advice" gap where decisions must be made faster than human counsel can arrive. This is how 
+to close that gap by building a cohesive, multi-agent advisory system within a single ChatGPT Project.
+
 ## The Problem: Advice Arrives Too Slowly
 
 Executives rely on mentors, peers, and trusted advisors, but human counsel is episodic. Decisions often move faster than advice 
