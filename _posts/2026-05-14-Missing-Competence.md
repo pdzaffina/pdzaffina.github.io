@@ -7,8 +7,7 @@ tags:
   - Competence
 ---
 
-This is the fourth and final post in a [series](#) on what happens when one of four critical team traits goes missing. 
-The framework covers [courage](http://peter.zaffina.net/blog/Missing-Courage/), [candor](https://peter.zaffina.net/blog/Missing-Candor/), [curiosity](https://peter.zaffina.net/blog/Missing-Curiosity/), and competence. The first three posts covered the traits that shape how a team thinks, communicates, and decides. This one is about the trait that determines whether any of that produces results.
+This is the fourth and final post in a [series](https://peter.zaffina.net/blog/tags/#team-culture) on what happens when one of [four critical team traits](https://peter.zaffina.net/blog/Four-Cs/) goes missing. The framework covers [courage](http://peter.zaffina.net/blog/Missing-Courage/), [candor](https://peter.zaffina.net/blog/Missing-Candor/), [curiosity](https://peter.zaffina.net/blog/Missing-Curiosity/), and competence. The first three posts covered the traits that shape how a team thinks, communicates, and decides. This one is about the trait that determines whether any of that produces results.
 
 ## The Pattern
 
