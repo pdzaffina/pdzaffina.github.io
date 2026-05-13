@@ -2,9 +2,9 @@
 layout: post
 title: "When Courage Is Missing, the Team Stays Busy and Goes Nowhere"
 tags:
-  - leadership
-  - team-culture
-  - courage
+  - Leadership
+  - Team Culture
+  - Courage
 ---
 
 In a recent post I wrote about a framework built on four traits: courage, candor, curiosity, and competence. The response made clear that the failure modes were the part people wanted to dig into. So this is the first in a series on what it looks like when each trait is missing, how to spot it, and what to actually do about it. Starting with courage, because its absence is the easiest to rationalize and the most expensive to ignore.
