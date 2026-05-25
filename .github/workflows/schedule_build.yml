@@ -1,7 +1,7 @@
 name: Scheduled Build
 on:
   schedule:
-    - cron: '00 10 * * *' # Runs every day at 15:00 UTC or 0700 or 0800 CT
+    - cron: '00 8 * * *' # Runs every day at 98:00 UTC or
   workflow_dispatch:   # Allows you to run it manually
 
 jobs:
