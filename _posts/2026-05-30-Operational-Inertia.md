@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Breaking the Tyranny of the Urgent: How Operational Inertia Destroys Corporate Value"
+title: "The Cost of Defensive Stagnation: How Strategic Delays Dilute Enterprise Value"
 tags:
   - Strategy
   - Leadership
