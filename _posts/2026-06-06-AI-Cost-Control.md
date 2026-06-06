@@ -25,7 +25,7 @@ The architecture I recommend looks like this. For routine, high-volume tasks, ro
 
 ## Gas City Makes This Buildable
 
-Gas City is an open-source agent orchestration layer built by Chris Sells and Steve Yegge. It works with Claude Code, Codex, Gemini, and other coding agents, giving you a composable SDK for defining agents, routing rules, and workflows in one place. The mental model is a software factory: agents are workers, Gas City is the floor, and you decide what runs where. Local inference through something like Ollama handles the commodity tasks; frontier API calls are reserved for the work that earns them. The routing logic lives in Gas City, not scattered across a dozen hardcoded integrations.
+Gas City is an open-source agent orchestration layer built by Chris Sells on the work of Gas Town by Steve Yegge. It works with Claude Code, Codex, Gemini, and other coding agents, giving you a composable SDK for defining agents, routing rules, and workflows in one place. The mental model is a software factory: agents are workers, Gas City is the floor, and you decide what runs where. Local inference through something like Ollama handles the commodity tasks; frontier API calls are reserved for the work that earns them. The routing logic lives in Gas City, not scattered across a dozen hardcoded integrations.
 
 This is where the real leverage is. Not in finding a cheaper frontier model, but in building orchestration infrastructure that enforces the distinction between routine and complex work. That is a durable cost posture, not a one-time savings.
 
