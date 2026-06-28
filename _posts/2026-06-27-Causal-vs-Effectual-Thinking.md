@@ -9,8 +9,9 @@ tags:
 ---
 
 The Army didn't teach me effectual thinking by name. It taught me by putting an artillery unit in Bayji, Iraq 
-and changing the mission constantly. Route clearance. Patrolling. Training and advising who showed up to 
-their own operations with incomplete equipment and complicated loyalties. None of that was in the field manual. The insurgency didn't care what we were trained for.
+and changing the mission constantly. Route clearance. Patrolling. Training and advising Iraqi soldiers who
+showed up to their own operations with incomplete equipment and complicated loyalties. None of that was in 
+the field manual. The insurgency didn't care what we were trained for.
 
 What that environment forced on us was a cognitive shift that I didn't have language for until much 
 later: the move from causal to effectual reasoning. Causal thinking starts with a goal and works backward, 
