@@ -11,9 +11,6 @@ I am an enterprise leader who operates at the intersection of technology, operat
 I currently lead large, multidisciplinary engineering and enterprise services organizations and advise senior executives on technology strategy, platform modernization, data, and emerging capabilities such as AI. My work spans public sector, tribal government, global manufacturing, and military contexts, often under conditions of regulatory scrutiny, compressed timelines, and incomplete information.
 
 
-A defining theme of my career is translating strategy into execution. I have directed enterprise initiatives impacting tens of thousands of users, led crisis response operations that distributed nearly $100M in public funds within weeks, and managed operational sustainment resources exceeding $1B. In each case, success depended on integrating people, process, and technology while maintaining trust and accountability.
-
-
 I am particularly effective in environments that require disciplined governance, cultural awareness, and cross-functional coordination. Leaders rely on me as a trusted advisor to clarify priorities, surface tradeoffs, and ensure execution aligns with organizational intent.
 
 
