@@ -15,7 +15,7 @@
   --gold-dim:      #7a6a3a;
   --gold-ghost:    rgba(184,160,96,0.07);
   --gold-border:   rgba(184,160,96,0.16);
-  --gold-border-m: rgba(184,160,96,0.34);
+  --gd-border-m: rgba(184,160,96,0.34);
   --cream:         #e8eef8;
   --cream-mid:     #ffffff; /* Keeping this as pure white is good for dark mode */
   --muted:         #cbd5e1; /* Changed from white to a soft blue-gray for less "glare" */
@@ -875,7 +875,7 @@ article.post .date,
 
 .entry em { font-style: italic; }
 
-.entry blockquote {
+/* .entry blockquote {
   border-left: 2px solid var(--gold);
   margin: 2rem 0;
   padding: 1rem 0 1rem 2rem;
@@ -883,11 +883,35 @@ article.post .date,
   color: var(--cream);
   font-size: 1.15rem;
   background: var(--gold-ghost);
+} */
+
+.entry blockquote {
+  font-size: 1.15rem;
 }
 
-.entry ul,
+.entry pre,
+.entry code {
+  font-size: 0.95rem;
+}
+
+/* .entry ul,
+.entry ol {
+  padding-left: .entry ul,
 .entry ol {
   padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--cream-mid);
+  font-family: var(--fb);
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1.85;
+}
+
+.entry li {
+  margin-bottom: 0.4rem;
+  font-size: 1.15rem;
+  line-height: 1.85;
+}1.5rem;
   margin-bottom: 1.5rem;
   color: var(--cream-mid);
 }
@@ -898,6 +922,23 @@ article.post .date,
   color: var(--gold);
   font-family: var(--fb);
   font-size: 0.82rem;
+} */
+
+.entry ul,
+.entry ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--cream-mid);
+  font-family: var(--fb);
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1.85;
+}
+
+.entry li {
+  margin-bottom: 0.4rem;
+  font-size: 1.15rem;
+  line-height: 1.85;
 }
 
 .entry hr {
