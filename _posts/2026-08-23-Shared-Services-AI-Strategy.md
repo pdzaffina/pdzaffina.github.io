@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Every Shared Services Function Needs the Same AI Strategy"
+title: "AI Is Absorbing the Work That Used to Build Judgment"
 tags:
   - AI Strategy
   - Shared Services
