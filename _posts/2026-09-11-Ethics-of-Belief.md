@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The Control Nobody Can Defend
+title: "The Ethics of Belief and the Control Nobody Can Defend"
 tags:
   - Risk Governance
   - IT Leadership
