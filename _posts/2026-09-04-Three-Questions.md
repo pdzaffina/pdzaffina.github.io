@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Three Questions Every Tribal Leader Should Ask Before Approving an AI Vendor"
+excerpt: "Every tribal enterprise I talk to is getting pitched an AI product right now, and almost none have a way to decide whether to say yes. The vendor conversation covers features and price. The conversation that actually protects the organization, who owns the risk once the contract is signed, rarely happens until the tool is already running."
 tags:
   - AI Strategy
   - Governance
