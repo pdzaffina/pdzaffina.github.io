@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resources — Peter Zaffina</title>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VW34240TN2"></script>
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {dataLayer.push(arguments);}
+        gtag('js', new Date()); gtag('config', 'G-VW34240TN2');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="/style.css" />
+
+    <style>
+        /* ════ RESOURCES ════ */
+
+        #resources-hero {
+            min-height: 62vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 9rem 0 6rem;
+        }
+
+        .resources-hero-content {
+            max-width: 900px;
+        }
+
+        .resources-eyebrow {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            opacity: 0.65;
+        }
+
+        .resources-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(4rem, 8vw, 7rem);
+            line-height: 0.88;
+            font-weight: 300;
+            margin: 0;
+        }
+
+        .resources-title span {
+            display: block;
+            font-style: italic;
+        }
+
+        .resources-rule {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin: 2.5rem 0;
+        }
+
+        .resources-rule-line {
+            width: 70px;
+            height: 1px;
+            background: currentColor;
+            opacity: 0.35;
+        }
+
+        .resources-rule-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: currentColor;
+            opacity: 0.5;
+        }
+
+        .resources-intro {
+            max-width: 680px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            font-weight: 300;
+            opacity: 0.78;
+        }
+
+        /* ════ RESOURCE LIBRARY ════ */
+
+        #resource-library {
+            padding: 7rem 0 9rem;
+        }
+
+        .resource-section {
+            margin-bottom: 6rem;
+        }
+
+        .resource-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .resource-section-header {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            margin-bottom: 2.75rem;
+            align-items: end;
+        }
+
+        .resource-section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 4vw, 3.4rem);
+            font-weight: 400;
+            line-height: 1;
+            margin: 0.4rem 0 0;
+        }
+
+        .resource-section-intro {
+            max-width: 650px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            line-height: 1.75;
+            font-weight: 300;
+            opacity: 0.7;
+            margin: 0;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1px;
+            background: rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(0, 0, 0, 0.12);
+        }
+
+        .resource-card {
+            background: #fff;
+            padding: 2.5rem;
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            position: relative;
+            z-index: 2;
+        }
+
+        .resource-icon {
+            font-size: 1.15rem;
+            margin-bottom: 2rem;
+            opacity: 0.55;
+        }
+
+        .resource-type {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-bottom: 0.7rem;
+        }
+
+        .resource-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            line-height: 1.05;
+            margin: 0 0 1rem;
+        }
+
+        .resource-description {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.88rem;
+            line-height: 1.7;
+            font-weight: 300;
+            opacity: 0.7;
+            margin: 0;
+            max-width: 500px;
+        }
+
+        .resource-link {
+            margin-top: auto;
+            padding-top: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            width: fit-content;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: inherit;
+            border-bottom: 1px solid currentColor;
+            padding-bottom: 0.35rem;
+            opacity: 0.75;
+            transition: opacity 0.2s ease, gap 0.2s ease;
+        }
+
+        .resource-link:hover {
+            opacity: 1;
+            gap: 1rem;
+        }
+
+        /* ════ SPEAKER CTA ════ */
+
+        .resources-contact {
+            margin-top: 7rem;
+            padding-top: 4rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .resources-contact-text {
+            max-width: 650px;
+        }
+
+        .resources-contact-text h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.2rem, 4vw, 3.4rem);
+            font-weight: 400;
+            line-height: 1;
+            margin: 0 0 1rem;
+        }
+
+        .resources-contact-text p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            font-weight: 300;
+            opacity: 0.7;
+            margin: 0;
+        }
+
+        /* ════ MOBILE ════ */
+
+        @media (max-width: 768px) {
+            #resources-hero {
+                min-height: auto;
+                padding: 8rem 0 5rem;
+            }
+
+            .resources-section-header {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .resources-contact {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- ════ NAV ════ -->
+
+    <nav id="site-nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo">Peter Zaffina</a>
+
+
+            <ul class="nav-links" id="nav-links">
+                <li><a href="/#services">Services</a></li>
+                <li><a href="/#credentials">Background</a></li>
+                <li><a href="https://peter.zaffina.net/blog/">Writing</a></li>
+                <li><a href="/resources/">Resources</a></li>
+                <li><a href="{{ site.baseurl }}/search">Search</a></li>
+                <li><a href="https://peter.zaffina.net/about/">About</a></li>
+            </ul>
+
+            <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+
+
+        </div>
+
+        <div class="nav-drawer" id="nav-drawer" aria-hidden="true">
+            <ul>
+                <li><a href="/#services">Services</a></li>
+                <li><a href="/#credentials">Background</a></li>
+                <li><a href="https://peter.zaffina.net/blog/">Writing</a></li>
+                <li><a href="/resources/">Resources</a></li>
+                <li><a href="{{ site.baseurl }}/search">Search</a></li>
+                <li><a href="https://peter.zaffina.net/about/">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ════ HERO ════ -->
+
+    <section id="resources-hero">
+        <div class="container">
+            <div class="resources-hero-content">
+
+
+                <p class="resources-eyebrow reveal r1">
+                    Speaker Resources
+                </p>
+
+                <h1 class="resources-title reveal r2">
+                    Ideas Worth
+                    <span>Taking With You.</span>
+                </h1>
+
+                <div class="resources-rule reveal r3">
+                    <div class="resources-rule-line"></div>
+                    <div class="resources-rule-dot"></div>
+                </div>
+
+                <p class="resources-intro reveal r4">
+                    Presentations, frameworks, and supporting materials from my work
+                    across enterprise technology, AI, leadership, and organizational design.
+                    These resources are provided for participants, colleagues, and leaders
+                    who want to take the conversation further.
+                </p>
+
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- ════ RESOURCE LIBRARY ════ -->
+
+    <section id="resource-library">
+        <div class="container">
+
+
+            <!-- PRESENTATIONS -->
+            <div class="resource-section">
+
+                <div class="resource-section-header fade-in">
+                    <div>
+                        <p class="section-label">Presentations</p>
+                        <h2 class="resource-section-title">
+                            Talks &amp;<br />Keynotes
+                        </h2>
+                    </div>
+
+                    <p class="resource-section-intro">
+                        Presentation materials from conferences, panels, and executive
+                        discussions. Slides are intended to stand on their own, but are
+                        best understood in the context of the conversations where they
+                        were presented.
+                    </p>
+                </div>
+
+                <div class="resource-grid">
+
+                    <!-- PRESENTATION 1 -->
+                    <article class="resource-card fade-in">
+                        <i class="resource-icon fa-solid fa-display"></i>
+
+                        <p class="resource-type">Presentation</p>
+
+                        <h3 class="resource-title">
+                            Presentation Title
+                        </h3>
+
+                        <p class="resource-description">
+                            Short description of the presentation and the problem or question
+                            it addresses.
+                        </p>
+
+                        <a href="YOUR-PRESENTATION-LINK" target="_blank" rel="noopener" class="resource-link">
+                            View Presentation
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </article>
+
+                    <!-- PRESENTATION 2 -->
+                    <article class="resource-card fade-in">
+                        <i class="resource-icon fa-solid fa-display"></i>
+
+                        <p class="resource-type">Presentation</p>
+
+                        <h3 class="resource-title">
+                            Presentation Title
+                        </h3>
+
+                        <p class="resource-description">
+                            Short description of the presentation and the problem or question
+                            it addresses.
+                        </p>
+
+                        <a href="YOUR-PRESENTATION-LINK" target="_blank" rel="noopener" class="resource-link">
+                            View Presentation
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </article>
+
+                    <!-- PRESENTATION 3 -->
+                    <article class="resource-card fade-in">
+                        <i class="resource-icon fa-solid fa-display"></i>
+
+                        <p class="resource-type">Presentation</p>
+
+                        <h3 class="resource-title">
+                            Presentation Title
+                        </h3>
+
+                        <p class="resource-description">
+                            Short description of the presentation and the problem or question
+                            it addresses.
+                        </p>
+
+                        <a href="YOUR-PRESENTATION-LINK" target="_blank" rel="noopener" class="resource-link">
+                            View Presentation
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </article>
+
+                </div>
+            </div>
+
+            <!-- DOCUMENTS -->
+            <div class="resource-section">
+
+                <div class="resource-section-header fade-in">
+                    <div>
+                        <p class="section-label">Documents</p>
+                        <h2 class="resource-section-title">
+                            Frameworks &amp;<br />Briefs
+                        </h2>
+                    </div>
+
+                    <p class="resource-section-intro">
+                        Practical frameworks, executive briefs, and supporting documents
+                        related to the ideas I discuss in my presentations and writing.
+                    </p>
+                </div>
+
+                <div class="resource-grid">
+
+                    <!-- DOCUMENT 1 -->
+                    <article class="resource-card fade-in">
+                        <i class="resource-icon fa-regular fa-file-lines"></i>
+
+                        <p class="resource-type">Executive Brief</p>
+
+                        <h3 class="resource-title">
+                            Document Title
+                        </h3>
+
+                        <p class="resource-description">
+                            Short description of the document and how it can be used.
+                        </p>
+
+                        <a href="YOUR-GIST-LINK" target="_blank" rel="noopener" class="resource-link">
+                            Read Document
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </article>
+
+                    <!-- DOCUMENT 2 -->
+                    <article class="resource-card fade-in">
+                        <i class="resource-icon fa-regular fa-file-lines"></i>
+
+                        <p class="resource-type">Framework</p>
+
+                        <h3 class="resource-title">
+                            Document Title
+                        </h3>
+
+                        <p class="resource-description">
+                            Short description of the document and how it can be used.
+                        </p>
+
+                        <a href="YOUR-GIST-LINK" target="_blank" rel="noopener" class="resource-link">
+                            Read Document
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </article>
+
+                </div>
+            </div>
+
+            <!-- CONTACT -->
+            <div class="resources-contact fade-in">
+
+                <div class="resources-contact-text">
+                    <h2>Want to continue the conversation?</h2>
+
+                    <p>
+                        If you are organizing a conference, executive session, or leadership
+                        discussion and would like to explore a topic in greater depth,
+                        I welcome the conversation.
+                    </p>
+                </div>
+
+                <a href="mailto:peter@zaffina.net?subject=Speaking%20Inquiry%20from%20Website" class="btn-primary">
+                    Start a Conversation
+                </a>
+
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- ════ FOOTER ════ -->
+
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+
+
+                <a href="/" class="footer-logo">Peter Zaffina</a>
+
+                <ul class="footer-nav">
+                    <li><a href="/#services">Services</a></li>
+                    <li><a href="/#credentials">Background</a></li>
+                    <li><a href="https://peter.zaffina.net/blog/">Writing</a></li>
+                    <li><a href="/resources/">Resources</a></li>
+                    <li><a href="https://peter.zaffina.net/about/">About</a></li>
+                </ul>
+
+                <ul class="footer-social">
+                    <li>
+                        <a href="mailto:peter@zaffina.net?subject=Speaking%20Inquiry%20from%20Website" title="Email">
+                            <i class="fa-regular fa-envelope"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://github.com/pdzaffina" title="GitHub">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://www.linkedin.com/in/peter-zaffina" title="LinkedIn">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-copy">&copy; 2026 Peter Zaffina. All rights reserved.</p>
+                <p class="footer-copy">Enterprise Technology Advisory</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+        // Scroll-triggered reveals
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, {threshold: 0.1});
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Hamburger
+        const hamburger = document.getElementById('nav-hamburger');
+        const drawer = document.getElementById('nav-drawer');
+
+        function closeNav() {
+            hamburger.classList.remove('open');
+            hamburger.setAttribute('aria-expanded', 'false');
+            drawer.classList.remove('open');
+            drawer.setAttribute('aria-hidden', 'true');
+        }
+
+        hamburger.addEventListener('click', () => {
+            const isOpen = drawer.classList.toggle('open');
+            hamburger.classList.toggle('open', isOpen);
+            hamburger.setAttribute('aria-expanded', String(isOpen));
+            drawer.setAttribute('aria-hidden', String(!isOpen));
+        });
+
+        document.addEventListener('click', e => {
+            if (!e.target.closest('#site-nav')) closeNav();
+        });
+    </script>
+
+</body>
+
+</html>
